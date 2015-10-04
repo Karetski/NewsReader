@@ -8,12 +8,12 @@
 
 import UIKit
 
-class Channel: NSObject {
+class NRChannel: NSObject {
     var title: String?
     var link: String?
     var channelDescription: String?
     
-    var items = [Item]()
+    var items = [NRItem]()
     
     override init() {
         super.init()

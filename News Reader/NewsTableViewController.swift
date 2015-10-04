@@ -10,7 +10,7 @@ import UIKit
 
 class NewsTableViewController: UITableViewController, NSXMLParserDelegate {
     
-    var channel: Channel?
+    var channel: NRChannel?
     
     let textCellIdentifier = "NewsCell"
     
