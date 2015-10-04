@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8A31C2CD1BBEB0A9001DA7C4 /* NRChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A31C2CC1BBEB0A9001DA7C4 /* NRChannel.swift */; settings = {ASSET_TAGS = (); }; };
+		8A31C2CF1BBEB3D2001DA7C4 /* NRItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A31C2CE1BBEB3D2001DA7C4 /* NRItem.swift */; settings = {ASSET_TAGS = (); }; };
 		8A6B0D7A1BBD8BA40056C91E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A6B0D791BBD8BA40056C91E /* AppDelegate.swift */; };
 		8A6B0D7F1BBD8BA40056C91E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A6B0D7D1BBD8BA40056C91E /* Main.storyboard */; };
 		8A6B0D811BBD8BA40056C91E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8A6B0D801BBD8BA40056C91E /* Assets.xcassets */; };
@@ -35,6 +37,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8A31C2CC1BBEB0A9001DA7C4 /* NRChannel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NRChannel.swift; sourceTree = "<group>"; };
+		8A31C2CE1BBEB3D2001DA7C4 /* NRItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NRItem.swift; sourceTree = "<group>"; };
 		8A6B0D761BBD8BA40056C91E /* News Reader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "News Reader.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A6B0D791BBD8BA40056C91E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8A6B0D7E1BBD8BA40056C91E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -131,6 +135,8 @@
 		8A6B0DA91BBD8F0B0056C91E /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				8A31C2CC1BBEB0A9001DA7C4 /* NRChannel.swift */,
+				8A31C2CE1BBEB3D2001DA7C4 /* NRItem.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -283,7 +289,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8A31C2CF1BBEB3D2001DA7C4 /* NRItem.swift in Sources */,
 				8A6B0DA81BBD8D740056C91E /* NewsTableViewController.swift in Sources */,
+				8A31C2CD1BBEB0A9001DA7C4 /* NRChannel.swift in Sources */,
 				8A6B0D7A1BBD8BA40056C91E /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

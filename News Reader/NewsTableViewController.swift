@@ -8,13 +8,19 @@
 
 import UIKit
 
-class NewsTableViewController: UITableViewController {
+class NewsTableViewController: UITableViewController, NSXMLParserDelegate {
     
-    let newsCollection = ["Title1", "Title2", "Title3"]
+    var channel: Channel?
+    
     let textCellIdentifier = "NewsCell"
     
     @IBAction func refreshButtonAction(sender: UIBarButtonItem) {
-        print("Button clicked")
+        self.beginParsing()
+    }
+    
+    func beginParsing()
+    {
+        
     }
     
     override func viewDidLoad() {
@@ -31,6 +37,9 @@ class NewsTableViewController: UITableViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    // XML Parsing
+
 
     // MARK: - Table view data source
 
@@ -41,17 +50,17 @@ class NewsTableViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return self.newsCollection.count
+        return self.activeChannel.items.count
     }
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(textCellIdentifier, forIndexPath: indexPath) as UITableViewCell
-        
-        let row = indexPath.row
-        cell.textLabel?.text = self.newsCollection[row]
-        
-        return cell
-    }
+//    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+//        let cell = tableView.dequeueReusableCellWithIdentifier(textCellIdentifier, forIndexPath: indexPath) as UITableViewCell
+//        
+//        let row = indexPath.row
+//        cell.textLabel?.text = self.newsCollection[row]
+//        
+//        return cell
+//    }
 
     /*
     // Override to support conditional editing of the table view.
