@@ -54,14 +54,17 @@ class NewsTableViewController: UITableViewController, NSXMLParserDelegate {
         return 0
     }
 
-//    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-//        let cell = tableView.dequeueReusableCellWithIdentifier(textCellIdentifier, forIndexPath: indexPath) as UITableViewCell
-//        
-//        let row = indexPath.row
-//        cell.textLabel?.text = self.newsCollection[row]
-//        
-//        return cell
-//    }
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier(textCellIdentifier, forIndexPath: indexPath) as UITableViewCell
+        
+        let row = indexPath.row
+        if let channel = self.channel {
+            let item = channel.items[row]
+            cell.textLabel?.text = item.title
+        }
+        
+        return cell
+    }
 
     /*
     // Override to support conditional editing of the table view.
