@@ -44,13 +44,14 @@ class NewsTableViewController: UITableViewController, NSXMLParserDelegate {
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return self.activeChannel.items.count
+        if let channel = self.channel {
+            return channel.items.count
+        }
+        return 0
     }
 
 //    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
