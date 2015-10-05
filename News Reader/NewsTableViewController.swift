@@ -25,13 +25,8 @@ class NewsTableViewController: UITableViewController, NRRSSParserDelegate {
             }
             self.beginParsing()
         }
-        
-        let cancelAction = UIAlertAction(title: "Cancel", style: .Default) { (action: UIAlertAction!) -> Void in
-        }
-        
-        alert.addTextFieldWithConfigurationHandler { (textField: UITextField!) -> Void in
-        }
-        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Default, handler: nil)
+        alert.addTextFieldWithConfigurationHandler(nil)
         alert.addAction(saveAction)
         alert.addAction(cancelAction)
         
@@ -77,17 +72,21 @@ class NewsTableViewController: UITableViewController, NRRSSParserDelegate {
     
     func parsingWasFinished(channel: NRChannel?, error: NSError?) {
         dispatch_async(dispatch_get_main_queue(), { () -> Void in
-            if let tempChannel = channel {
-                self.channel = tempChannel
-                self.title = tempChannel.title
+            if let currentChannel = channel {
+                self.channel = currentChannel
+                self.title = currentChannel.title
                 self.tableView.reloadData()
             } else {
-//                let alertController = UIAlertController(title: "iOScreator", message:
-//                    "Hello, world!", preferredStyle: UIAlertControllerStyle.Alert)
-//                alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
-//                
-//                self.presentViewController(alertController, animated: true, completion: nil)
-                self.title = "Error"
+                if let currentChannel = self.channel {
+                    self.title = currentChannel.title
+                } else {
+                    self.title = "News Reader"
+                }
+                
+                let alert = UIAlertController(title: "Error", message: error?.localizedDescription, preferredStyle: .Alert)
+                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default,handler: nil))
+                
+                self.presentViewController(alert, animated: true, completion: nil)
             }
         })
     }
