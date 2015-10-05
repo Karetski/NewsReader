@@ -12,8 +12,4 @@ class NRItem: NSObject {
     var title: String?
     var link: String?
     var itemDescription: String?
-    
-    override init() {
-        super.init()
-    }
 }

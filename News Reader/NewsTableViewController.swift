@@ -63,11 +63,10 @@ class NewsTableViewController: UITableViewController, NRRSSParserDelegate {
         // Dispose of any resources that can be recreated.
     }
     
-    // MARK: NRRSSParserDelegate implementation
+    // MARK: - NRRSSParserDelegate implementation
+    
     func parsingWasStarted() {
-        dispatch_async(dispatch_get_main_queue(), { () -> Void in
-            self.title = "Loading..."
-        })
+        self.title = "Loading..."
     }
     
     func parsingWasFinished(channel: NRChannel?, error: NSError?) {
@@ -111,6 +110,7 @@ class NewsTableViewController: UITableViewController, NRRSSParserDelegate {
         if let channel = self.channel {
             let item = channel.items[row]
             cell.textLabel?.text = item.title
+            cell.detailTextLabel?.text = item.itemDescription
         }
         
         return cell

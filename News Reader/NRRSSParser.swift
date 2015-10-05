@@ -33,7 +33,7 @@ class NRRSSParser: NSObject, NSXMLParserDelegate {
         task.resume()
     }
     
-    // MARK: NSXMLParserDelegate implementation
+    // MARK: - NSXMLParserDelegate implementation
     
     func parserDidEndDocument(parser: NSXMLParser) {
         self.delegate?.parsingWasFinished(self.channel, error: nil)

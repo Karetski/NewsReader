@@ -14,8 +14,4 @@ class NRChannel: NSObject {
     var channelDescription: String?
     
     var items = [NRItem]()
-    
-    override init() {
-        super.init()
-    }
 }
