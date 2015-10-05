@@ -16,6 +16,8 @@ class NRRSSParser: NSObject, NSXMLParserDelegate {
     var delegate: NRRSSParserDelegate?
     
     func startParsingWithRequest(request: NSURLRequest) {
+        self.delegate?.parsingWasStarted()
+        
         let session = NSURLSession.sharedSession()
         
         let task = session.dataTaskWithRequest(request, completionHandler: { data, response, error -> Void in

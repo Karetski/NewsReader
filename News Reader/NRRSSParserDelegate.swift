@@ -9,6 +9,7 @@
 import UIKit
 
 protocol NRRSSParserDelegate {
+    func parsingWasStarted()
     func parsingWasFinished(channel: NRChannel?, error: NSError?)
 }
 

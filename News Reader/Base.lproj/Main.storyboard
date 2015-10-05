@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="sLk-Pb-lI3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="sLk-Pb-lI3">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
     </dependencies>
     <scenes>
-        <!--Root View Controller-->
+        <!--News Reader-->
         <scene sceneID="WdU-op-vSO">
             <objects>
                 <tableViewController id="EqL-Q9-efQ" customClass="NewsTableViewController" customModule="News_Reader" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="aJb-xy-Uph">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="NewsCell" textLabel="w7v-xq-IvR" style="IBUITableViewCellStyleDefault" id="U8T-Cr-6J4">
@@ -23,12 +24,15 @@
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="w7v-xq-IvR">
                                             <rect key="frame" x="15" y="0.0" width="570" height="43"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <animations/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
+                                    <animations/>
                                 </tableViewCellContentView>
+                                <animations/>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -36,10 +40,15 @@
                             <outlet property="delegate" destination="EqL-Q9-efQ" id="HhP-i5-g05"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Root View Controller" id="rPS-Lv-97X">
-                        <barButtonItem key="rightBarButtonItem" title="Refresh" id="rfB-RH-4ik">
+                    <navigationItem key="navigationItem" title="News Reader" id="rPS-Lv-97X">
+                        <barButtonItem key="leftBarButtonItem" systemItem="refresh" id="rfB-RH-4ik">
                             <connections>
                                 <action selector="refreshButtonAction:" destination="EqL-Q9-efQ" id="dG3-1q-lPg"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="compose" id="W3z-0x-mKP">
+                            <connections>
+                                <action selector="changeRSSSource:" destination="EqL-Q9-efQ" id="qiw-54-7rf"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -58,6 +67,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="T3j-F3-7iv">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <animations/>
                     </navigationBar>
                     <connections>
                         <segue destination="EqL-Q9-efQ" kind="relationship" relationship="rootViewController" id="YNI-4p-qqo"/>

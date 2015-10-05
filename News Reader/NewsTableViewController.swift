@@ -11,18 +11,51 @@ import UIKit
 class NewsTableViewController: UITableViewController, NRRSSParserDelegate {
     
     var channel: NRChannel?
+    var rssLink = "http://www.nytimes.com/services/xml/rss/nyt/World.xml"
     
     let textCellIdentifier = "NewsCell"
     
+    @IBAction func changeRSSSource(sender: UIBarButtonItem) {
+        let alert = UIAlertController(title: "RSS Source", message: "Change RSS source link", preferredStyle: .Alert)
+        
+        let saveAction = UIAlertAction(title: "Save", style: .Default) { (action: UIAlertAction!) -> Void in
+            let textField = alert.textFields![0]
+            if let newLink = textField.text {
+                self.rssLink = newLink
+            }
+            self.beginParsing()
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Default) { (action: UIAlertAction!) -> Void in
+        }
+        
+        alert.addTextFieldWithConfigurationHandler { (textField: UITextField!) -> Void in
+        }
+        
+        alert.addAction(saveAction)
+        alert.addAction(cancelAction)
+        
+        presentViewController(alert, animated: true, completion: nil)
+    }
+    
     @IBAction func refreshButtonAction(sender: UIBarButtonItem) {
-        let request = NSURLRequest(URL: NSURL(string: "http://www.nytimes.com/services/xml/rss/nyt/World.xml")!)
-        let parser = NRRSSParser()
-        parser.startParsingWithRequest(request)
+        self.beginParsing()
+    }
+    
+    func beginParsing() {
+        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            let request = NSURLRequest(URL: NSURL(string: self.rssLink)!)
+            let parser = NRRSSParser()
+            parser.delegate = self
+            parser.startParsingWithRequest(request)
+        })
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        self.beginParsing()
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -36,10 +69,27 @@ class NewsTableViewController: UITableViewController, NRRSSParserDelegate {
     }
     
     // MARK: NRRSSParserDelegate implementation
+    func parsingWasStarted() {
+        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            self.title = "Loading..."
+        })
+    }
     
     func parsingWasFinished(channel: NRChannel?, error: NSError?) {
-        self.channel = channel
-        self.tableView.reloadData()
+        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            if let tempChannel = channel {
+                self.channel = tempChannel
+                self.title = tempChannel.title
+                self.tableView.reloadData()
+            } else {
+//                let alertController = UIAlertController(title: "iOScreator", message:
+//                    "Hello, world!", preferredStyle: UIAlertControllerStyle.Alert)
+//                alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
+//                
+//                self.presentViewController(alertController, animated: true, completion: nil)
+                self.title = "Error"
+            }
+        })
     }
 
     // MARK: - Table view data source
