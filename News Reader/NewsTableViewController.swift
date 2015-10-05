@@ -8,19 +8,16 @@
 
 import UIKit
 
-class NewsTableViewController: UITableViewController, NSXMLParserDelegate {
+class NewsTableViewController: UITableViewController, NRRSSParserDelegate {
     
     var channel: NRChannel?
     
     let textCellIdentifier = "NewsCell"
     
     @IBAction func refreshButtonAction(sender: UIBarButtonItem) {
-        self.beginParsing()
-    }
-    
-    func beginParsing()
-    {
-        
+        let request = NSURLRequest(URL: NSURL(string: "http://www.nytimes.com/services/xml/rss/nyt/World.xml")!)
+        let parser = NRRSSParser()
+        parser.startParsingWithRequest(request)
     }
     
     override func viewDidLoad() {
@@ -38,8 +35,12 @@ class NewsTableViewController: UITableViewController, NSXMLParserDelegate {
         // Dispose of any resources that can be recreated.
     }
     
-    // XML Parsing
-
+    // MARK: NRRSSParserDelegate implementation
+    
+    func parsingWasFinished(channel: NRChannel?, error: NSError?) {
+        self.channel = channel
+        self.tableView.reloadData()
+    }
 
     // MARK: - Table view data source
 
