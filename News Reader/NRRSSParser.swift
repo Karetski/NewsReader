@@ -12,6 +12,17 @@ class NRRSSParser: NSObject, NSXMLParserDelegate {
     var channel = NRChannel()
     var activeItem: NRItem?
     var activeElement = ""
+    var activeAttributes: [String: String]?
+    
+    let node_title = "title"
+    let node_link = "link"
+    let node_description = "description"
+    let node_category = "category"
+    let node_creator = "creator"
+    let node_pubDate = "pubDate"
+    let node_language = "language"
+    let node_copyright = "copyright"
+    let node_media = "media:content"
     
     var delegate: NRRSSParserDelegate?
     
@@ -48,6 +59,7 @@ class NRRSSParser: NSObject, NSXMLParserDelegate {
             self.activeItem = NRItem()
         }
         self.activeElement = ""
+        self.activeAttributes = attributeDict
     }
     
     func parser(parser: NSXMLParser, foundCharacters string: String) {
@@ -72,17 +84,21 @@ class NRRSSParser: NSObject, NSXMLParserDelegate {
             if elementName == "description" {
                 item.itemDescription = self.activeElement
             }
-//            if elementName == "media:description" {
-//                item.itemDescription = self.activeElement
-//            }
             if elementName == "category" {
                 item.categories.append(self.activeElement)
             }
             if elementName == "dc:creator" {
-                item.author = self.activeElement
+                item.creator = self.activeElement
             }
             if elementName == "pubDate" {
                 item.date = self.activeElement
+            }
+            if elementName == node_media {
+                if let attributes = self.activeAttributes {
+                    if let url = attributes["url"] {
+                        item.appendMediaWithString(url)
+                    }
+                }
             }
         } else {
             if elementName == "title" {

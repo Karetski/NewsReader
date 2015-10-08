@@ -17,6 +17,8 @@ class NewsDetailViewController: UIViewController {
 
         if let item = self.item {
             self.title = item.title
+            print(item.media)
+            print(item.categories)
         }
         
         // Do any additional setup after loading the view.

@@ -12,13 +12,19 @@ class NRItem: NSObject {
     var title: String?
     var link: NSURL?
     var itemDescription: String?
-    var author: String?
-    var image: String? // Change to IMAGE
+    var creator: String?
     var date: String? // Change to NSDate
     
+    var media = [NSURL]()
     var categories = [String]()
     
     func linkWithString(string: String) {
         self.link = NSURL(string: string)
+    }
+    
+    func appendMediaWithString(string: String) {
+        if let url = NSURL(string: string) {
+            self.media.append(url)
+        }
     }
 }
