@@ -16,15 +16,21 @@ class NRItem: NSObject {
     var date: String? // Change to NSDate
     
     var media = [NSURL]()
-    var categories = [String]()
+    var categories = [String: NSURL]()
     
-    func linkWithString(string: String) {
-        self.link = NSURL(string: string)
+    func linkWithString(urlString: String) {
+        self.link = NSURL(string: urlString)
     }
     
-    func appendMediaWithString(string: String) {
-        if let url = NSURL(string: string) {
+    func appendMediaWithString(urlString: String) {
+        if let url = NSURL(string: urlString) {
             self.media.append(url)
+        }
+    }
+    
+    func appendCategoryWithName(string: String, stringWithURL urlString: String) {
+        if let url = NSURL(string: urlString) {
+            self.categories[string] = url
         }
     }
 }

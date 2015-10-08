@@ -24,6 +24,9 @@ class NRRSSParser: NSObject, NSXMLParserDelegate {
     let node_copyright = "copyright"
     let node_media = "media:content"
     
+    let attr_url = "url"
+    let attr_domain = "domain"
+    
     var delegate: NRRSSParserDelegate?
     
     func startParsingWithRequest(request: NSURLRequest) {
@@ -85,7 +88,12 @@ class NRRSSParser: NSObject, NSXMLParserDelegate {
                 item.itemDescription = self.activeElement
             }
             if elementName == "category" {
-                item.categories.append(self.activeElement)
+                if let attributes = self.activeAttributes {
+                    if let url = attributes[self.attr_domain] {
+                        item.appendCategoryWithName(self.activeElement, stringWithURL: url)
+                    }
+                }
+                self.activeAttributes = nil
             }
             if elementName == "dc:creator" {
                 item.creator = self.activeElement
@@ -95,10 +103,11 @@ class NRRSSParser: NSObject, NSXMLParserDelegate {
             }
             if elementName == node_media {
                 if let attributes = self.activeAttributes {
-                    if let url = attributes["url"] {
+                    if let url = attributes[self.attr_url] {
                         item.appendMediaWithString(url)
                     }
                 }
+                self.activeAttributes = nil
             }
         } else {
             if elementName == "title" {
