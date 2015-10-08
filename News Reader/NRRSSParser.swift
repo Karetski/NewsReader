@@ -21,7 +21,7 @@ class NRRSSParser: NSObject, NSXMLParserDelegate {
         let session = NSURLSession.sharedSession()
         
         let task = session.dataTaskWithRequest(request, completionHandler: { data, response, error -> Void in
-            if ((error) != nil) {
+            if error != nil {
                 self.delegate?.parsingWasFinished(nil, error: error)
             } else {
                 let parser = NSXMLParser(data: data!)
@@ -67,20 +67,41 @@ class NRRSSParser: NSObject, NSXMLParserDelegate {
                 item.title = self.activeElement
             }
             if elementName == "link" {
-                item.link = self.activeElement
+                item.linkWithString(self.activeElement)
             }
             if elementName == "description" {
                 item.itemDescription = self.activeElement
+            }
+//            if elementName == "media:description" {
+//                item.itemDescription = self.activeElement
+//            }
+            if elementName == "category" {
+                item.categories.append(self.activeElement)
+            }
+            if elementName == "dc:creator" {
+                item.author = self.activeElement
+            }
+            if elementName == "pubDate" {
+                item.date = self.activeElement
             }
         } else {
             if elementName == "title" {
                 self.channel.title = self.activeElement
             }
             if elementName == "link" {
-                self.channel.link = self.activeElement
+                self.channel.linkWithString(self.activeElement)
             }
             if elementName == "description" {
                 self.channel.channelDescription = self.activeElement
+            }
+            if elementName == "language" {
+                self.channel.language = self.activeElement
+            }
+            if elementName == "copyright" {
+                self.channel.copyright = self.activeElement
+            }
+            if elementName == "pubDate" {
+                self.channel.date = self.activeElement
             }
         }
     }

@@ -14,6 +14,7 @@ class NewsTableViewController: UITableViewController, NRRSSParserDelegate {
     var rssLink = "http://www.nytimes.com/services/xml/rss/nyt/World.xml"
     
     let textCellIdentifier = "NewsCell"
+    let detailSegueIdentifier = "NewsDetailSegue"
     
     @IBAction func changeRSSSource(sender: UIBarButtonItem) {
         let alert = UIAlertController(title: "RSS Source", message: "Change RSS source link", preferredStyle: .Alert)
@@ -66,7 +67,9 @@ class NewsTableViewController: UITableViewController, NRRSSParserDelegate {
     // MARK: - NRRSSParserDelegate implementation
     
     func parsingWasStarted() {
-        self.title = "Loading..."
+        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            self.title = "Loading..."
+        })
     }
     
     func parsingWasFinished(channel: NRChannel?, error: NSError?) {
@@ -151,14 +154,20 @@ class NewsTableViewController: UITableViewController, NRRSSParserDelegate {
     }
     */
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == detailSegueIdentifier {
+            if let destination = segue.destinationViewController as? NewsDetailViewController {
+                if let indexPath = self.tableView.indexPathForSelectedRow {
+                    if let channel = self.channel {
+                        destination.item = channel.items[indexPath.row]
+                    }
+                }
+            }
+        }
     }
-    */
 
 }

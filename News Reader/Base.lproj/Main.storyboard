@@ -41,6 +41,9 @@
                                     <animations/>
                                 </tableViewCellContentView>
                                 <animations/>
+                                <connections>
+                                    <segue destination="ygs-iN-TrJ" kind="show" identifier="NewsDetailSegue" id="zjY-5O-ZVG"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -54,7 +57,7 @@
                                 <action selector="refreshButtonAction:" destination="EqL-Q9-efQ" id="dG3-1q-lPg"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="compose" id="W3z-0x-mKP">
+                        <barButtonItem key="rightBarButtonItem" enabled="NO" systemItem="compose" id="W3z-0x-mKP">
                             <connections>
                                 <action selector="changeRSSSource:" destination="EqL-Q9-efQ" id="qiw-54-7rf"/>
                             </connections>
@@ -67,6 +70,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LGR-i5-YfC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-170" y="459"/>
+        </scene>
+        <!--News Detail View Controller-->
+        <scene sceneID="3z0-BD-WL0">
+            <objects>
+                <viewController id="ygs-iN-TrJ" customClass="NewsDetailViewController" customModule="News_Reader" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="X1C-Ha-9nB"/>
+                        <viewControllerLayoutGuide type="bottom" id="xpX-gm-eL4"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="RWQ-rC-aoN">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7sL-tz-A8f" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="554" y="459"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="3Hh-vG-ta5">
