@@ -14,6 +14,7 @@ class NRRSSParser: NSObject, NSXMLParserDelegate {
     var activeElement = ""
     var activeAttributes: [String: String]?
     
+    let node_item = "item"
     let node_title = "title"
     let node_link = "link"
     let node_description = "description"
@@ -70,7 +71,7 @@ class NRRSSParser: NSObject, NSXMLParserDelegate {
     }
     
     func parser(parser: NSXMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
-        if elementName == "item" {
+        if elementName == self.node_item {
             if let item = self.activeItem {
                 self.channel.items.append(item)
             }
@@ -78,16 +79,16 @@ class NRRSSParser: NSObject, NSXMLParserDelegate {
             return
         }
         if let item = self.activeItem {
-            if elementName == "title" {
+            if elementName == self.node_title {
                 item.title = self.activeElement
             }
-            if elementName == "link" {
+            if elementName == self.node_link {
                 item.linkWithString(self.activeElement)
             }
-            if elementName == "description" {
+            if elementName == self.node_description {
                 item.itemDescription = self.activeElement
             }
-            if elementName == "category" {
+            if elementName == self.node_category {
                 if let attributes = self.activeAttributes {
                     if let url = attributes[self.attr_domain] {
                         item.appendCategoryWithName(self.activeElement, stringWithURL: url)
@@ -95,10 +96,10 @@ class NRRSSParser: NSObject, NSXMLParserDelegate {
                 }
                 self.activeAttributes = nil
             }
-            if elementName == "dc:creator" {
+            if elementName == self.node_creator {
                 item.creator = self.activeElement
             }
-            if elementName == "pubDate" {
+            if elementName == self.node_pubDate {
                 item.date = self.activeElement
             }
             if elementName == node_media {
@@ -110,22 +111,22 @@ class NRRSSParser: NSObject, NSXMLParserDelegate {
                 self.activeAttributes = nil
             }
         } else {
-            if elementName == "title" {
+            if elementName == self.node_title {
                 self.channel.title = self.activeElement
             }
-            if elementName == "link" {
+            if elementName == self.node_link {
                 self.channel.linkWithString(self.activeElement)
             }
-            if elementName == "description" {
+            if elementName == self.node_description {
                 self.channel.channelDescription = self.activeElement
             }
-            if elementName == "language" {
+            if elementName == self.node_language {
                 self.channel.language = self.activeElement
             }
-            if elementName == "copyright" {
+            if elementName == self.node_copyright {
                 self.channel.copyright = self.activeElement
             }
-            if elementName == "pubDate" {
+            if elementName == self.node_pubDate {
                 self.channel.date = self.activeElement
             }
         }
