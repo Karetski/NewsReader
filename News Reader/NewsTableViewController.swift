@@ -9,12 +9,35 @@
 import UIKit
 
 class NewsTableViewController: UITableViewController, NRRSSParserDelegate {
-    
     var channel: NRChannel?
     var rssLink = "http://www.nytimes.com/services/xml/rss/nyt/World.xml"
     
     let textCellIdentifier = "NewsCell"
     let detailSegueIdentifier = "NewsDetailSegue"
+    
+    // MARK: View Lifecycle
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.estimatedRowHeight = 160.0
+        
+        self.beginParsing()
+        
+        // Uncomment the following line to preserve selection between presentations
+        // self.clearsSelectionOnViewWillAppear = false
+        
+        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    // MARK: Button actions
     
     @IBAction func changeRSSSource(sender: UIBarButtonItem) {
         let alert = UIAlertController(title: "RSS Source", message: "Change RSS source link", preferredStyle: .Alert)
@@ -38,30 +61,16 @@ class NewsTableViewController: UITableViewController, NRRSSParserDelegate {
         self.beginParsing()
     }
     
+    // MARK: Parser loading
+    
     func beginParsing() {
         dispatch_async(dispatch_get_main_queue(), { () -> Void in
-            let request = NSURLRequest(URL: NSURL(string: self.rssLink)!)
-            let parser = NRRSSParser()
-            parser.delegate = self
-            parser.startParsingWithRequest(request)
+            if let requestURL = NSURL(string: self.rssLink) {
+                let parser = NRRSSParser()
+                parser.delegate = self
+                parser.parseWithURL(requestURL)
+            }
         })
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        self.beginParsing()
-        
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     // MARK: - NRRSSParserDelegate implementation
@@ -107,13 +116,13 @@ class NewsTableViewController: UITableViewController, NRRSSParserDelegate {
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(textCellIdentifier, forIndexPath: indexPath) as UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(textCellIdentifier) as! NewsCell
         
         let row = indexPath.row
         if let channel = self.channel {
             let item = channel.items[row]
-            cell.textLabel?.text = item.title
-            cell.detailTextLabel?.text = item.itemDescription
+            cell.title.text = item.title
+            cell.subtitle.text = item.itemDescription
         }
         
         return cell

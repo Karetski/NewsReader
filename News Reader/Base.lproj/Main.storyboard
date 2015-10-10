@@ -14,35 +14,44 @@
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="NewsCell" textLabel="w7v-xq-IvR" detailTextLabel="pbd-lE-fll" style="IBUITableViewCellStyleSubtitle" id="U8T-Cr-6J4">
-                                <rect key="frame" x="0.0" y="92" width="600" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="NewsCell" rowHeight="83" id="QME-HQ-uic" customClass="NewsCell" customModule="News_Reader" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="92" width="600" height="83"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="U8T-Cr-6J4" id="PUY-PB-3Pf">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="QME-HQ-uic" id="3l3-kv-3nn">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="82"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="w7v-xq-IvR">
-                                            <rect key="frame" x="15" y="5" width="32" height="20"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="751" verticalHuggingPriority="751" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wkQ-8R-Nq6">
+                                            <rect key="frame" x="15" y="15" width="570" height="21"/>
                                             <animations/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="pbd-lE-fll">
-                                            <rect key="frame" x="15" y="25" width="41" height="14"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="750" verticalHuggingPriority="750" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Eh-gQ-qdD">
+                                            <rect key="frame" x="15" y="39" width="570" height="28"/>
                                             <animations/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                     <animations/>
+                                    <constraints>
+                                        <constraint firstItem="5Eh-gQ-qdD" firstAttribute="leading" secondItem="3l3-kv-3nn" secondAttribute="leading" constant="15" id="1Y5-u5-fS8"/>
+                                        <constraint firstItem="wkQ-8R-Nq6" firstAttribute="top" secondItem="3l3-kv-3nn" secondAttribute="top" constant="15" id="BJz-Kd-ByC"/>
+                                        <constraint firstAttribute="trailing" secondItem="5Eh-gQ-qdD" secondAttribute="trailing" constant="15" id="FB4-q8-vEI"/>
+                                        <constraint firstItem="wkQ-8R-Nq6" firstAttribute="leading" secondItem="3l3-kv-3nn" secondAttribute="leading" constant="15" id="S7g-z1-EoH"/>
+                                        <constraint firstAttribute="bottom" secondItem="5Eh-gQ-qdD" secondAttribute="bottom" constant="15" id="StG-9k-Wvn"/>
+                                        <constraint firstAttribute="trailing" secondItem="wkQ-8R-Nq6" secondAttribute="trailing" constant="15" id="gHH-aS-eAO"/>
+                                        <constraint firstItem="5Eh-gQ-qdD" firstAttribute="top" secondItem="wkQ-8R-Nq6" secondAttribute="bottom" constant="3" id="uup-xh-hlm"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                                 <animations/>
                                 <connections>
-                                    <segue destination="ygs-iN-TrJ" kind="show" identifier="NewsDetailSegue" id="zjY-5O-ZVG"/>
+                                    <outlet property="subtitle" destination="5Eh-gQ-qdD" id="rVi-4e-GH9"/>
+                                    <outlet property="title" destination="wkQ-8R-Nq6" id="f2k-XA-ckI"/>
+                                    <segue destination="ygs-iN-TrJ" kind="show" identifier="NewsDetailSegue" id="Ds3-qS-Ee9"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>

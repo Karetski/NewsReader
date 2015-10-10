@@ -30,7 +30,11 @@ class NRRSSParser: NSObject, NSXMLParserDelegate {
     
     var delegate: NRRSSParserDelegate?
     
-    func startParsingWithRequest(request: NSURLRequest) {
+    func parseWithURL(url: NSURL) {
+        self.parseWithRequest(NSURLRequest(URL: url))
+    }
+    
+    func parseWithRequest(request: NSURLRequest) {
         self.delegate?.parsingWasStarted()
         
         let session = NSURLSession.sharedSession()
