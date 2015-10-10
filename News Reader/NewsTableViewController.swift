@@ -77,6 +77,9 @@ class NewsTableViewController: UITableViewController, NRRSSParserDelegate {
     
     func parsingWasStarted() {
         dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            if let leftBarButtomItem = self.navigationItem.leftBarButtonItem {
+                leftBarButtomItem.enabled = false
+            }
             self.title = "Loading..."
         })
     }
@@ -99,6 +102,9 @@ class NewsTableViewController: UITableViewController, NRRSSParserDelegate {
                 
                 self.presentViewController(alert, animated: true, completion: nil)
             }
+            if let leftBarButtomItem = self.navigationItem.leftBarButtonItem {
+                leftBarButtomItem.enabled = true
+            }
         })
     }
 
@@ -118,9 +124,8 @@ class NewsTableViewController: UITableViewController, NRRSSParserDelegate {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(textCellIdentifier) as! NewsCell
         
-        let row = indexPath.row
         if let channel = self.channel {
-            let item = channel.items[row]
+            let item = channel.items[indexPath.row]
             cell.title.text = item.title
             cell.subtitle.text = item.itemDescription
         }

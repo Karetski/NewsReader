@@ -28,8 +28,8 @@
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="750" verticalHuggingPriority="750" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Eh-gQ-qdD">
-                                            <rect key="frame" x="15" y="39" width="570" height="28"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="750" verticalHuggingPriority="750" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Eh-gQ-qdD">
+                                            <rect key="frame" x="15" y="46" width="570" height="21"/>
                                             <animations/>
                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -44,7 +44,7 @@
                                         <constraint firstItem="wkQ-8R-Nq6" firstAttribute="leading" secondItem="3l3-kv-3nn" secondAttribute="leading" constant="15" id="S7g-z1-EoH"/>
                                         <constraint firstAttribute="bottom" secondItem="5Eh-gQ-qdD" secondAttribute="bottom" constant="15" id="StG-9k-Wvn"/>
                                         <constraint firstAttribute="trailing" secondItem="wkQ-8R-Nq6" secondAttribute="trailing" constant="15" id="gHH-aS-eAO"/>
-                                        <constraint firstItem="5Eh-gQ-qdD" firstAttribute="top" secondItem="wkQ-8R-Nq6" secondAttribute="bottom" constant="3" id="uup-xh-hlm"/>
+                                        <constraint firstItem="5Eh-gQ-qdD" firstAttribute="top" secondItem="wkQ-8R-Nq6" secondAttribute="bottom" constant="10" id="uup-xh-hlm"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <animations/>

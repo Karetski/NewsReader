@@ -18,6 +18,7 @@ class NRRSSParser: NSObject, NSXMLParserDelegate {
     let node_title = "title"
     let node_link = "link"
     let node_description = "description"
+    
     let node_category = "category"
     let node_creator = "creator"
     let node_pubDate = "pubDate"
