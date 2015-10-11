@@ -28,11 +28,11 @@
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="750" verticalHuggingPriority="750" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Eh-gQ-qdD">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="750" verticalHuggingPriority="750" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Eh-gQ-qdD">
                                             <rect key="frame" x="15" y="46" width="570" height="21"/>
                                             <animations/>
                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
@@ -49,9 +49,68 @@
                                 </tableViewCellContentView>
                                 <animations/>
                                 <connections>
-                                    <outlet property="subtitle" destination="5Eh-gQ-qdD" id="rVi-4e-GH9"/>
-                                    <outlet property="title" destination="wkQ-8R-Nq6" id="f2k-XA-ckI"/>
+                                    <outlet property="descriptionLabel" destination="5Eh-gQ-qdD" id="3gN-4Y-yxD"/>
+                                    <outlet property="titleLabel" destination="wkQ-8R-Nq6" id="9Ur-oo-gts"/>
                                     <segue destination="ygs-iN-TrJ" kind="show" identifier="NewsDetailSegue" id="Ds3-qS-Ee9"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ImageNewsCell" rowHeight="130" id="fbP-mA-Q9S" customClass="ImageNewsCell" customModule="News_Reader" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="175" width="600" height="130"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fbP-mA-Q9S" id="qtb-E1-rCA">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="129"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="751" verticalHuggingPriority="751" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" placeholderIntrinsicWidth="455" placeholderIntrinsicHeight="21" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CTW-sl-lBj">
+                                            <rect key="frame" x="130" y="15" width="455" height="21"/>
+                                            <animations/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="750" verticalHuggingPriority="750" placeholderIntrinsicWidth="455" placeholderIntrinsicHeight="21" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Ke-sk-6FI">
+                                            <rect key="frame" x="130" y="46" width="455" height="21"/>
+                                            <animations/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DBi-va-0dU">
+                                            <rect key="frame" x="15" y="15" width="100" height="100"/>
+                                            <animations/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" priority="999" constant="100" id="Yk6-ef-imF"/>
+                                                <constraint firstAttribute="width" constant="100" id="k7h-zD-Q6s"/>
+                                            </constraints>
+                                        </imageView>
+                                    </subviews>
+                                    <animations/>
+                                    <constraints>
+                                        <constraint firstItem="CTW-sl-lBj" firstAttribute="leading" secondItem="DBi-va-0dU" secondAttribute="trailing" constant="15" id="11N-Ks-oJT"/>
+                                        <constraint firstAttribute="trailing" secondItem="4Ke-sk-6FI" secondAttribute="trailing" constant="15" id="2w9-mY-ABw"/>
+                                        <constraint firstItem="4Ke-sk-6FI" firstAttribute="leading" secondItem="DBi-va-0dU" secondAttribute="trailing" constant="15" id="L2R-Kc-h2V"/>
+                                        <constraint firstItem="4Ke-sk-6FI" firstAttribute="leading" secondItem="qtb-E1-rCA" secondAttribute="leading" constant="130" id="Tus-sR-hQO"/>
+                                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="4Ke-sk-6FI" secondAttribute="bottom" constant="15" id="WUI-EF-IlG"/>
+                                        <constraint firstItem="DBi-va-0dU" firstAttribute="top" secondItem="qtb-E1-rCA" secondAttribute="top" constant="15" id="bWp-jE-ZPA"/>
+                                        <constraint firstItem="CTW-sl-lBj" firstAttribute="leading" secondItem="qtb-E1-rCA" secondAttribute="leading" constant="130" id="ebp-HM-23G"/>
+                                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="DBi-va-0dU" secondAttribute="bottom" priority="999" constant="14" id="hL9-ce-jNs"/>
+                                        <constraint firstAttribute="trailing" secondItem="CTW-sl-lBj" secondAttribute="trailing" constant="15" id="j0n-YG-4tz"/>
+                                        <constraint firstItem="CTW-sl-lBj" firstAttribute="top" secondItem="qtb-E1-rCA" secondAttribute="top" constant="15" id="n3R-26-NYy"/>
+                                        <constraint firstItem="4Ke-sk-6FI" firstAttribute="top" secondItem="CTW-sl-lBj" secondAttribute="bottom" constant="10" id="qCq-U6-RPh"/>
+                                        <constraint firstItem="DBi-va-0dU" firstAttribute="leading" secondItem="qtb-E1-rCA" secondAttribute="leading" constant="15" id="vvz-ON-mrB"/>
+                                    </constraints>
+                                    <variation key="default">
+                                        <mask key="constraints">
+                                            <exclude reference="ebp-HM-23G"/>
+                                            <exclude reference="Tus-sR-hQO"/>
+                                        </mask>
+                                    </variation>
+                                </tableViewCellContentView>
+                                <animations/>
+                                <connections>
+                                    <outlet property="descriptionLabel" destination="4Ke-sk-6FI" id="zp5-VH-ugy"/>
+                                    <outlet property="previewImageView" destination="DBi-va-0dU" id="u61-gc-zIh"/>
+                                    <outlet property="titleLabel" destination="CTW-sl-lBj" id="9U3-2Q-FNz"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -66,7 +125,7 @@
                                 <action selector="refreshButtonAction:" destination="EqL-Q9-efQ" id="dG3-1q-lPg"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" enabled="NO" systemItem="compose" id="W3z-0x-mKP">
+                        <barButtonItem key="rightBarButtonItem" systemItem="compose" id="W3z-0x-mKP">
                             <connections>
                                 <action selector="changeRSSSource:" destination="EqL-Q9-efQ" id="qiw-54-7rf"/>
                             </connections>

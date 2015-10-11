@@ -9,8 +9,8 @@
 import UIKit
 
 class NewsCell: UITableViewCell {
-    @IBOutlet var title: UILabel!
-    @IBOutlet var subtitle: UILabel!
+    @IBOutlet var titleLabel: UILabel!
+    @IBOutlet var descriptionLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

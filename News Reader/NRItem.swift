@@ -15,6 +15,23 @@ class NRItem: NSObject {
     var creator: String?
     var date: String? // Change to NSDate
     
+    var thubmnail: NSURL? {
+        var url: NSURL?
+        
+        for mediaURL in self.media {
+            var stringURL = "\(mediaURL)"
+
+            let regex = try! NSRegularExpression(pattern: "(https?)\\S*(png|jpg|jpeg|gif)", options: .CaseInsensitive)
+            
+            if let result = regex.firstMatchInString(stringURL, options: NSMatchingOptions(rawValue: 0), range: NSMakeRange(0, stringURL.characters.count)) {
+                stringURL = (stringURL as NSString).substringWithRange(result.range) as String
+                url = NSURL(string: stringURL)
+                break
+            }
+        }
+        return url
+    }
+    
     var media = [NSURL]()
     var categories = [String: NSURL]()
     

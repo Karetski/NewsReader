@@ -18,13 +18,12 @@ class NRRSSParser: NSObject, NSXMLParserDelegate {
     let node_title = "title"
     let node_link = "link"
     let node_description = "description"
-    
     let node_category = "category"
     let node_creator = "creator"
     let node_pubDate = "pubDate"
     let node_language = "language"
     let node_copyright = "copyright"
-    let node_media = "media:content"
+    let node_mediaContent = "media:content"
     
     let attr_url = "url"
     let attr_domain = "domain"
@@ -107,7 +106,7 @@ class NRRSSParser: NSObject, NSXMLParserDelegate {
             if elementName == self.node_pubDate {
                 item.date = self.activeElement
             }
-            if elementName == node_media {
+            if elementName == node_mediaContent {
                 if let attributes = self.activeAttributes {
                     if let url = attributes[self.attr_url] {
                         item.appendMediaWithString(url)

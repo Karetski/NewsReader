@@ -12,7 +12,8 @@ class NewsTableViewController: UITableViewController, NRRSSParserDelegate {
     var channel: NRChannel?
     var rssLink = "http://www.nytimes.com/services/xml/rss/nyt/World.xml"
     
-    let textCellIdentifier = "NewsCell"
+    let newsCellIdentifier = "NewsCell"
+    let imageNewsCellIdentifier = "ImageNewsCell"
     let detailSegueIdentifier = "NewsDetailSegue"
     
     // MARK: View Lifecycle
@@ -122,12 +123,12 @@ class NewsTableViewController: UITableViewController, NRRSSParserDelegate {
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(textCellIdentifier) as! NewsCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(newsCellIdentifier) as! NewsCell
         
         if let channel = self.channel {
             let item = channel.items[indexPath.row]
-            cell.title.text = item.title
-            cell.subtitle.text = item.itemDescription
+            cell.titleLabel.text = item.title
+            cell.descriptionLabel.text = item.itemDescription
         }
         
         return cell
