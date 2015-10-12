@@ -123,13 +123,36 @@ class NewsTableViewController: UITableViewController, NRRSSParserDelegate {
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        if let channel = self.channel {
+            if let thumbnail = channel.items[indexPath.row].thumbnail {
+                return self.imageNewsCellAtIndexPath(indexPath, channel: channel, thumbnail: thumbnail)
+            } else {
+                return self.newsCellAtIndexPath(indexPath, channel: channel)
+            }
+        }
+        return UITableViewCell()
+    }
+    
+    func imageNewsCellAtIndexPath(indexPath: NSIndexPath, channel: NRChannel, thumbnail: NSURL) -> ImageNewsCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier(imageNewsCellIdentifier) as! ImageNewsCell
+        
+        let item = channel.items[indexPath.row]
+        
+        cell.titleLabel.text = item.title
+        cell.descriptionLabel.text = item.itemDescription
+        cell.previewImageView.setImageFromURL(thumbnail, contentMode: .ScaleAspectFit)
+        cell.dateLabel.text = item.date
+        
+        return cell
+    }
+    
+    func newsCellAtIndexPath(indexPath: NSIndexPath, channel: NRChannel) -> NewsCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(newsCellIdentifier) as! NewsCell
         
-        if let channel = self.channel {
-            let item = channel.items[indexPath.row]
-            cell.titleLabel.text = item.title
-            cell.descriptionLabel.text = item.itemDescription
-        }
+        let item = channel.items[indexPath.row]
+        cell.titleLabel.text = item.title
+        cell.descriptionLabel.text = item.itemDescription
+        cell.dateLabel.text = item.date
         
         return cell
     }

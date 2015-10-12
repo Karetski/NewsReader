@@ -22,6 +22,7 @@
 		8AC53E5D1BC98CF2000B45E2 /* NewsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC53E5C1BC98CF2000B45E2 /* NewsCell.swift */; settings = {ASSET_TAGS = (); }; };
 		8AC74DB91BC285FF00CBF2AE /* NRRSSParserDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC74DB81BC285FF00CBF2AE /* NRRSSParserDelegate.swift */; settings = {ASSET_TAGS = (); }; };
 		8AEA0E641BBDCBC000556336 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 8AEA0E631BBDCBC000556336 /* .gitignore */; settings = {ASSET_TAGS = (); }; };
+		8AEEE52A1BCBE16B0013A5CE /* UIImageView+setImageFromURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AEEE5291BCBE16B0013A5CE /* UIImageView+setImageFromURL.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +64,7 @@
 		8AC53E5C1BC98CF2000B45E2 /* NewsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsCell.swift; sourceTree = "<group>"; };
 		8AC74DB81BC285FF00CBF2AE /* NRRSSParserDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NRRSSParserDelegate.swift; sourceTree = "<group>"; };
 		8AEA0E631BBDCBC000556336 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		8AEEE5291BCBE16B0013A5CE /* UIImageView+setImageFromURL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+setImageFromURL.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +151,7 @@
 				8A31C2CE1BBEB3D2001DA7C4 /* NRItem.swift */,
 				8AB0BFA71BC1EBB500523D8F /* NRRSSParser.swift */,
 				8AC74DB81BC285FF00CBF2AE /* NRRSSParserDelegate.swift */,
+				8AEEE5291BCBE16B0013A5CE /* UIImageView+setImageFromURL.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -311,6 +314,7 @@
 				8A31C2CD1BBEB0A9001DA7C4 /* NRChannel.swift in Sources */,
 				8AB0BFA81BC1EBB500523D8F /* NRRSSParser.swift in Sources */,
 				8AC53E5D1BC98CF2000B45E2 /* NewsCell.swift in Sources */,
+				8AEEE52A1BCBE16B0013A5CE /* UIImageView+setImageFromURL.swift in Sources */,
 				8A6B0D7A1BBD8BA40056C91E /* AppDelegate.swift in Sources */,
 				8AA61E831BC9C87F00D937C6 /* ImageNewsCell.swift in Sources */,
 			);
