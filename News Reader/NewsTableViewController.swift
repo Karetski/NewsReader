@@ -10,6 +10,7 @@ import UIKit
 
 class NewsTableViewController: UITableViewController, RSSParserDelegate {
     var channel: Channel?
+    var imageDownloadsInProgress = [NSIndexPath: ImageDownloader]()
     
     var rssLink = "http://www.nytimes.com/services/xml/rss/nyt/World.xml"
     
@@ -127,19 +128,6 @@ class NewsTableViewController: UITableViewController, RSSParserDelegate {
         }
     }
     
-    func imageNewsCellAtIndexPath(indexPath: NSIndexPath, channel: Channel, thumbnail: NSURL) -> ImageNewsCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(imageNewsCellIdentifier) as! ImageNewsCell
-        
-        let item = channel.items[indexPath.row]
-        
-        cell.titleLabel.text = item.title
-        cell.descriptionLabel.text = item.itemDescription
-        cell.thumbnailImageView.setImageFromURL(thumbnail, contentMode: .ScaleAspectFit)
-        cell.dateLabel.text = item.date
-        
-        return cell
-    }
-    
     func newsCellAtIndexPath(indexPath: NSIndexPath, channel: Channel) -> NewsCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(newsCellIdentifier) as! NewsCell
         
@@ -149,6 +137,81 @@ class NewsTableViewController: UITableViewController, RSSParserDelegate {
         cell.dateLabel.text = item.date
         
         return cell
+    }
+    
+    func imageNewsCellAtIndexPath(indexPath: NSIndexPath, channel: Channel, thumbnail: NSURL) -> ImageNewsCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier(imageNewsCellIdentifier) as! ImageNewsCell
+        
+        let item = channel.items[indexPath.row]
+        
+        cell.titleLabel.text = item.title
+        cell.descriptionLabel.text = item.itemDescription
+        cell.dateLabel.text = item.date
+
+//        cell.thumbnailImageView.setImageFromURL(thumbnail, contentMode: .ScaleAspectFit)
+        if let thumbnailImage = item.thumbnailImage {
+            cell.thumbnailImageView.image = thumbnailImage
+        } else {
+            if self.tableView.dragging == false && self.tableView.decelerating == false {
+                self.startThumbnailDownload(item, indexPath: indexPath, cell: cell)
+            }
+        }
+        
+        return cell
+    }
+    
+    func startThumbnailDownload(item: Item, indexPath: NSIndexPath, cell: ImageNewsCell) {
+        print(indexPath.row)
+        if let _ = self.imageDownloadsInProgress[indexPath] {
+            return
+        }
+        guard let thumbnailURL = item.thumbnail else {
+            return
+        }
+        let imageDownloader = ImageDownloader()
+        imageDownloader.completionHandler = { (image, error) -> Void in
+            // ERROR HANDLING
+
+            dispatch_async(dispatch_get_main_queue()) { () -> Void in
+                cell.thumbnailImageView.image = image
+            }
+            
+            item.thumbnailImage = image
+            
+            self.imageDownloadsInProgress.removeValueForKey(indexPath)
+        }
+        self.imageDownloadsInProgress[indexPath] = imageDownloader
+        imageDownloader.downloadImageWithURL(thumbnailURL)
+    }
+    
+    func loadImagesForOnscreenRows() {
+        guard let channel = self.channel else {
+            return
+        }
+        guard let visiblePaths = self.tableView.indexPathsForVisibleRows else {
+            return
+        }
+
+        for indexPath in visiblePaths {
+            let item = channel.items[indexPath.row]
+            guard let _ = item.thumbnail else {
+                return
+            }
+            let cell = tableView.cellForRowAtIndexPath(indexPath) as! ImageNewsCell
+            self.startThumbnailDownload(item, indexPath: indexPath, cell: cell)
+        }
+    }
+    
+    // MARK: - UIScrollViewDelegate
+    
+    override func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        if !decelerate {
+            self.loadImagesForOnscreenRows()
+        }
+    }
+    
+    override func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+        self.loadImagesForOnscreenRows()
     }
     
     // MARK: - Navigation

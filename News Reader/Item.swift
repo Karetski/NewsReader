@@ -15,6 +15,7 @@ class Item: NSObject {
     var creator: String?
     var date: String? // Change to NSDate1
     
+    var thumbnailImage: UIImage?
     var thumbnail: NSURL? {
         var url: NSURL?
         
