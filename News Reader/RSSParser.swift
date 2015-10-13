@@ -8,9 +8,9 @@
 
 import UIKit
 
-class NRRSSParser: NSObject, NSXMLParserDelegate {
-    var channel = NRChannel()
-    var activeItem: NRItem?
+class RSSParser: NSObject, NSXMLParserDelegate {
+    var channel = Channel()
+    var activeItem: Item?
     var activeElement = ""
     var activeAttributes: [String: String]?
     
@@ -28,7 +28,7 @@ class NRRSSParser: NSObject, NSXMLParserDelegate {
     let attr_url = "url"
     let attr_domain = "domain"
     
-    var delegate: NRRSSParserDelegate?
+    var delegate: RSSParserDelegate?
     
     func parseWithURL(url: NSURL) {
         self.parseWithRequest(NSURLRequest(URL: url))
@@ -64,7 +64,7 @@ class NRRSSParser: NSObject, NSXMLParserDelegate {
     
     func parser(parser: NSXMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String]) {
         if elementName == "item" {
-            self.activeItem = NRItem()
+            self.activeItem = Item()
         }
         self.activeElement = ""
         self.activeAttributes = attributeDict
@@ -87,7 +87,7 @@ class NRRSSParser: NSObject, NSXMLParserDelegate {
                 item.title = self.activeElement
             }
             if elementName == self.node_link {
-                item.linkWithString(self.activeElement)
+                item.setLinkWithString(self.activeElement)
             }
             if elementName == self.node_description {
                 item.itemDescription = self.activeElement
@@ -119,7 +119,7 @@ class NRRSSParser: NSObject, NSXMLParserDelegate {
                 self.channel.title = self.activeElement
             }
             if elementName == self.node_link {
-                self.channel.linkWithString(self.activeElement)
+                self.channel.setLinkWithString(self.activeElement)
             }
             if elementName == self.node_description {
                 self.channel.channelDescription = self.activeElement

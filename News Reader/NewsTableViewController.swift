@@ -8,13 +8,14 @@
 
 import UIKit
 
-class NewsTableViewController: UITableViewController, NRRSSParserDelegate {
-    var channel: NRChannel?
+class NewsTableViewController: UITableViewController, RSSParserDelegate {
+    var channel: Channel?
+    
     var rssLink = "http://www.nytimes.com/services/xml/rss/nyt/World.xml"
     
     let newsCellIdentifier = "NewsCell"
     let imageNewsCellIdentifier = "ImageNewsCell"
-    let detailSegueIdentifier = "NewsDetailSegue"
+    let newsDetailSegueIdentifier = "NewsDetailSegue"
     
     // MARK: View Lifecycle
     
@@ -25,17 +26,10 @@ class NewsTableViewController: UITableViewController, NRRSSParserDelegate {
         self.tableView.estimatedRowHeight = 160.0
         
         self.beginParsing()
-        
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-        
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     // MARK: Button actions
@@ -67,7 +61,7 @@ class NewsTableViewController: UITableViewController, NRRSSParserDelegate {
     func beginParsing() {
         dispatch_async(dispatch_get_main_queue(), { () -> Void in
             if let requestURL = NSURL(string: self.rssLink) {
-                let parser = NRRSSParser()
+                let parser = RSSParser()
                 parser.delegate = self
                 parser.parseWithURL(requestURL)
             }
@@ -85,15 +79,15 @@ class NewsTableViewController: UITableViewController, NRRSSParserDelegate {
         })
     }
     
-    func parsingWasFinished(channel: NRChannel?, error: NSError?) {
+    func parsingWasFinished(channel: Channel?, error: NSError?) {
         dispatch_async(dispatch_get_main_queue(), { () -> Void in
-            if let currentChannel = channel {
-                self.channel = currentChannel
-                self.title = currentChannel.title
+            if let channel = channel {
+                self.channel = channel
+                self.title = channel.title
                 self.tableView.reloadData()
             } else {
-                if let currentChannel = self.channel {
-                    self.title = currentChannel.title
+                if let channel = self.channel {
+                    self.title = channel.title
                 } else {
                     self.title = "News Reader"
                 }
@@ -116,37 +110,37 @@ class NewsTableViewController: UITableViewController, NRRSSParserDelegate {
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let channel = self.channel {
-            return channel.items.count
+        guard let channel = self.channel else {
+            return 0
         }
-        return 0
+        return channel.items.count
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        if let channel = self.channel {
-            if let thumbnail = channel.items[indexPath.row].thumbnail {
-                return self.imageNewsCellAtIndexPath(indexPath, channel: channel, thumbnail: thumbnail)
-            } else {
-                return self.newsCellAtIndexPath(indexPath, channel: channel)
-            }
+        guard let channel = self.channel else {
+            return UITableViewCell()
         }
-        return UITableViewCell()
+        if let thumbnail = channel.items[indexPath.row].thumbnail {
+            return self.imageNewsCellAtIndexPath(indexPath, channel: channel, thumbnail: thumbnail)
+        } else {
+            return self.newsCellAtIndexPath(indexPath, channel: channel)
+        }
     }
     
-    func imageNewsCellAtIndexPath(indexPath: NSIndexPath, channel: NRChannel, thumbnail: NSURL) -> ImageNewsCell {
+    func imageNewsCellAtIndexPath(indexPath: NSIndexPath, channel: Channel, thumbnail: NSURL) -> ImageNewsCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(imageNewsCellIdentifier) as! ImageNewsCell
         
         let item = channel.items[indexPath.row]
         
         cell.titleLabel.text = item.title
         cell.descriptionLabel.text = item.itemDescription
-        cell.previewImageView.setImageFromURL(thumbnail, contentMode: .ScaleAspectFit)
+        cell.thumbnailImageView.setImageFromURL(thumbnail, contentMode: .ScaleAspectFit)
         cell.dateLabel.text = item.date
         
         return cell
     }
     
-    func newsCellAtIndexPath(indexPath: NSIndexPath, channel: NRChannel) -> NewsCell {
+    func newsCellAtIndexPath(indexPath: NSIndexPath, channel: Channel) -> NewsCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(newsCellIdentifier) as! NewsCell
         
         let item = channel.items[indexPath.row]
@@ -156,48 +150,12 @@ class NewsTableViewController: UITableViewController, NRRSSParserDelegate {
         
         return cell
     }
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            // Delete the row from the data source
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
     
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == detailSegueIdentifier {
+        if segue.identifier == newsDetailSegueIdentifier {
             if let destination = segue.destinationViewController as? NewsDetailViewController {
                 if let indexPath = self.tableView.indexPathForSelectedRow {
                     if let channel = self.channel {

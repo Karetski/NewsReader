@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NRChannel: NSObject {
+class Channel: NSObject {
     var title: String?
     var link: NSURL?
     var channelDescription: String?
@@ -16,9 +16,9 @@ class NRChannel: NSObject {
     var copyright: String?
     var date: String? // Change to NSDate
     
-    var items = [NRItem]()
+    var items = [Item]()
     
-    func linkWithString(string: String) {
+    func setLinkWithString(string: String) {
         self.link = NSURL(string: string)
     }
 }

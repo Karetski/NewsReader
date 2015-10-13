@@ -153,7 +153,7 @@
                                 <connections>
                                     <outlet property="dateLabel" destination="xp6-Ka-iYf" id="wUL-RB-EZn"/>
                                     <outlet property="descriptionLabel" destination="4Ke-sk-6FI" id="zp5-VH-ugy"/>
-                                    <outlet property="previewImageView" destination="DBi-va-0dU" id="u61-gc-zIh"/>
+                                    <outlet property="thumbnailImageView" destination="DBi-va-0dU" id="ndE-BS-ryN"/>
                                     <outlet property="titleLabel" destination="CTW-sl-lBj" id="9U3-2Q-FNz"/>
                                 </connections>
                             </tableViewCell>
@@ -200,7 +200,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7sL-tz-A8f" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="554" y="459"/>
+            <point key="canvasLocation" x="530" y="459"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="3Hh-vG-ta5">

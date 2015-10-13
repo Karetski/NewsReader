@@ -8,8 +8,8 @@
 
 import UIKit
 
-protocol NRRSSParserDelegate {
+protocol RSSParserDelegate {
     func parsingWasStarted()
-    func parsingWasFinished(channel: NRChannel?, error: NSError?)
+    func parsingWasFinished(channel: Channel?, error: NSError?)
 }
 

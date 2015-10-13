@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NRItem: NSObject {
+class Item: NSObject {
     var title: String?
     var link: NSURL?
     var itemDescription: String?
@@ -26,7 +26,6 @@ class NRItem: NSObject {
             if let result = regex.firstMatchInString(stringURL, options: NSMatchingOptions(rawValue: 0), range: NSMakeRange(0, stringURL.characters.count)) {
                 stringURL = (stringURL as NSString).substringWithRange(result.range) as String
                 url = NSURL(string: stringURL)
-                
                 break
             }
         }
@@ -37,7 +36,7 @@ class NRItem: NSObject {
     var media = [NSURL]()
     var categories = [String: NSURL]()
     
-    func linkWithString(urlString: String) {
+    func setLinkWithString(urlString: String) {
         self.link = NSURL(string: urlString)
     }
     

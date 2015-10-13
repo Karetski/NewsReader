@@ -10,13 +10,14 @@ import UIKit
 
 extension UIImageView {
     func setImageFromURL(url: NSURL, contentMode mode: UIViewContentMode) {
-        print(url)
         self.contentMode = mode
         NSURLSession.sharedSession().dataTaskWithURL(url, completionHandler: { (data, _, error) -> Void in
             guard let data = data where error == nil else { return }
             dispatch_async(dispatch_get_main_queue()) { () -> Void in
                 self.image = UIImage(data: data)
             }
+            self.image = UIImage(data: data)
         }).resume()
     }
 }
+

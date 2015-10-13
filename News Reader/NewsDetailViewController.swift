@@ -10,7 +10,7 @@ import UIKit
 
 class NewsDetailViewController: UIViewController {
 
-    var item: NRItem?
+    var item: Item?
     
     override func viewDidLoad() {
         super.viewDidLoad()
