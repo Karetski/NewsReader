@@ -57,7 +57,16 @@ class NewsTableViewController: UITableViewController, RSSParserDelegate {
         self.beginParsing()
     }
     
-    // MARK: Parser loading
+    // MARK: - Helpers
+    
+    func sendMessageWithError(error: NSError, withTitle title: String) {
+        let alert = UIAlertController(title: title, message: error.localizedDescription, preferredStyle: .Alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default,handler: nil))
+        
+        self.presentViewController(alert, animated: true, completion: nil)
+    }
+    
+    // MARK: - Parser loading
     
     func beginParsing() {
         dispatch_async(dispatch_get_main_queue(), { () -> Void in
@@ -69,7 +78,7 @@ class NewsTableViewController: UITableViewController, RSSParserDelegate {
         })
     }
     
-    // MARK: - NRRSSParserDelegate implementation
+    // MARK: - NRRSSParserDelegate
     
     func parsingWasStarted() {
         dispatch_async(dispatch_get_main_queue(), { () -> Void in
@@ -81,6 +90,10 @@ class NewsTableViewController: UITableViewController, RSSParserDelegate {
     }
     
     func parsingWasFinished(channel: Channel?, error: NSError?) {
+        if let error = error {
+            self.sendMessageWithError(error, withTitle: "Parsing error")
+            return
+        }
         dispatch_async(dispatch_get_main_queue(), { () -> Void in
             if let channel = channel {
                 self.channel = channel
@@ -92,11 +105,6 @@ class NewsTableViewController: UITableViewController, RSSParserDelegate {
                 } else {
                     self.title = "News Reader"
                 }
-                
-                let alert = UIAlertController(title: "Error", message: error?.localizedDescription, preferredStyle: .Alert)
-                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default,handler: nil))
-                
-                self.presentViewController(alert, animated: true, completion: nil)
             }
             if let leftBarButtomItem = self.navigationItem.leftBarButtonItem {
                 leftBarButtomItem.enabled = true
@@ -147,8 +155,7 @@ class NewsTableViewController: UITableViewController, RSSParserDelegate {
         cell.titleLabel.text = item.title
         cell.descriptionLabel.text = item.itemDescription
         cell.dateLabel.text = item.date
-
-//        cell.thumbnailImageView.setImageFromURL(thumbnail, contentMode: .ScaleAspectFit)
+        
         if let thumbnailImage = item.thumbnailImage {
             cell.thumbnailImageView.image = thumbnailImage
         } else {
@@ -161,7 +168,6 @@ class NewsTableViewController: UITableViewController, RSSParserDelegate {
     }
     
     func startThumbnailDownload(item: Item, indexPath: NSIndexPath, cell: ImageNewsCell) {
-        print(indexPath.row)
         if let _ = self.imageDownloadsInProgress[indexPath] {
             return
         }
@@ -170,12 +176,14 @@ class NewsTableViewController: UITableViewController, RSSParserDelegate {
         }
         let imageDownloader = ImageDownloader()
         imageDownloader.completionHandler = { (image, error) -> Void in
-            // ERROR HANDLING
-
+            if let error = error {
+                self.sendMessageWithError(error, withTitle: "Image Downloading Error")
+                return
+            }
+            
             dispatch_async(dispatch_get_main_queue()) { () -> Void in
                 cell.thumbnailImageView.image = image
             }
-            
             item.thumbnailImage = image
             
             self.imageDownloadsInProgress.removeValueForKey(indexPath)
@@ -191,14 +199,13 @@ class NewsTableViewController: UITableViewController, RSSParserDelegate {
         guard let visiblePaths = self.tableView.indexPathsForVisibleRows else {
             return
         }
-
+        
         for indexPath in visiblePaths {
             let item = channel.items[indexPath.row]
-            guard let _ = item.thumbnail else {
-                return
+            if let _ = item.thumbnail {
+                let cell = tableView.cellForRowAtIndexPath(indexPath) as! ImageNewsCell
+                self.startThumbnailDownload(item, indexPath: indexPath, cell: cell)
             }
-            let cell = tableView.cellForRowAtIndexPath(indexPath) as! ImageNewsCell
-            self.startThumbnailDownload(item, indexPath: indexPath, cell: cell)
         }
     }
     
