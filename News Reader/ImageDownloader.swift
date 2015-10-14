@@ -20,7 +20,6 @@ class ImageDownloader: NSObject {
             } else {
                 self.completionHandler(nil, error)
             }
-            
         }).resume()
     }
 }

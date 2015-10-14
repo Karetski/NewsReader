@@ -13,7 +13,7 @@ class Item: NSObject {
     var link: NSURL?
     var itemDescription: String?
     var creator: String?
-    var date: String? // Change to NSDate1
+    var date: String? // Change to NSDate
     
     var thumbnailImage: UIImage?
     var thumbnail: NSURL? {

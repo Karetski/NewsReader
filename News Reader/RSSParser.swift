@@ -37,9 +37,7 @@ class RSSParser: NSObject, NSXMLParserDelegate {
     func parseWithRequest(request: NSURLRequest) {
         self.delegate?.parsingWasStarted()
         
-        let session = NSURLSession.sharedSession()
-        
-        let task = session.dataTaskWithRequest(request, completionHandler: { data, response, error -> Void in
+        NSURLSession.sharedSession().dataTaskWithRequest(request, completionHandler: { data, response, error -> Void in
             if error != nil {
                 self.delegate?.parsingWasFinished(nil, error: error)
             } else {
@@ -47,9 +45,7 @@ class RSSParser: NSObject, NSXMLParserDelegate {
                 parser.delegate = self
                 parser.parse()
             }
-        })
-        
-        task.resume()
+        }).resume()
     }
     
     // MARK: - NSXMLParserDelegate implementation
