@@ -162,10 +162,13 @@ class NewsTableViewController: UITableViewController, RSSParserDelegate {
             if self.tableView.dragging == false && self.tableView.decelerating == false {
                 self.startThumbnailDownload(item, indexPath: indexPath, cell: cell)
             }
+            cell.thumbnailImageView.image = UIImage(named: "Placeholder.png")
         }
         
         return cell
     }
+    
+    // MARK: - Image downloading helpers
     
     func startThumbnailDownload(item: Item, indexPath: NSIndexPath, cell: ImageNewsCell) {
         if let _ = self.imageDownloadsInProgress[indexPath] {
