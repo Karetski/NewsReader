@@ -19,7 +19,7 @@ class RSSParser: NSObject, NSXMLParserDelegate {
     let node_link = "link"
     let node_description = "description"
     let node_category = "category"
-    let node_creator = "creator"
+    let node_creator = "dc:creator"
     let node_pubDate = "pubDate"
     let node_language = "language"
     let node_copyright = "copyright"

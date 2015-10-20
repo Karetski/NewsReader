@@ -16,7 +16,9 @@ class NewsTableViewController: UITableViewController, RSSParserDelegate {
     
     let newsCellIdentifier = "NewsCell"
     let imageNewsCellIdentifier = "ImageNewsCell"
+    
     let newsDetailSegueIdentifier = "NewsDetailSegue"
+    let imageNewsDetailSegueIdentifier = "ImageNewsDetailSegue"
     
     // MARK: View Lifecycle
     
@@ -141,7 +143,7 @@ class NewsTableViewController: UITableViewController, RSSParserDelegate {
         
         let item = channel.items[indexPath.row]
         cell.titleLabel.text = item.title
-        cell.descriptionLabel.text = item.itemDescription
+        cell.descriptionLabel.text = item.minifiedDescription
         cell.dateLabel.text = item.date
         
         return cell
@@ -153,7 +155,7 @@ class NewsTableViewController: UITableViewController, RSSParserDelegate {
         let item = channel.items[indexPath.row]
         
         cell.titleLabel.text = item.title
-        cell.descriptionLabel.text = item.itemDescription
+        cell.descriptionLabel.text = item.minifiedDescription
         cell.dateLabel.text = item.date
         
         if let thumbnailImage = item.thumbnailImage {
@@ -227,8 +229,8 @@ class NewsTableViewController: UITableViewController, RSSParserDelegate {
     // MARK: - Navigation
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == newsDetailSegueIdentifier {
-            if let destination = segue.destinationViewController as? NewsDetailViewController {
+        if segue.identifier == newsDetailSegueIdentifier || segue.identifier == self.imageNewsDetailSegueIdentifier {
+            if let destination = segue.destinationViewController as? NewsDetailTableViewController {
                 if let indexPath = self.tableView.indexPathForSelectedRow {
                     if let channel = self.channel {
                         destination.item = channel.items[indexPath.row]

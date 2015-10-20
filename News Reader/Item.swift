@@ -11,9 +11,33 @@ import UIKit
 class Item: NSObject {
     var title: String?
     var link: NSURL?
-    var itemDescription: String?
     var creator: String?
     var date: String? // Change to NSDate
+    
+    var itemDescription: String?
+    var minifiedDescription: String? {
+        guard let description = self.itemDescription else {
+            return nil
+        }
+        
+        var resultString = description
+        var tags = [String]()
+        
+        let regex = try! NSRegularExpression(pattern: "<(.*?)>", options: .CaseInsensitive)
+        regex.enumerateMatchesInString(description, options: NSMatchingOptions(rawValue: 0), range: NSMakeRange(0, description.characters.count)) { (result, _, _) in
+            if let result = result {
+                let string = (description as NSString).substringWithRange(result.range) as String
+                tags.append(string)
+
+            }
+        }
+        
+        for tag in tags {
+            resultString = resultString.stringByReplacingOccurrencesOfString(tag, withString: "")
+        }
+        
+        return resultString
+    }
     
     var thumbnailImage: UIImage?
     var thumbnail: NSURL? {
