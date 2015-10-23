@@ -68,8 +68,6 @@ class NewsTableViewController: UITableViewController, RSSParserDelegate {
         self.presentViewController(alert, animated: true, completion: nil)
     }
     
-    // MARK: - Parser loading
-    
     func beginParsing() {
         dispatch_async(dispatch_get_main_queue(), { () -> Void in
             if let requestURL = NSURL(string: self.rssLink) {

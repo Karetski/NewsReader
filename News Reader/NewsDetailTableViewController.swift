@@ -39,10 +39,12 @@ class NewsDetailTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if section == 1 {
-            return "Categories"
-        } else if section == 2 {
-            return "Media"
+        if let item = self.item {
+            if section == 1 && item.categories.count > 0 {
+                return "Categories"
+            } else if section == 2 && item.media.count > 0 {
+                return "Media"
+            }
         }
         return nil
     }
@@ -91,8 +93,6 @@ class NewsDetailTableViewController: UITableViewController {
             cell.thumbnailImageView.image = image
         } else if let imageURL = item.thumbnail {
             cell.thumbnailImageView.setImageFromURL(imageURL)
-        } else {
-            cell.thumbnailImageView.frame = CGRectNull
         }
         
         return cell
