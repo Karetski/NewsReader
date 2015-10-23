@@ -12,6 +12,8 @@ class NewsDetailTableViewController: UITableViewController {
     var item: Item?
     
     let detailNewsCellIdentifier = "DetailNewsCell"
+    let categoriesNewsCellIdentifier = "CategoriesNewsCell"
+    let mediaNewsCellIdentifier = "MediaNewsCell"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,28 +32,67 @@ class NewsDetailTableViewController: UITableViewController {
     // MARK: - Table view data source
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
+        guard let _ = self.item else {
+            return 1
+        }
+        return 3
+    }
+    
+    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 1 {
+            return "Categories"
+        } else if section == 2 {
+            return "Media"
+        }
+        return nil
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        if let item = self.item {
+            if section == 0 {
+                return 1
+            } else if section == 1 {
+                return item.categories.count
+            } else if section == 2 {
+                return item.media.count
+            }
+        }
+        return 0
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        guard let item = self.item else {
+            return UITableViewCell()
+        }
+        
+        if indexPath.section == 1 {
+            let cell = tableView.dequeueReusableCellWithIdentifier(self.categoriesNewsCellIdentifier, forIndexPath: indexPath) as UITableViewCell
+            
+            cell.textLabel?.text = Array(item.categories.keys)[indexPath.row]
+            
+            return cell
+        }
+        
+        if indexPath.section == 2 {
+            let cell = tableView.dequeueReusableCellWithIdentifier(self.categoriesNewsCellIdentifier, forIndexPath: indexPath) as UITableViewCell
+            
+            cell.textLabel?.text = item.media[indexPath.row].absoluteString
+            
+            return cell
+        }
+        
         let cell = tableView.dequeueReusableCellWithIdentifier(self.detailNewsCellIdentifier) as! DetailNewsCell
         
-        if let item = self.item {
-            cell.titleLabel.text = item.title
-            cell.dateLabel.text = item.date
-            cell.authorLabel.text = item.creator
-            cell.descriptionLabel.text = item.minifiedDescription
-            if let image = item.thumbnailImage {
-                cell.thumbnailImageView.image = image
-            } else if let imageURL = item.thumbnail {
-                cell.thumbnailImageView.setImageFromURL(imageURL)
-            } else {
-                cell.thumbnailImageView.hidden = true
-            }
+        cell.titleLabel.text = item.title
+        cell.dateLabel.text = item.date
+        cell.authorLabel.text = item.creator
+        cell.descriptionLabel.text = item.minifiedDescription
+        if let image = item.thumbnailImage {
+            cell.thumbnailImageView.image = image
+        } else if let imageURL = item.thumbnail {
+            cell.thumbnailImageView.setImageFromURL(imageURL)
+        } else {
+            cell.thumbnailImageView.frame = CGRectNull
         }
         
         return cell
