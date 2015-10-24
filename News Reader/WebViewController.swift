@@ -11,6 +11,7 @@ import UIKit
 class WebViewController: UIViewController, UIWebViewDelegate {
     @IBOutlet weak var webView: UIWebView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var activityBackground: UIVisualEffectView!
     
     var url: NSURL?
     
@@ -50,10 +51,12 @@ class WebViewController: UIViewController, UIWebViewDelegate {
     
     func webViewDidStartLoad(webView: UIWebView) {
         self.activityIndicator.startAnimating()
+        self.activityBackground.hidden = false
     }
     
     func webViewDidFinishLoad(webView: UIWebView) {
         self.activityIndicator.stopAnimating()
+        self.activityBackground.hidden = true
     }
 
     /*
