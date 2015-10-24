@@ -33,8 +33,17 @@ class WebViewController: UIViewController, UIWebViewDelegate {
         // Dispose of any resources that can be recreated.
     }
     
+    // MARK: - Button actions
+    
     @IBAction func doneAction(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    @IBAction func copyAction(sender: AnyObject) {
+        guard let url = self.url else {
+            return
+        }
+        UIPasteboard.generalPasteboard().string = url.absoluteString
     }
     
     // MARK: - UIWebViewDelegate

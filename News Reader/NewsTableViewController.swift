@@ -20,7 +20,7 @@ class NewsTableViewController: UITableViewController, RSSParserDelegate {
     let newsDetailSegueIdentifier = "NewsDetailSegue"
     let imageNewsDetailSegueIdentifier = "ImageNewsDetailSegue"
     
-    // MARK: View Lifecycle
+    // MARK: - View Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,7 +35,7 @@ class NewsTableViewController: UITableViewController, RSSParserDelegate {
         super.didReceiveMemoryWarning()
     }
     
-    // MARK: Button actions
+    // MARK: - Button actions
     
     @IBAction func changeRSSSource(sender: UIBarButtonItem) {
         let alert = UIAlertController(title: "RSS Source", message: "Change RSS source link", preferredStyle: .Alert)
