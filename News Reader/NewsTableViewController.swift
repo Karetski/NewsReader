@@ -94,7 +94,7 @@ class NewsTableViewController: UITableViewController, RSSParserDelegate {
             self.sendMessageWithError(error, withTitle: "Parsing error")
             return
         }
-        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+        dispatch_async(dispatch_get_main_queue()) { () -> Void in
             if let channel = channel {
                 self.channel = channel
                 self.title = channel.title
@@ -109,7 +109,7 @@ class NewsTableViewController: UITableViewController, RSSParserDelegate {
             if let leftBarButtomItem = self.navigationItem.leftBarButtonItem {
                 leftBarButtomItem.enabled = true
             }
-        })
+        }
     }
 
     // MARK: - Table view data source
@@ -180,7 +180,7 @@ class NewsTableViewController: UITableViewController, RSSParserDelegate {
         let imageDownloader = ImageDownloader()
         imageDownloader.completionHandler = { (image, error) -> Void in
             if let error = error {
-                self.sendMessageWithError(error, withTitle: "Image Downloading Error")
+                self.sendMessageWithError(error, withTitle: "Image downloading Error")
                 return
             }
             

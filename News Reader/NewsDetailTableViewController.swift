@@ -15,13 +15,21 @@ class NewsDetailTableViewController: UITableViewController {
     let categoriesNewsCellIdentifier = "CategoriesNewsCell"
     let mediaNewsCellIdentifier = "MediaNewsCell"
     
+    let itemLinkSegueIdentifier = "ItemLinkSegue"
+    let categoryLinkSegueIdentifier = "CategoryLinkSegue"
+    let mediaLinkSegueIdentifier = "MediaLinkSegue"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 160.0
-        
-        // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        if let item = self.item {
+            self.title = item.title
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -76,7 +84,7 @@ class NewsDetailTableViewController: UITableViewController {
         }
         
         if indexPath.section == 2 {
-            let cell = tableView.dequeueReusableCellWithIdentifier(self.categoriesNewsCellIdentifier, forIndexPath: indexPath) as UITableViewCell
+            let cell = tableView.dequeueReusableCellWithIdentifier(self.mediaNewsCellIdentifier, forIndexPath: indexPath) as UITableViewCell
             
             cell.textLabel?.text = item.media[indexPath.row].absoluteString
             
@@ -98,15 +106,32 @@ class NewsDetailTableViewController: UITableViewController {
         return cell
     }
     
-
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        guard let item = self.item else {
+            return
+        }
+        guard let destination = segue.destinationViewController as? WebViewController else {
+            return
+        }
+        
+        if segue.identifier == self.itemLinkSegueIdentifier {
+            destination.url = item.link
+            return
+        }
+        
+        guard let indexPath = self.tableView.indexPathForSelectedRow else {
+            return
+        }
+        if segue.identifier == self.categoryLinkSegueIdentifier {
+            destination.url = Array(item.categories.values)[indexPath.row]
+            return
+        }
+        if segue.identifier == self.mediaLinkSegueIdentifier {
+            destination.url = item.media[indexPath.row]
+            return
+        }
     }
-    */
-
 }
