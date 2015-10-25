@@ -30,6 +30,9 @@ class NewsDetailTableViewController: UITableViewController {
         if let item = self.item {
             self.title = item.title
         }
+        if let indexPath = self.tableView.indexPathForSelectedRow {
+            self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        }
     }
 
     override func didReceiveMemoryWarning() {
