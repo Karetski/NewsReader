@@ -92,22 +92,28 @@ class NewsTableViewController: UITableViewController, RSSParserDelegate {
     func parsingWasFinished(channel: Channel?, error: NSError?) {
         if let error = error {
             self.sendMessageWithError(error, withTitle: "Parsing error")
-            return
-        }
-        dispatch_async(dispatch_get_main_queue()) { () -> Void in
-            if let channel = channel {
-                self.channel = channel
-                self.title = channel.title
-                self.tableView.reloadData()
-            } else {
+            dispatch_async(dispatch_get_main_queue()) { () -> Void in
                 if let channel = self.channel {
                     self.title = channel.title
+                    if let leftBarButtomItem = self.navigationItem.leftBarButtonItem {
+                        leftBarButtomItem.enabled = true
+                    }
                 } else {
                     self.title = "News Reader"
                 }
             }
-            if let leftBarButtomItem = self.navigationItem.leftBarButtonItem {
-                leftBarButtomItem.enabled = true
+            return
+        } else {
+            dispatch_async(dispatch_get_main_queue()) { () -> Void in
+                if let channel = channel {
+                    self.channel = channel
+                    self.title = channel.title
+                    self.tableView.reloadData()
+                    
+                    if let leftBarButtomItem = self.navigationItem.leftBarButtonItem {
+                        leftBarButtomItem.enabled = true
+                    }
+                }
             }
         }
     }

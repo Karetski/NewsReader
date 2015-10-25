@@ -12,6 +12,7 @@ class WebViewController: UIViewController, UIWebViewDelegate {
     @IBOutlet weak var webView: UIWebView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var activityBackground: UIVisualEffectView!
+    @IBOutlet weak var customNavigationItem: UINavigationItem!
     
     var url: NSURL?
     
@@ -26,6 +27,8 @@ class WebViewController: UIViewController, UIWebViewDelegate {
         
         dispatch_async(dispatch_get_main_queue()) { () -> Void in
             self.webView.loadRequest(request)
+//            self.navigationBar. = url.absoluteString
+            self.customNavigationItem.title = url.absoluteString
         }
     }
 
@@ -45,6 +48,11 @@ class WebViewController: UIViewController, UIWebViewDelegate {
             return
         }
         UIPasteboard.generalPasteboard().string = url.absoluteString
+        
+        let alert = UIAlertController(title: "Added", message: "URL Added to clipboard", preferredStyle: .Alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default,handler: nil))
+        
+        self.presentViewController(alert, animated: true, completion: nil)
     }
     
     // MARK: - UIWebViewDelegate
