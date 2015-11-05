@@ -69,50 +69,44 @@ class NewsTableViewController: UITableViewController, RSSParserDelegate {
     }
     
     func beginParsing() {
-        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+        dispatch_async(dispatch_get_global_queue(QOS_CLASS_DEFAULT, 0)) { () -> Void in
             if let requestURL = NSURL(string: self.rssLink) {
                 let parser = RSSParser()
                 parser.delegate = self
                 parser.parseWithURL(requestURL)
             }
-        })
+        }
     }
     
     // MARK: - NRRSSParserDelegate
     
     func parsingWasStarted() {
-        dispatch_async(dispatch_get_main_queue(), { () -> Void in
-            if let leftBarButtomItem = self.navigationItem.leftBarButtonItem {
-                leftBarButtomItem.enabled = false
-            }
-            self.title = "Loading..."
-        })
+        if let leftBarButtomItem = self.navigationItem.leftBarButtonItem {
+            leftBarButtomItem.enabled = false
+        }
+        self.title = "Loading..."
     }
     
     func parsingWasFinished(channel: Channel?, error: NSError?) {
         if let error = error {
             self.sendMessageWithError(error, withTitle: "Parsing error")
-            dispatch_async(dispatch_get_main_queue()) { () -> Void in
-                if let channel = self.channel {
-                    self.title = channel.title
-                    if let leftBarButtomItem = self.navigationItem.leftBarButtonItem {
-                        leftBarButtomItem.enabled = true
-                    }
-                } else {
-                    self.title = "News Reader"
+            if let channel = self.channel {
+                self.title = channel.title
+                if let leftBarButtomItem = self.navigationItem.leftBarButtonItem {
+                    leftBarButtomItem.enabled = true
                 }
+            } else {
+                self.title = "News Reader"
             }
             return
         } else {
-            dispatch_async(dispatch_get_main_queue()) { () -> Void in
-                if let channel = channel {
-                    self.channel = channel
-                    self.title = channel.title
-                    self.tableView.reloadData()
-                    
-                    if let leftBarButtomItem = self.navigationItem.leftBarButtonItem {
-                        leftBarButtomItem.enabled = true
-                    }
+            if let channel = channel {
+                self.channel = channel
+                self.title = channel.title
+                self.tableView.reloadData()
+                
+                if let leftBarButtomItem = self.navigationItem.leftBarButtonItem {
+                    leftBarButtomItem.enabled = true
                 }
             }
         }

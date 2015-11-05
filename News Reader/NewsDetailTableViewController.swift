@@ -81,7 +81,8 @@ class NewsDetailTableViewController: UITableViewController {
         if indexPath.section == 1 {
             let cell = tableView.dequeueReusableCellWithIdentifier(self.categoriesNewsCellIdentifier, forIndexPath: indexPath) as UITableViewCell
             
-            cell.textLabel?.text = Array(item.categories.keys)[indexPath.row]
+            let category = item.categories[indexPath.row]
+            cell.textLabel?.text = category.name
             
             return cell
         }
@@ -89,7 +90,8 @@ class NewsDetailTableViewController: UITableViewController {
         if indexPath.section == 2 {
             let cell = tableView.dequeueReusableCellWithIdentifier(self.mediaNewsCellIdentifier, forIndexPath: indexPath) as UITableViewCell
             
-            cell.textLabel?.text = item.media[indexPath.row].absoluteString
+            let media = item.media[indexPath.row]
+            cell.textLabel?.text = media.link
             
             return cell
         }
@@ -129,11 +131,11 @@ class NewsDetailTableViewController: UITableViewController {
             return
         }
         if segue.identifier == self.categoryLinkSegueIdentifier {
-            destination.url = Array(item.categories.values)[indexPath.row]
+            destination.url = item.categories[indexPath.row].url
             return
         }
         if segue.identifier == self.mediaLinkSegueIdentifier {
-            destination.url = item.media[indexPath.row]
+            destination.url = item.media[indexPath.row].url
             return
         }
     }

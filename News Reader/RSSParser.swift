@@ -35,11 +35,15 @@ class RSSParser: NSObject, NSXMLParserDelegate {
     }
     
     func parseWithRequest(request: NSURLRequest) {
-        self.delegate?.parsingWasStarted()
+        dispatch_async(dispatch_get_main_queue()) { () -> Void in
+            self.delegate?.parsingWasStarted()
+        }
         
         NSURLSession.sharedSession().dataTaskWithRequest(request, completionHandler: { data, response, error -> Void in
             if error != nil {
-                self.delegate?.parsingWasFinished(nil, error: error)
+                dispatch_async(dispatch_get_main_queue()) { () -> Void in
+                    self.delegate?.parsingWasFinished(nil, error: error)
+                }
             } else {
                 let parser = NSXMLParser(data: data!)
                 parser.delegate = self
@@ -51,11 +55,15 @@ class RSSParser: NSObject, NSXMLParserDelegate {
     // MARK: - NSXMLParserDelegate implementation
     
     func parserDidEndDocument(parser: NSXMLParser) {
-        self.delegate?.parsingWasFinished(self.channel, error: nil)
+        dispatch_async(dispatch_get_main_queue()) { () -> Void in
+            self.delegate?.parsingWasFinished(self.channel, error: nil)
+        }
     }
     
     func parser(parser: NSXMLParser, parseErrorOccurred parseError: NSError) {
-        self.delegate?.parsingWasFinished(nil, error: parseError)
+        dispatch_async(dispatch_get_main_queue()) { () -> Void in
+            self.delegate?.parsingWasFinished(nil, error: parseError)
+        }
     }
     
     func parser(parser: NSXMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String]) {

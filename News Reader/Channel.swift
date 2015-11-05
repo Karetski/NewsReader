@@ -14,11 +14,11 @@ class Channel: NSObject {
     var channelDescription: String?
     var language: String?
     var copyright: String?
-    var date: String? // Change to NSDate
+    var date: String? 
     
     var items = [Item]()
     
-    func setLinkWithString(string: String) {
-        self.link = NSURL(string: string)
+    func setLinkWithString(link: String) {
+        self.link = NSURL(string: link)
     }
 }
