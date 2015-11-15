@@ -7,9 +7,12 @@
 //
 
 import UIKit
+import CoreData
 
 class NewsTableViewController: UITableViewController, RSSParserDelegate {
-    var channel: Channel?
+    
+    var managedContext: NSManagedObjectContext!
+    var channel: Channel!
     var imageDownloadsInProgress = [NSIndexPath: ImageDownloader]()
     
     var rssLink = "http://www.nytimes.com/services/xml/rss/nyt/World.xml"
@@ -28,7 +31,10 @@ class NewsTableViewController: UITableViewController, RSSParserDelegate {
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 160.0
         
-        self.beginParsing()
+        if self.fetchData() == true {
+            self.title = channel.title
+            self.tableView.reloadData()
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -69,12 +75,30 @@ class NewsTableViewController: UITableViewController, RSSParserDelegate {
     }
     
     func beginParsing() {
-        dispatch_async(dispatch_get_global_queue(QOS_CLASS_DEFAULT, 0)) { () -> Void in
-            if let requestURL = NSURL(string: self.rssLink) {
+//        dispatch_async(dispatch_get_global_queue(QOS_CLASS_DEFAULT, 0)) { () -> Void in
+        dispatch_async(dispatch_get_main_queue()) { () -> Void in
+            if let url = NSURL(string: self.rssLink) {
                 let parser = RSSParser()
                 parser.delegate = self
-                parser.parseWithURL(requestURL)
+                parser.parseWithURL(url, intoManagedObjectContext: self.managedContext)
             }
+        }
+    }
+    
+    func fetchData() -> Bool {
+        let channelFetch = NSFetchRequest(entityName: "Channel")
+        do {
+            let results = try self.managedContext.executeFetchRequest(channelFetch) as! [Channel]
+            
+            if results.count > 0 {
+                self.channel = results.first
+                return true
+            } else {
+                return false
+            }
+        } catch let error as NSError {
+            print("Error: \(error) " + "description \(error.localizedDescription)")
+            return false
         }
     }
     
@@ -87,27 +111,27 @@ class NewsTableViewController: UITableViewController, RSSParserDelegate {
         self.title = "Loading..."
     }
     
-    func parsingWasFinished(channel: Channel?, error: NSError?) {
+    func parsingWasFinished(error: NSError?) {
         if let error = error {
             self.sendMessageWithError(error, withTitle: "Parsing error")
-            if let channel = self.channel {
+            if self.fetchData() == true {
                 self.title = channel.title
+                self.tableView.reloadData()
+            } else {
+                self.title = "News Reader"
                 if let leftBarButtomItem = self.navigationItem.leftBarButtonItem {
                     leftBarButtomItem.enabled = true
                 }
-            } else {
-                self.title = "News Reader"
             }
             return
         } else {
-            if let channel = channel {
-                self.channel = channel
+            if self.fetchData() == true {
                 self.title = channel.title
                 self.tableView.reloadData()
-                
-                if let leftBarButtomItem = self.navigationItem.leftBarButtonItem {
-                    leftBarButtomItem.enabled = true
-                }
+            }
+            
+            if let leftBarButtomItem = self.navigationItem.leftBarButtonItem {
+                leftBarButtomItem.enabled = true
             }
         }
     }
@@ -122,14 +146,17 @@ class NewsTableViewController: UITableViewController, RSSParserDelegate {
         guard let channel = self.channel else {
             return 0
         }
-        return channel.items.count
+        return channel.items!.count
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         guard let channel = self.channel else {
             return UITableViewCell()
         }
-        if let thumbnail = channel.items[indexPath.row].thumbnail {
+        
+        let item = channel.items![indexPath.row] as! Item
+        
+        if let thumbnail = item.thumbnail {
             return self.imageNewsCellAtIndexPath(indexPath, channel: channel, thumbnail: thumbnail)
         } else {
             return self.newsCellAtIndexPath(indexPath, channel: channel)
@@ -139,7 +166,8 @@ class NewsTableViewController: UITableViewController, RSSParserDelegate {
     func newsCellAtIndexPath(indexPath: NSIndexPath, channel: Channel) -> NewsCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(newsCellIdentifier) as! NewsCell
         
-        let item = channel.items[indexPath.row]
+        let item = channel.items![indexPath.row] as! Item
+        
         cell.titleLabel.text = item.title
         cell.descriptionLabel.text = item.minifiedDescription
         cell.dateLabel.text = item.date
@@ -150,7 +178,7 @@ class NewsTableViewController: UITableViewController, RSSParserDelegate {
     func imageNewsCellAtIndexPath(indexPath: NSIndexPath, channel: Channel, thumbnail: NSURL) -> ImageNewsCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(imageNewsCellIdentifier) as! ImageNewsCell
         
-        let item = channel.items[indexPath.row]
+        let item = channel.items![indexPath.row] as! Item
         
         cell.titleLabel.text = item.title
         cell.descriptionLabel.text = item.minifiedDescription
@@ -187,7 +215,14 @@ class NewsTableViewController: UITableViewController, RSSParserDelegate {
             dispatch_async(dispatch_get_main_queue()) { () -> Void in
                 cell.thumbnailImageView.image = image
             }
+            
             item.thumbnailImage = image
+            
+            do {
+                try self.managedContext.save()
+            } catch let error as NSError {
+                print("Error: \(error) " + "description \(error.localizedDescription)")
+            }
             
             self.imageDownloadsInProgress.removeValueForKey(indexPath)
         }
@@ -204,7 +239,7 @@ class NewsTableViewController: UITableViewController, RSSParserDelegate {
         }
         
         for indexPath in visiblePaths {
-            let item = channel.items[indexPath.row]
+            let item = channel.items![indexPath.row] as! Item
             if let _ = item.thumbnail {
                 let cell = tableView.cellForRowAtIndexPath(indexPath) as! ImageNewsCell
                 self.startThumbnailDownload(item, indexPath: indexPath, cell: cell)
@@ -231,7 +266,7 @@ class NewsTableViewController: UITableViewController, RSSParserDelegate {
             if let destination = segue.destinationViewController as? NewsDetailTableViewController {
                 if let indexPath = self.tableView.indexPathForSelectedRow {
                     if let channel = self.channel {
-                        destination.item = channel.items[indexPath.row]
+                        destination.item = channel.items![indexPath.row] as? Item
                     }
                 }
             }

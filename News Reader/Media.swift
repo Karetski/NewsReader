@@ -7,18 +7,22 @@
 //
 
 import UIKit
+import CoreData
 
-class Media: NSObject {
-    var link: String
+class Media: NSManagedObject {
+//    var link: String
     
     var url: NSURL? {
+        guard let link  = self.link else {
+            return nil
+        }
         if let url = NSURL(string: link) {
             return url
         }
         return nil
     }
-    
-    init(link: String) {
-        self.link = link
-    }
+//
+//    init(link: String) {
+//        self.link = link
+//    }
 }

@@ -10,6 +10,6 @@ import UIKit
 
 protocol RSSParserDelegate {
     func parsingWasStarted()
-    func parsingWasFinished(channel: Channel?, error: NSError?)
+    func parsingWasFinished(error: NSError?)
 }
 

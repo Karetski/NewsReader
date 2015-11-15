@@ -9,6 +9,7 @@
 import UIKit
 
 class NewsDetailTableViewController: UITableViewController {
+    
     var item: Item?
     
     let detailNewsCellIdentifier = "DetailNewsCell"
@@ -51,9 +52,9 @@ class NewsDetailTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if let item = self.item {
-            if section == 1 && item.categories.count > 0 {
+            if section == 1 && item.categories!.count > 0 {
                 return "Categories"
-            } else if section == 2 && item.media.count > 0 {
+            } else if section == 2 && item.media!.count > 0 {
                 return "Media"
             }
         }
@@ -65,9 +66,9 @@ class NewsDetailTableViewController: UITableViewController {
             if section == 0 {
                 return 1
             } else if section == 1 {
-                return item.categories.count
+                return item.categories!.count
             } else if section == 2 {
-                return item.media.count
+                return item.media!.count
             }
         }
         return 0
@@ -81,7 +82,7 @@ class NewsDetailTableViewController: UITableViewController {
         if indexPath.section == 1 {
             let cell = tableView.dequeueReusableCellWithIdentifier(self.categoriesNewsCellIdentifier, forIndexPath: indexPath) as UITableViewCell
             
-            let category = item.categories[indexPath.row]
+            let category = item.categories![indexPath.row] as! Category
             cell.textLabel?.text = category.name
             
             return cell
@@ -90,7 +91,7 @@ class NewsDetailTableViewController: UITableViewController {
         if indexPath.section == 2 {
             let cell = tableView.dequeueReusableCellWithIdentifier(self.mediaNewsCellIdentifier, forIndexPath: indexPath) as UITableViewCell
             
-            let media = item.media[indexPath.row]
+            let media = item.media![indexPath.row] as! Media
             cell.textLabel?.text = media.link
             
             return cell
@@ -123,7 +124,10 @@ class NewsDetailTableViewController: UITableViewController {
         }
         
         if segue.identifier == self.itemLinkSegueIdentifier {
-            destination.url = item.link
+            guard let url = item.url else {
+                return
+            }
+            destination.url = url
             return
         }
         
@@ -131,11 +135,19 @@ class NewsDetailTableViewController: UITableViewController {
             return
         }
         if segue.identifier == self.categoryLinkSegueIdentifier {
-            destination.url = item.categories[indexPath.row].url
+            let category = item.categories![indexPath.row] as! Category
+            guard let url = category.url else {
+                return
+            }
+            destination.url = url
             return
         }
         if segue.identifier == self.mediaLinkSegueIdentifier {
-            destination.url = item.media[indexPath.row].url
+            let media = item.media![indexPath.row] as! Media
+            guard let url = media.url else {
+                return
+            }
+            destination.url = url
             return
         }
     }

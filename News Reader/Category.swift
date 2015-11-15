@@ -7,20 +7,24 @@
 //
 
 import UIKit
+import CoreData
 
-class Category: NSObject {
-    var name: String
-    var link: String
+class Category: NSManagedObject {
+//    var name: String
+//    var link: String
     
     var url: NSURL? {
+        guard let link  = self.link else {
+            return nil
+        }
         if let url = NSURL(string: link) {
             return url
         }
         return nil
     }
-    
-    init(name: String, link: String) {
-        self.name = name
-        self.link = link
-    }
+//    
+//    init(name: String, link: String) {
+//        self.name = name
+//        self.link = link
+//    }
 }

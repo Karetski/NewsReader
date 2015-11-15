@@ -7,13 +7,16 @@
 //
 
 import UIKit
+import CoreData
 
 class RSSParser: NSObject, NSXMLParserDelegate {
-    var channel = Channel()
+    var channel: Channel!
     var activeItem: Item?
     var activeElement = ""
     var activeAttributes: [String: String]?
+    var managedContext: NSManagedObjectContext!
     
+    let node_channel = "channel"
     let node_item = "item"
     let node_title = "title"
     let node_link = "link"
@@ -30,19 +33,36 @@ class RSSParser: NSObject, NSXMLParserDelegate {
     
     var delegate: RSSParserDelegate?
     
-    func parseWithURL(url: NSURL) {
-        self.parseWithRequest(NSURLRequest(URL: url))
+    func parseWithURL(url: NSURL, intoManagedObjectContext managedContext: NSManagedObjectContext) {
+        self.parseWithRequest(NSURLRequest(URL: url), intoManagedObjectContext: managedContext)
     }
     
-    func parseWithRequest(request: NSURLRequest) {
+    func parseWithRequest(request: NSURLRequest, intoManagedObjectContext managedContext: NSManagedObjectContext) {
         dispatch_async(dispatch_get_main_queue()) { () -> Void in
             self.delegate?.parsingWasStarted()
+        }
+        
+        self.managedContext = managedContext
+        
+        let channelEntity = NSEntityDescription.entityForName("Channel", inManagedObjectContext: managedContext)
+        let channelFetch = NSFetchRequest(entityName: "Channel")
+        do {
+            let results = try self.managedContext.executeFetchRequest(channelFetch) as! [Channel]
+            
+            if let channel = results.first {
+                self.managedContext.deleteObject(channel)
+            }
+            
+            self.channel = Channel(entity: channelEntity!, insertIntoManagedObjectContext: self.managedContext)
+            try self.managedContext.save()
+        } catch let error as NSError {
+            print("Error: \(error) " + "description \(error.localizedDescription)")
         }
         
         NSURLSession.sharedSession().dataTaskWithRequest(request, completionHandler: { data, response, error -> Void in
             if error != nil {
                 dispatch_async(dispatch_get_main_queue()) { () -> Void in
-                    self.delegate?.parsingWasFinished(nil, error: error)
+                    self.delegate?.parsingWasFinished(error)
                 }
             } else {
                 let parser = NSXMLParser(data: data!)
@@ -56,19 +76,21 @@ class RSSParser: NSObject, NSXMLParserDelegate {
     
     func parserDidEndDocument(parser: NSXMLParser) {
         dispatch_async(dispatch_get_main_queue()) { () -> Void in
-            self.delegate?.parsingWasFinished(self.channel, error: nil)
+            self.delegate?.parsingWasFinished(nil)
         }
     }
     
     func parser(parser: NSXMLParser, parseErrorOccurred parseError: NSError) {
         dispatch_async(dispatch_get_main_queue()) { () -> Void in
-            self.delegate?.parsingWasFinished(nil, error: parseError)
+            self.delegate?.parsingWasFinished(parseError)
         }
     }
     
     func parser(parser: NSXMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String]) {
-        if elementName == "item" {
-            self.activeItem = Item()
+        if elementName == self.node_item {
+            let itemEntity = NSEntityDescription.entityForName("Item", inManagedObjectContext: managedContext)
+            
+            self.activeItem = Item(entity: itemEntity!, insertIntoManagedObjectContext: self.managedContext)
         }
         self.activeElement = ""
         self.activeAttributes = attributeDict
@@ -81,9 +103,27 @@ class RSSParser: NSObject, NSXMLParserDelegate {
     func parser(parser: NSXMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
         if elementName == self.node_item {
             if let item = self.activeItem {
-                self.channel.items.append(item)
+                let items = self.channel.items!.mutableCopy() as! NSMutableOrderedSet
+                
+                items.addObject(item)
+                
+                self.channel.items = items.copy() as? NSOrderedSet
+                
+                do {
+                    try self.managedContext.save()
+                } catch let error as NSError {
+                    print("Error: \(error) " + "description \(error.localizedDescription)")
+                }
             }
             self.activeItem = nil
+            return
+        }
+        if elementName == self.node_channel {
+            do {
+                try managedContext.save()
+            } catch let error as NSError {
+                print("Error: \(error) " + "description \(error.localizedDescription)")
+            }
             return
         }
         if let item = self.activeItem {
@@ -91,7 +131,7 @@ class RSSParser: NSObject, NSXMLParserDelegate {
                 item.title = self.activeElement
             }
             if elementName == self.node_link {
-                item.setLinkWithString(self.activeElement)
+                item.link = self.activeElement
             }
             if elementName == self.node_description {
                 item.itemDescription = self.activeElement
@@ -99,7 +139,22 @@ class RSSParser: NSObject, NSXMLParserDelegate {
             if elementName == self.node_category {
                 if let attributes = self.activeAttributes {
                     if let url = attributes[self.attr_domain] {
-                        item.appendCategoryWithName(self.activeElement, stringWithURL: url)
+                        let categoryEntity = NSEntityDescription.entityForName("Category", inManagedObjectContext: self.managedContext)
+                        
+                        let category = Category(entity: categoryEntity!, insertIntoManagedObjectContext: self.managedContext)
+                        
+                        category.name = self.activeElement
+                        category.link = url
+                        
+                        let categories = item.categories!.mutableCopy() as! NSMutableOrderedSet
+                        categories.addObject(category)
+                        item.categories = categories.copy() as? NSOrderedSet
+
+                        do {
+                            try self.managedContext.save()
+                        } catch let error as NSError {
+                            print("Error: \(error) " + "description \(error.localizedDescription)")
+                        }
                     }
                 }
                 self.activeAttributes = nil
@@ -113,7 +168,21 @@ class RSSParser: NSObject, NSXMLParserDelegate {
             if elementName == node_mediaContent {
                 if let attributes = self.activeAttributes {
                     if let url = attributes[self.attr_url] {
-                        item.appendMediaWithString(url)
+                        let mediaEntity = NSEntityDescription.entityForName("Media", inManagedObjectContext: self.managedContext)
+                        
+                        let media = Media(entity: mediaEntity!, insertIntoManagedObjectContext: self.managedContext)
+                        
+                        media.link = url
+                        
+                        let medias = item.media!.mutableCopy() as! NSMutableOrderedSet
+                        medias.addObject(media)
+                        item.media = medias.copy() as? NSOrderedSet
+                        
+                        do {
+                            try self.managedContext.save()
+                        } catch let error as NSError {
+                            print("Error: \(error) " + "description \(error.localizedDescription)")
+                        }
                     }
                 }
                 self.activeAttributes = nil
@@ -123,7 +192,7 @@ class RSSParser: NSObject, NSXMLParserDelegate {
                 self.channel.title = self.activeElement
             }
             if elementName == self.node_link {
-                self.channel.setLinkWithString(self.activeElement)
+                self.channel.link = self.activeElement
             }
             if elementName == self.node_description {
                 self.channel.channelDescription = self.activeElement

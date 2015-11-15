@@ -7,18 +7,20 @@
 //
 
 import UIKit
+import CoreData
 
-class Channel: NSObject {
-    var title: String?
-    var link: NSURL?
-    var channelDescription: String?
-    var language: String?
-    var copyright: String?
-    var date: String? 
+class Channel: NSManagedObject {
+//    var title: String?
+//    var link: NSURL?
+//    var channelDescription: String?
+//    var language: String?
+//    var copyright: String?
+//    var date: String?
+//    
+//    var items = [Item]()
     
-    var items = [Item]()
+//    func setLinkWithString(link: String) {
+//        self.link = NSURL(string: link)
+//    }
     
-    func setLinkWithString(link: String) {
-        self.link = NSURL(string: link)
-    }
 }

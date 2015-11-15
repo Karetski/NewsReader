@@ -7,14 +7,15 @@
 //
 
 import UIKit
+import CoreData
 
-class Item: NSObject {
-    var title: String?
-    var link: NSURL?
-    var creator: String?
-    var date: String?
-    
-    var itemDescription: String?
+class Item: NSManagedObject {
+//    var title: String?
+//    var link: NSURL?
+//    var creator: String?
+//    var date: String?
+//    
+//    var itemDescription: String?
     var minifiedDescription: String? {
         guard let description = self.itemDescription else {
             return nil
@@ -39,7 +40,7 @@ class Item: NSObject {
         return resultString
     }
     
-    var thumbnailData: NSData?
+//    var thumbnailData: NSData?
     var thumbnailImage: UIImage? {
         set {
             if let image = newValue {
@@ -61,8 +62,17 @@ class Item: NSObject {
     var thumbnail: NSURL? {
         var url: NSURL?
         
-        for media in self.media {
-            var stringURL = media.link
+        guard let media = self.media else {
+            return url
+        }
+        
+        for item in media.array {
+            let mediaItem = item as! Media
+            guard let mediaLink = mediaItem.link else {
+                continue
+            }
+            
+            var stringURL = mediaLink
             
             let regex = try! NSRegularExpression(pattern: "(https?)\\S*(png|jpg|jpeg|gif)", options: .CaseInsensitive)
             
@@ -76,20 +86,30 @@ class Item: NSObject {
         return url
     }
     
-    var media = [Media]()
-    var categories = [Category]()
-    
-    func setLinkWithString(link: String) {
-        self.link = NSURL(string: link)
+    var url: NSURL? {
+        guard let link  = self.link else {
+            return nil
+        }
+        if let url = NSURL(string: link) {
+            return url
+        }
+        return nil
     }
     
-    func appendMediaWithString(link: String) {
-        let media = Media(link: link)
-        self.media.append(media)
-    }
+//    var media = [Media]()
+//    var categories = [Category]()
     
-    func appendCategoryWithName(name: String, stringWithURL link: String) {
-        let category = Category(name: name, link: link)
-        self.categories.append(category)
-    }
+//    func setLinkWithString(link: String) {
+//        self.link = NSURL(string: link)
+//    }
+//    
+//    func appendMediaWithString(link: String) {
+//        let media = Media(link: link)
+//        self.media.append(media)
+//    }
+//    
+//    func appendCategoryWithName(name: String, stringWithURL link: String) {
+//        let category = Category(name: name, link: link)
+//        self.categories.append(category)
+//    }
 }
