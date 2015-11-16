@@ -10,12 +10,7 @@ import UIKit
 import CoreData
 
 class Item: NSManagedObject {
-//    var title: String?
-//    var link: NSURL?
-//    var creator: String?
-//    var date: String?
-//    
-//    var itemDescription: String?
+
     var minifiedDescription: String? {
         guard let description = self.itemDescription else {
             return nil
@@ -40,7 +35,6 @@ class Item: NSManagedObject {
         return resultString
     }
     
-//    var thumbnailData: NSData?
     var thumbnailImage: UIImage? {
         set {
             if let image = newValue {
@@ -59,6 +53,7 @@ class Item: NSManagedObject {
             return image
         }
     }
+    
     var thumbnail: NSURL? {
         var url: NSURL?
         
@@ -95,21 +90,4 @@ class Item: NSManagedObject {
         }
         return nil
     }
-    
-//    var media = [Media]()
-//    var categories = [Category]()
-    
-//    func setLinkWithString(link: String) {
-//        self.link = NSURL(string: link)
-//    }
-//    
-//    func appendMediaWithString(link: String) {
-//        let media = Media(link: link)
-//        self.media.append(media)
-//    }
-//    
-//    func appendCategoryWithName(name: String, stringWithURL link: String) {
-//        let category = Category(name: name, link: link)
-//        self.categories.append(category)
-//    }
 }

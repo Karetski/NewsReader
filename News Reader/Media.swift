@@ -10,7 +10,6 @@ import UIKit
 import CoreData
 
 class Media: NSManagedObject {
-//    var link: String
     
     var url: NSURL? {
         guard let link  = self.link else {
@@ -21,8 +20,4 @@ class Media: NSManagedObject {
         }
         return nil
     }
-//
-//    init(link: String) {
-//        self.link = link
-//    }
 }

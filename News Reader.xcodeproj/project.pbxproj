@@ -147,6 +147,7 @@
 			isa = PBXGroup;
 			children = (
 				8A6B0D791BBD8BA40056C91E /* AppDelegate.swift */,
+				8A4A35231BCC105D001C324F /* Extensions */,
 				8A6B0DA91BBD8F0B0056C91E /* Model */,
 				8A6B0DAA1BBD8F150056C91E /* Controller */,
 				8A6B0DAB1BBD8F3C0056C91E /* View */,
@@ -177,16 +178,7 @@
 		8A6B0DA91BBD8F0B0056C91E /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				8A4A35231BCC105D001C324F /* Extensions */,
-				8A31C2CC1BBEB0A9001DA7C4 /* Channel.swift */,
-				8AB4C8FC1BF9007300E945D8 /* Channel+CoreDataProperties.swift */,
-				8A31C2CE1BBEB3D2001DA7C4 /* Item.swift */,
-				8AB4C8FD1BF9007300E945D8 /* Item+CoreDataProperties.swift */,
-				8AEACC481BE911350059F53C /* Media.swift */,
-				8AB4C8FE1BF9007300E945D8 /* Media+CoreDataProperties.swift */,
-				8AEACC4A1BE912350059F53C /* Category.swift */,
-				8AB4C8FB1BF9007300E945D8 /* Category+CoreDataProperties.swift */,
-				8AB4C9031BF9016500E945D8 /* CoreDataStack.swift */,
+				8A7CA6591BFA68C500BD9534 /* CoreData */,
 				8AB0BFA71BC1EBB500523D8F /* RSSParser.swift */,
 				8AC74DB81BC285FF00CBF2AE /* RSSParserDelegate.swift */,
 				8A7F9E0D1BCDAC6C002C6F89 /* ImageDownloader.swift */,
@@ -215,6 +207,22 @@
 				8A6B0D821BBD8BA40056C91E /* LaunchScreen.storyboard */,
 			);
 			name = View;
+			sourceTree = "<group>";
+		};
+		8A7CA6591BFA68C500BD9534 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				8A31C2CC1BBEB0A9001DA7C4 /* Channel.swift */,
+				8AB4C8FC1BF9007300E945D8 /* Channel+CoreDataProperties.swift */,
+				8A31C2CE1BBEB3D2001DA7C4 /* Item.swift */,
+				8AB4C8FD1BF9007300E945D8 /* Item+CoreDataProperties.swift */,
+				8AEACC481BE911350059F53C /* Media.swift */,
+				8AB4C8FE1BF9007300E945D8 /* Media+CoreDataProperties.swift */,
+				8AEACC4A1BE912350059F53C /* Category.swift */,
+				8AB4C8FB1BF9007300E945D8 /* Category+CoreDataProperties.swift */,
+				8AB4C9031BF9016500E945D8 /* CoreDataStack.swift */,
+			);
+			name = CoreData;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

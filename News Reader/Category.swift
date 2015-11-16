@@ -10,8 +10,6 @@ import UIKit
 import CoreData
 
 class Category: NSManagedObject {
-//    var name: String
-//    var link: String
     
     var url: NSURL? {
         guard let link  = self.link else {
@@ -22,9 +20,4 @@ class Category: NSManagedObject {
         }
         return nil
     }
-//    
-//    init(name: String, link: String) {
-//        self.name = name
-//        self.link = link
-//    }
 }

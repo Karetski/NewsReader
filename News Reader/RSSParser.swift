@@ -17,8 +17,6 @@ class RSSParser: NSObject, NSXMLParserDelegate {
     
     var managedContext: NSManagedObjectContext!
     
-//    var rssData: NSData?
-    
     let node_channel = "channel"
     let node_item = "item"
     let node_title = "title"
@@ -46,7 +44,7 @@ class RSSParser: NSObject, NSXMLParserDelegate {
         }
         
         self.managedContext = managedContext
-        
+
         let channelEntity = NSEntityDescription.entityForName("Channel", inManagedObjectContext: managedContext)
         let channelFetch = NSFetchRequest(entityName: "Channel")
         
@@ -122,14 +120,6 @@ class RSSParser: NSObject, NSXMLParserDelegate {
             self.activeItem = nil
             return
         }
-//        if elementName == self.node_channel {
-//            do {
-//                try managedContext.save()
-//            } catch let error as NSError {
-//                print("Error: \(error) " + "description \(error.localizedDescription)")
-//            }
-//            return
-//        }
         if let item = self.activeItem {
             if elementName == self.node_title {
                 item.title = self.activeElement

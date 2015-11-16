@@ -16,7 +16,6 @@ class ImageDownloader: NSObject {
             if let data = data {
                 let image = UIImage(data: data)
                 self.completionHandler(image, nil)
-                
             } else {
                 self.completionHandler(nil, error)
             }
