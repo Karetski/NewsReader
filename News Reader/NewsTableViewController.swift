@@ -75,12 +75,16 @@ class NewsTableViewController: UITableViewController, RSSParserDelegate {
     }
     
     func beginParsing() {
-//        dispatch_async(dispatch_get_global_queue(QOS_CLASS_DEFAULT, 0)) { () -> Void in
-        dispatch_async(dispatch_get_main_queue()) { () -> Void in
-            if let url = NSURL(string: self.rssLink) {
-                let parser = RSSParser()
-                parser.delegate = self
-                parser.parseWithURL(url, intoManagedObjectContext: self.managedContext)
+        let privateManagedContext = NSManagedObjectContext(concurrencyType: .PrivateQueueConcurrencyType)
+        privateManagedContext.parentContext = self.managedContext
+        
+        privateManagedContext.performBlock {
+            dispatch_async(dispatch_get_global_queue(QOS_CLASS_DEFAULT, 0)) { () -> Void in
+                if let url = NSURL(string: self.rssLink) {
+                    let parser = RSSParser()
+                    parser.delegate = self
+                    parser.parseWithURL(url, intoManagedObjectContext: privateManagedContext)
+                }
             }
         }
     }
@@ -114,14 +118,16 @@ class NewsTableViewController: UITableViewController, RSSParserDelegate {
     func parsingWasFinished(error: NSError?) {
         if let error = error {
             self.sendMessageWithError(error, withTitle: "Parsing error")
+            
             if self.fetchData() == true {
                 self.title = channel.title
                 self.tableView.reloadData()
             } else {
                 self.title = "News Reader"
-                if let leftBarButtomItem = self.navigationItem.leftBarButtonItem {
-                    leftBarButtomItem.enabled = true
-                }
+            }
+            
+            if let leftBarButtomItem = self.navigationItem.leftBarButtonItem {
+                leftBarButtomItem.enabled = true
             }
             return
         } else {
@@ -206,9 +212,10 @@ class NewsTableViewController: UITableViewController, RSSParserDelegate {
             return
         }
         let imageDownloader = ImageDownloader()
-        imageDownloader.completionHandler = { (image, error) -> Void in
+        imageDownloader.completionHandler = { image, error -> Void in
             if let error = error {
                 self.sendMessageWithError(error, withTitle: "Image downloading Error")
+                self.imageDownloadsInProgress.removeValueForKey(indexPath)
                 return
             }
             

@@ -14,7 +14,10 @@ class RSSParser: NSObject, NSXMLParserDelegate {
     var activeItem: Item?
     var activeElement = ""
     var activeAttributes: [String: String]?
+    
     var managedContext: NSManagedObjectContext!
+    
+//    var rssData: NSData?
     
     let node_channel = "channel"
     let node_item = "item"
@@ -46,6 +49,7 @@ class RSSParser: NSObject, NSXMLParserDelegate {
         
         let channelEntity = NSEntityDescription.entityForName("Channel", inManagedObjectContext: managedContext)
         let channelFetch = NSFetchRequest(entityName: "Channel")
+        
         do {
             let results = try self.managedContext.executeFetchRequest(channelFetch) as! [Channel]
             
@@ -54,13 +58,13 @@ class RSSParser: NSObject, NSXMLParserDelegate {
             }
             
             self.channel = Channel(entity: channelEntity!, insertIntoManagedObjectContext: self.managedContext)
-            try self.managedContext.save()
         } catch let error as NSError {
             print("Error: \(error) " + "description \(error.localizedDescription)")
         }
         
         NSURLSession.sharedSession().dataTaskWithRequest(request, completionHandler: { data, response, error -> Void in
-            if error != nil {
+            if let error = error {
+                self.managedContext.rollback()
                 dispatch_async(dispatch_get_main_queue()) { () -> Void in
                     self.delegate?.parsingWasFinished(error)
                 }
@@ -75,12 +79,18 @@ class RSSParser: NSObject, NSXMLParserDelegate {
     // MARK: - NSXMLParserDelegate implementation
     
     func parserDidEndDocument(parser: NSXMLParser) {
+        do {
+            try managedContext.save()
+        } catch let error as NSError {
+            print("Error: \(error) " + "description \(error.localizedDescription)")
+        }
         dispatch_async(dispatch_get_main_queue()) { () -> Void in
             self.delegate?.parsingWasFinished(nil)
         }
     }
     
     func parser(parser: NSXMLParser, parseErrorOccurred parseError: NSError) {
+        self.managedContext.rollback()
         dispatch_async(dispatch_get_main_queue()) { () -> Void in
             self.delegate?.parsingWasFinished(parseError)
         }
@@ -108,24 +118,18 @@ class RSSParser: NSObject, NSXMLParserDelegate {
                 items.addObject(item)
                 
                 self.channel.items = items.copy() as? NSOrderedSet
-                
-                do {
-                    try self.managedContext.save()
-                } catch let error as NSError {
-                    print("Error: \(error) " + "description \(error.localizedDescription)")
-                }
             }
             self.activeItem = nil
             return
         }
-        if elementName == self.node_channel {
-            do {
-                try managedContext.save()
-            } catch let error as NSError {
-                print("Error: \(error) " + "description \(error.localizedDescription)")
-            }
-            return
-        }
+//        if elementName == self.node_channel {
+//            do {
+//                try managedContext.save()
+//            } catch let error as NSError {
+//                print("Error: \(error) " + "description \(error.localizedDescription)")
+//            }
+//            return
+//        }
         if let item = self.activeItem {
             if elementName == self.node_title {
                 item.title = self.activeElement
@@ -149,12 +153,6 @@ class RSSParser: NSObject, NSXMLParserDelegate {
                         let categories = item.categories!.mutableCopy() as! NSMutableOrderedSet
                         categories.addObject(category)
                         item.categories = categories.copy() as? NSOrderedSet
-
-                        do {
-                            try self.managedContext.save()
-                        } catch let error as NSError {
-                            print("Error: \(error) " + "description \(error.localizedDescription)")
-                        }
                     }
                 }
                 self.activeAttributes = nil
@@ -177,12 +175,6 @@ class RSSParser: NSObject, NSXMLParserDelegate {
                         let medias = item.media!.mutableCopy() as! NSMutableOrderedSet
                         medias.addObject(media)
                         item.media = medias.copy() as? NSOrderedSet
-                        
-                        do {
-                            try self.managedContext.save()
-                        } catch let error as NSError {
-                            print("Error: \(error) " + "description \(error.localizedDescription)")
-                        }
                     }
                 }
                 self.activeAttributes = nil
