@@ -10,10 +10,12 @@ import UIKit
 import CoreData
 
 class RSSParser: NSObject, NSXMLParserDelegate {
-    var channel: Channel!
-    var activeItem: Item?
-    var activeElement = ""
-    var activeAttributes: [String: String]?
+    private var channel: Channel!
+    private var activeItem: Item?
+    private var activeElement = ""
+    private var activeAttributes: [String: String]?
+    private var lastPubDate: String?
+    private var isOldChannel: Bool = false
     
     var managedContext: NSManagedObjectContext!
     
@@ -44,21 +46,6 @@ class RSSParser: NSObject, NSXMLParserDelegate {
         }
         
         self.managedContext = managedContext
-
-        let channelEntity = NSEntityDescription.entityForName("Channel", inManagedObjectContext: managedContext)
-        let channelFetch = NSFetchRequest(entityName: "Channel")
-        
-        do {
-            let results = try self.managedContext.executeFetchRequest(channelFetch) as! [Channel]
-            
-            if let channel = results.first {
-                self.managedContext.deleteObject(channel)
-            }
-            
-            self.channel = Channel(entity: channelEntity!, insertIntoManagedObjectContext: self.managedContext)
-        } catch let error as NSError {
-            print("Error: \(error) " + "description \(error.localizedDescription)")
-        }
         
         NSURLSession.sharedSession().dataTaskWithRequest(request, completionHandler: { data, response, error -> Void in
             if let error = error {
@@ -90,11 +77,32 @@ class RSSParser: NSObject, NSXMLParserDelegate {
     func parser(parser: NSXMLParser, parseErrorOccurred parseError: NSError) {
         self.managedContext.rollback()
         dispatch_async(dispatch_get_main_queue()) { () -> Void in
-            self.delegate?.parsingWasFinished(parseError)
+            if self.isOldChannel {
+                self.delegate?.parsingWasFinished(nil)
+            } else {
+                self.delegate?.parsingWasFinished(parseError)
+            }
         }
     }
     
     func parser(parser: NSXMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String]) {
+        if elementName == self.node_channel {
+            let channelEntity = NSEntityDescription.entityForName("Channel", inManagedObjectContext: managedContext)
+            let channelFetch = NSFetchRequest(entityName: "Channel")
+            
+            do {
+                let results = try self.managedContext.executeFetchRequest(channelFetch) as! [Channel]
+                
+                if let channel = results.first {
+                    self.lastPubDate = channel.date
+                    self.managedContext.deleteObject(channel)
+                }
+                
+                self.channel = Channel(entity: channelEntity!, insertIntoManagedObjectContext: self.managedContext)
+            } catch let error as NSError {
+                print("Error: \(error) " + "description \(error.localizedDescription)")
+            }
+        }
         if elementName == self.node_item {
             let itemEntity = NSEntityDescription.entityForName("Item", inManagedObjectContext: managedContext)
             
@@ -186,6 +194,12 @@ class RSSParser: NSObject, NSXMLParserDelegate {
                 self.channel.copyright = self.activeElement
             }
             if elementName == self.node_pubDate {
+                if let lastPubDate = self.lastPubDate {
+                    if lastPubDate == self.activeElement {
+                        self.isOldChannel = true
+                        parser.abortParsing()
+                    }
+                }
                 self.channel.date = self.activeElement
             }
         }

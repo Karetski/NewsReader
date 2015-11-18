@@ -20,4 +20,5 @@ class Category: NSManagedObject {
         }
         return nil
     }
+    
 }

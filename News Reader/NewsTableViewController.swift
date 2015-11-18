@@ -31,7 +31,7 @@ class NewsTableViewController: UITableViewController, RSSParserDelegate {
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 160.0
         
-        if self.fetchData() == true {
+        if self.fetchData() {
             self.title = channel.title
             self.tableView.reloadData()
         }
@@ -119,7 +119,7 @@ class NewsTableViewController: UITableViewController, RSSParserDelegate {
         if let error = error {
             self.sendMessageWithError(error, withTitle: "Parsing error")
             
-            if self.fetchData() == true {
+            if self.fetchData() {
                 self.title = channel.title
                 self.tableView.reloadData()
             } else {
@@ -131,7 +131,7 @@ class NewsTableViewController: UITableViewController, RSSParserDelegate {
             }
             return
         } else {
-            if self.fetchData() == true {
+            if self.fetchData() {
                 self.title = channel.title
                 self.tableView.reloadData()
             }
