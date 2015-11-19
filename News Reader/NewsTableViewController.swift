@@ -10,7 +10,6 @@ import UIKit
 import CoreData
 
 class NewsTableViewController: UITableViewController, RSSParserDelegate {
-    
     var managedContext: NSManagedObjectContext!
     var channel: Channel!
     var imageDownloadsInProgress = [NSIndexPath: ImageDownloader]()
@@ -279,5 +278,4 @@ class NewsTableViewController: UITableViewController, RSSParserDelegate {
             }
         }
     }
-
 }

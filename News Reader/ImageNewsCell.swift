@@ -9,7 +9,6 @@
 import UIKit
 
 class ImageNewsCell: NewsCell {
-    
     @IBOutlet var thumbnailImageView: UIImageView!
     
     override func prepareForReuse() {

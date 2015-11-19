@@ -13,7 +13,6 @@ import Foundation
 import CoreData
 
 extension Item {
-
     @NSManaged var creator: String?
     @NSManaged var date: String?
     @NSManaged var itemDescription: String?
@@ -25,5 +24,4 @@ extension Item {
     
     @NSManaged var categories: NSOrderedSet?
     @NSManaged var media: NSOrderedSet?
-
 }

@@ -6,8 +6,9 @@
 //  Copyright © 2015 Alexey. All rights reserved.
 //
 
-import Cocoa
+import UIKit
 
 class DetailImageNewsCell: DetailNewsCell {
-
+    @IBOutlet var thumbnailImageView: UIImageView!
+    
 }

@@ -9,10 +9,10 @@
 import UIKit
 
 class NewsDetailTableViewController: UITableViewController {
-    
     var item: Item?
     
     let detailNewsCellIdentifier = "DetailNewsCell"
+    let detailImageNewsCellIdentifier = "DetailImageNewsCell"
     let categoriesNewsCellIdentifier = "CategoriesNewsCell"
     let mediaNewsCellIdentifier = "MediaNewsCell"
     
@@ -96,7 +96,18 @@ class NewsDetailTableViewController: UITableViewController {
             return cell
         }
         
-        let cell = tableView.dequeueReusableCellWithIdentifier(self.detailNewsCellIdentifier) as! DetailNewsCell
+        guard let imageURL = item.thumbnail else {
+            let cell = tableView.dequeueReusableCellWithIdentifier(self.detailNewsCellIdentifier) as! DetailNewsCell
+            
+            cell.titleLabel.text = item.title
+            cell.dateLabel.text = item.date
+            cell.authorLabel.text = item.creator
+            cell.descriptionLabel.text = item.minifiedDescription
+            
+            return cell
+        }
+        
+        let cell = tableView.dequeueReusableCellWithIdentifier(self.detailImageNewsCellIdentifier) as! DetailImageNewsCell
         
         cell.titleLabel.text = item.title
         cell.dateLabel.text = item.date
@@ -104,7 +115,7 @@ class NewsDetailTableViewController: UITableViewController {
         cell.descriptionLabel.text = item.minifiedDescription
         if let image = item.thumbnailImage {
             cell.thumbnailImageView.image = image
-        } else if let imageURL = item.thumbnail {
+        } else {
             cell.thumbnailImageView.setImageFromURL(imageURL)
         }
         

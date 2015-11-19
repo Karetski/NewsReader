@@ -13,7 +13,6 @@ import Foundation
 import CoreData
 
 extension Channel {
-
     @NSManaged var channelDescription: String?
     @NSManaged var copyright: String?
     @NSManaged var date: String?
@@ -22,5 +21,4 @@ extension Channel {
     @NSManaged var title: String?
     
     @NSManaged var items: NSOrderedSet?
-
 }

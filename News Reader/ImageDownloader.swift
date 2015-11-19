@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ImageDownloader: NSObject {
+class ImageDownloader {
     var completionHandler: ((UIImage?, NSError?) -> Void)!
     
     func downloadImageWithURL(url: NSURL) {

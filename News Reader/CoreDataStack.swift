@@ -10,7 +10,6 @@ import Foundation
 import CoreData
 
 class CoreDataStack {
-    
     let modelName = "News Reader"
     
     lazy var context: NSManagedObjectContext = {
@@ -56,6 +55,5 @@ class CoreDataStack {
                 abort()
             }
         }
-    }
-    
+    }    
 }

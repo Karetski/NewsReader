@@ -18,6 +18,8 @@ class RSSParser: NSObject, NSXMLParserDelegate {
     private var isOldChannel: Bool = false
     
     var managedContext: NSManagedObjectContext!
+
+    var delegate: RSSParserDelegate?
     
     let node_channel = "channel"
     let node_item = "item"
@@ -34,8 +36,6 @@ class RSSParser: NSObject, NSXMLParserDelegate {
     let attr_url = "url"
     let attr_domain = "domain"
     
-    var delegate: RSSParserDelegate?
-    
     func parseWithURL(url: NSURL, intoManagedObjectContext managedContext: NSManagedObjectContext) {
         self.parseWithRequest(NSURLRequest(URL: url), intoManagedObjectContext: managedContext)
     }
@@ -47,7 +47,7 @@ class RSSParser: NSObject, NSXMLParserDelegate {
         
         self.managedContext = managedContext
         
-        NSURLSession.sharedSession().dataTaskWithRequest(request, completionHandler: { data, response, error -> Void in
+        NSURLSession.sharedSession().dataTaskWithRequest(request, completionHandler: { (data, response, error) -> Void in
             if let error = error {
                 self.managedContext.rollback()
                 dispatch_async(dispatch_get_main_queue()) { () -> Void in

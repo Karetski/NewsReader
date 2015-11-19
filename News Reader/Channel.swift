@@ -10,5 +10,4 @@ import UIKit
 import CoreData
 
 class Channel: NSManagedObject {
-    
 }

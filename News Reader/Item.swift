@@ -10,7 +10,6 @@ import UIKit
 import CoreData
 
 class Item: NSManagedObject {
-
     var minifiedDescription: String? {
         guard let description = self.itemDescription else {
             return nil
@@ -90,5 +89,4 @@ class Item: NSManagedObject {
         }
         return nil
     }
-    
 }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8A0B46A51BFD238000B9E2A2 /* DetailImageNewsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A0B46A41BFD238000B9E2A2 /* DetailImageNewsCell.swift */; };
 		8A31C2CD1BBEB0A9001DA7C4 /* Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A31C2CC1BBEB0A9001DA7C4 /* Channel.swift */; };
 		8A31C2CF1BBEB3D2001DA7C4 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A31C2CE1BBEB3D2001DA7C4 /* Item.swift */; };
 		8A6B0D7A1BBD8BA40056C91E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A6B0D791BBD8BA40056C91E /* AppDelegate.swift */; };
@@ -54,6 +55,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8A0B46A41BFD238000B9E2A2 /* DetailImageNewsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailImageNewsCell.swift; sourceTree = "<group>"; };
 		8A31C2CC1BBEB0A9001DA7C4 /* Channel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Channel.swift; sourceTree = "<group>"; };
 		8A31C2CE1BBEB3D2001DA7C4 /* Item.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		8A6B0D761BBD8BA40056C91E /* News Reader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "News Reader.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -182,7 +184,6 @@
 				8AB0BFA71BC1EBB500523D8F /* RSSParser.swift */,
 				8AC74DB81BC285FF00CBF2AE /* RSSParserDelegate.swift */,
 				8A7F9E0D1BCDAC6C002C6F89 /* ImageDownloader.swift */,
-				8AE139101BDFD35D00140BEA /* News Reader.xcdatamodeld */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -203,6 +204,7 @@
 				8AC53E5C1BC98CF2000B45E2 /* NewsCell.swift */,
 				8AA61E821BC9C87F00D937C6 /* ImageNewsCell.swift */,
 				8AC972ED1BD6A264002D99FC /* DetailNewsCell.swift */,
+				8A0B46A41BFD238000B9E2A2 /* DetailImageNewsCell.swift */,
 				8A6B0D7D1BBD8BA40056C91E /* Main.storyboard */,
 				8A6B0D821BBD8BA40056C91E /* LaunchScreen.storyboard */,
 			);
@@ -221,6 +223,7 @@
 				8AEACC4A1BE912350059F53C /* Category.swift */,
 				8AB4C8FB1BF9007300E945D8 /* Category+CoreDataProperties.swift */,
 				8AB4C9031BF9016500E945D8 /* CoreDataStack.swift */,
+				8AE139101BDFD35D00140BEA /* News Reader.xcdatamodeld */,
 			);
 			name = CoreData;
 			sourceTree = "<group>";
@@ -369,6 +372,7 @@
 				8AB4C9001BF9007300E945D8 /* Channel+CoreDataProperties.swift in Sources */,
 				8AB4C8FF1BF9007300E945D8 /* Category+CoreDataProperties.swift in Sources */,
 				8A7F9E0E1BCDAC6C002C6F89 /* ImageDownloader.swift in Sources */,
+				8A0B46A51BFD238000B9E2A2 /* DetailImageNewsCell.swift in Sources */,
 				8AC53E5D1BC98CF2000B45E2 /* NewsCell.swift in Sources */,
 				8AEEE52A1BCBE16B0013A5CE /* UIImageView+setImageFromURL.swift in Sources */,
 				8A6B0D7A1BBD8BA40056C91E /* AppDelegate.swift in Sources */,
