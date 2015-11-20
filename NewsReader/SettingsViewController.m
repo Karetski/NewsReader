@@ -19,12 +19,19 @@
     [super viewDidLoad];
 }
 
-- (void)viewDidAppear:(BOOL)animated {
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
     self.brushSizeSlider.value = self.brushSize;
     self.opacitySlider.value = self.opacity;
     self.redSlider.value = self.red * 255.0;
     self.greenSlider.value = self.green * 255.0;
     self.blueSlider.value = self.blue * 255.0;
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
     [self previewRedraw];
 }
 

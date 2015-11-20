@@ -654,7 +654,7 @@
                                 <color key="textColor" red="0.42280733585357666" green="0.39412957429885864" blue="0.99857497215270996" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="7.5" minValue="0.0" maxValue="75" translatesAutoresizingMaskIntoConstraints="NO" id="PMc-Yy-kmH">
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="7.5" minValue="0.0" maxValue="150" translatesAutoresizingMaskIntoConstraints="NO" id="PMc-Yy-kmH">
                                 <rect key="frame" x="140" y="79" width="242" height="31"/>
                                 <animations/>
                                 <connections>
