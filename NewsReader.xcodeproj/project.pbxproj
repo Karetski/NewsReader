@@ -10,6 +10,7 @@
 		8A0B46A51BFD238000B9E2A2 /* DetailImageNewsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A0B46A41BFD238000B9E2A2 /* DetailImageNewsCell.swift */; };
 		8A31C2CD1BBEB0A9001DA7C4 /* Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A31C2CC1BBEB0A9001DA7C4 /* Channel.swift */; };
 		8A31C2CF1BBEB3D2001DA7C4 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A31C2CE1BBEB3D2001DA7C4 /* Item.swift */; };
+		8A5C59251BFF3C6E002D17BA /* DrawingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A5C59241BFF3C6E002D17BA /* DrawingViewController.m */; };
 		8A6B0D7A1BBD8BA40056C91E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A6B0D791BBD8BA40056C91E /* AppDelegate.swift */; };
 		8A6B0D7F1BBD8BA40056C91E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A6B0D7D1BBD8BA40056C91E /* Main.storyboard */; };
 		8A6B0D811BBD8BA40056C91E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8A6B0D801BBD8BA40056C91E /* Assets.xcassets */; };
@@ -19,6 +20,7 @@
 		8A6B0DA81BBD8D740056C91E /* NewsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A6B0DA71BBD8D740056C91E /* NewsTableViewController.swift */; };
 		8A7F9E0E1BCDAC6C002C6F89 /* ImageDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7F9E0D1BCDAC6C002C6F89 /* ImageDownloader.swift */; };
 		8AA61E831BC9C87F00D937C6 /* ImageNewsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA61E821BC9C87F00D937C6 /* ImageNewsCell.swift */; };
+		8AA77D781BFE6BE900018BEF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AA77D771BFE6BE900018BEF /* UIKit.framework */; };
 		8AB0BFA81BC1EBB500523D8F /* RSSParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB0BFA71BC1EBB500523D8F /* RSSParser.swift */; };
 		8AB4C8FF1BF9007300E945D8 /* Category+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB4C8FB1BF9007300E945D8 /* Category+CoreDataProperties.swift */; };
 		8AB4C9001BF9007300E945D8 /* Channel+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB4C8FC1BF9007300E945D8 /* Channel+CoreDataProperties.swift */; };
@@ -58,21 +60,25 @@
 		8A0B46A41BFD238000B9E2A2 /* DetailImageNewsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailImageNewsCell.swift; sourceTree = "<group>"; };
 		8A31C2CC1BBEB0A9001DA7C4 /* Channel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Channel.swift; sourceTree = "<group>"; };
 		8A31C2CE1BBEB3D2001DA7C4 /* Item.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
-		8A6B0D761BBD8BA40056C91E /* News Reader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "News Reader.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8A5571591BFF2FB500B6C5F5 /* NewsReader-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NewsReader-Bridging-Header.h"; sourceTree = "<group>"; };
+		8A5C59231BFF3C6E002D17BA /* DrawingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawingViewController.h; sourceTree = "<group>"; };
+		8A5C59241BFF3C6E002D17BA /* DrawingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrawingViewController.m; sourceTree = "<group>"; };
+		8A6B0D761BBD8BA40056C91E /* NewsReader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NewsReader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A6B0D791BBD8BA40056C91E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8A6B0D7E1BBD8BA40056C91E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8A6B0D801BBD8BA40056C91E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8A6B0D831BBD8BA40056C91E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8A6B0D851BBD8BA40056C91E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8A6B0D8A1BBD8BA40056C91E /* News ReaderTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "News ReaderTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8A6B0D8A1BBD8BA40056C91E /* NewsReader.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NewsReader.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A6B0D8E1BBD8BA40056C91E /* News_ReaderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = News_ReaderTests.swift; sourceTree = "<group>"; };
 		8A6B0D901BBD8BA40056C91E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8A6B0D951BBD8BA40056C91E /* News ReaderUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "News ReaderUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8A6B0D951BBD8BA40056C91E /* NewsReader.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NewsReader.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A6B0D991BBD8BA40056C91E /* News_ReaderUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = News_ReaderUITests.swift; sourceTree = "<group>"; };
 		8A6B0D9B1BBD8BA40056C91E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8A6B0DA71BBD8D740056C91E /* NewsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsTableViewController.swift; sourceTree = "<group>"; };
 		8A7F9E0D1BCDAC6C002C6F89 /* ImageDownloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageDownloader.swift; sourceTree = "<group>"; };
 		8AA61E821BC9C87F00D937C6 /* ImageNewsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageNewsCell.swift; sourceTree = "<group>"; };
+		8AA77D771BFE6BE900018BEF /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		8AB0BFA71BC1EBB500523D8F /* RSSParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RSSParser.swift; sourceTree = "<group>"; usesTabs = 0; };
 		8AB4C8FB1BF9007300E945D8 /* Category+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Category+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		8AB4C8FC1BF9007300E945D8 /* Channel+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Channel+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -96,6 +102,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8AA77D781BFE6BE900018BEF /* UIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -124,13 +131,23 @@
 			name = Extensions;
 			sourceTree = "<group>";
 		};
+		8A55715A1BFF31D000B6C5F5 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				8A6B0D791BBD8BA40056C91E /* AppDelegate.swift */,
+				8A5571591BFF2FB500B6C5F5 /* NewsReader-Bridging-Header.h */,
+			);
+			name = "Support Files";
+			sourceTree = "<group>";
+		};
 		8A6B0D6D1BBD8BA30056C91E = {
 			isa = PBXGroup;
 			children = (
+				8AA77D771BFE6BE900018BEF /* UIKit.framework */,
 				8AEA0E631BBDCBC000556336 /* .gitignore */,
-				8A6B0D781BBD8BA40056C91E /* News Reader */,
-				8A6B0D8D1BBD8BA40056C91E /* News ReaderTests */,
-				8A6B0D981BBD8BA40056C91E /* News ReaderUITests */,
+				8A6B0D781BBD8BA40056C91E /* NewsReader */,
+				8A6B0D8D1BBD8BA40056C91E /* NewsReaderTests */,
+				8A6B0D981BBD8BA40056C91E /* NewsReaderUITests */,
 				8A6B0D771BBD8BA40056C91E /* Products */,
 			);
 			sourceTree = "<group>";
@@ -138,17 +155,17 @@
 		8A6B0D771BBD8BA40056C91E /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				8A6B0D761BBD8BA40056C91E /* News Reader.app */,
-				8A6B0D8A1BBD8BA40056C91E /* News ReaderTests.xctest */,
-				8A6B0D951BBD8BA40056C91E /* News ReaderUITests.xctest */,
+				8A6B0D761BBD8BA40056C91E /* NewsReader.app */,
+				8A6B0D8A1BBD8BA40056C91E /* NewsReader.xctest */,
+				8A6B0D951BBD8BA40056C91E /* NewsReader.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		8A6B0D781BBD8BA40056C91E /* News Reader */ = {
+		8A6B0D781BBD8BA40056C91E /* NewsReader */ = {
 			isa = PBXGroup;
 			children = (
-				8A6B0D791BBD8BA40056C91E /* AppDelegate.swift */,
+				8A55715A1BFF31D000B6C5F5 /* Support Files */,
 				8A4A35231BCC105D001C324F /* Extensions */,
 				8A6B0DA91BBD8F0B0056C91E /* Model */,
 				8A6B0DAA1BBD8F150056C91E /* Controller */,
@@ -156,25 +173,25 @@
 				8A6B0D801BBD8BA40056C91E /* Assets.xcassets */,
 				8A6B0D851BBD8BA40056C91E /* Info.plist */,
 			);
-			path = "News Reader";
+			path = NewsReader;
 			sourceTree = "<group>";
 		};
-		8A6B0D8D1BBD8BA40056C91E /* News ReaderTests */ = {
+		8A6B0D8D1BBD8BA40056C91E /* NewsReaderTests */ = {
 			isa = PBXGroup;
 			children = (
 				8A6B0D8E1BBD8BA40056C91E /* News_ReaderTests.swift */,
 				8A6B0D901BBD8BA40056C91E /* Info.plist */,
 			);
-			path = "News ReaderTests";
+			path = NewsReaderTests;
 			sourceTree = "<group>";
 		};
-		8A6B0D981BBD8BA40056C91E /* News ReaderUITests */ = {
+		8A6B0D981BBD8BA40056C91E /* NewsReaderUITests */ = {
 			isa = PBXGroup;
 			children = (
 				8A6B0D991BBD8BA40056C91E /* News_ReaderUITests.swift */,
 				8A6B0D9B1BBD8BA40056C91E /* Info.plist */,
 			);
-			path = "News ReaderUITests";
+			path = NewsReaderUITests;
 			sourceTree = "<group>";
 		};
 		8A6B0DA91BBD8F0B0056C91E /* Model */ = {
@@ -193,6 +210,7 @@
 			children = (
 				8A6B0DA71BBD8D740056C91E /* NewsTableViewController.swift */,
 				8AB93C0E1BC6C90C00351C4F /* NewsDetailTableViewController.swift */,
+				8AA77D721BFE6AA200018BEF /* Drawing */,
 				8AC036381BDBF7280041AC62 /* WebViewController.swift */,
 			);
 			name = Controller;
@@ -228,12 +246,21 @@
 			name = CoreData;
 			sourceTree = "<group>";
 		};
+		8AA77D721BFE6AA200018BEF /* Drawing */ = {
+			isa = PBXGroup;
+			children = (
+				8A5C59231BFF3C6E002D17BA /* DrawingViewController.h */,
+				8A5C59241BFF3C6E002D17BA /* DrawingViewController.m */,
+			);
+			name = Drawing;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		8A6B0D751BBD8BA40056C91E /* News Reader */ = {
+		8A6B0D751BBD8BA40056C91E /* NewsReader */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 8A6B0D9E1BBD8BA40056C91E /* Build configuration list for PBXNativeTarget "News Reader" */;
+			buildConfigurationList = 8A6B0D9E1BBD8BA40056C91E /* Build configuration list for PBXNativeTarget "NewsReader" */;
 			buildPhases = (
 				8A6B0D721BBD8BA40056C91E /* Sources */,
 				8A6B0D731BBD8BA40056C91E /* Frameworks */,
@@ -243,14 +270,14 @@
 			);
 			dependencies = (
 			);
-			name = "News Reader";
+			name = NewsReader;
 			productName = "News Reader";
-			productReference = 8A6B0D761BBD8BA40056C91E /* News Reader.app */;
+			productReference = 8A6B0D761BBD8BA40056C91E /* NewsReader.app */;
 			productType = "com.apple.product-type.application";
 		};
-		8A6B0D891BBD8BA40056C91E /* News ReaderTests */ = {
+		8A6B0D891BBD8BA40056C91E /* NewsReaderTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 8A6B0DA11BBD8BA40056C91E /* Build configuration list for PBXNativeTarget "News ReaderTests" */;
+			buildConfigurationList = 8A6B0DA11BBD8BA40056C91E /* Build configuration list for PBXNativeTarget "NewsReaderTests" */;
 			buildPhases = (
 				8A6B0D861BBD8BA40056C91E /* Sources */,
 				8A6B0D871BBD8BA40056C91E /* Frameworks */,
@@ -261,14 +288,14 @@
 			dependencies = (
 				8A6B0D8C1BBD8BA40056C91E /* PBXTargetDependency */,
 			);
-			name = "News ReaderTests";
+			name = NewsReaderTests;
 			productName = "News ReaderTests";
-			productReference = 8A6B0D8A1BBD8BA40056C91E /* News ReaderTests.xctest */;
+			productReference = 8A6B0D8A1BBD8BA40056C91E /* NewsReader.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		8A6B0D941BBD8BA40056C91E /* News ReaderUITests */ = {
+		8A6B0D941BBD8BA40056C91E /* NewsReaderUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 8A6B0DA41BBD8BA40056C91E /* Build configuration list for PBXNativeTarget "News ReaderUITests" */;
+			buildConfigurationList = 8A6B0DA41BBD8BA40056C91E /* Build configuration list for PBXNativeTarget "NewsReaderUITests" */;
 			buildPhases = (
 				8A6B0D911BBD8BA40056C91E /* Sources */,
 				8A6B0D921BBD8BA40056C91E /* Frameworks */,
@@ -279,9 +306,9 @@
 			dependencies = (
 				8A6B0D971BBD8BA40056C91E /* PBXTargetDependency */,
 			);
-			name = "News ReaderUITests";
+			name = NewsReaderUITests;
 			productName = "News ReaderUITests";
-			productReference = 8A6B0D951BBD8BA40056C91E /* News ReaderUITests.xctest */;
+			productReference = 8A6B0D951BBD8BA40056C91E /* NewsReader.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -290,6 +317,7 @@
 		8A6B0D6E1BBD8BA30056C91E /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0710;
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = Alexey;
 				TargetAttributes = {
@@ -306,7 +334,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 8A6B0D711BBD8BA30056C91E /* Build configuration list for PBXProject "News Reader" */;
+			buildConfigurationList = 8A6B0D711BBD8BA30056C91E /* Build configuration list for PBXProject "NewsReader" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -319,9 +347,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				8A6B0D751BBD8BA40056C91E /* News Reader */,
-				8A6B0D891BBD8BA40056C91E /* News ReaderTests */,
-				8A6B0D941BBD8BA40056C91E /* News ReaderUITests */,
+				8A6B0D751BBD8BA40056C91E /* NewsReader */,
+				8A6B0D891BBD8BA40056C91E /* NewsReaderTests */,
+				8A6B0D941BBD8BA40056C91E /* NewsReaderUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -372,6 +400,7 @@
 				8AB4C9001BF9007300E945D8 /* Channel+CoreDataProperties.swift in Sources */,
 				8AB4C8FF1BF9007300E945D8 /* Category+CoreDataProperties.swift in Sources */,
 				8A7F9E0E1BCDAC6C002C6F89 /* ImageDownloader.swift in Sources */,
+				8A5C59251BFF3C6E002D17BA /* DrawingViewController.m in Sources */,
 				8A0B46A51BFD238000B9E2A2 /* DetailImageNewsCell.swift in Sources */,
 				8AC53E5D1BC98CF2000B45E2 /* NewsCell.swift in Sources */,
 				8AEEE52A1BCBE16B0013A5CE /* UIImageView+setImageFromURL.swift in Sources */,
@@ -405,12 +434,12 @@
 /* Begin PBXTargetDependency section */
 		8A6B0D8C1BBD8BA40056C91E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 8A6B0D751BBD8BA40056C91E /* News Reader */;
+			target = 8A6B0D751BBD8BA40056C91E /* NewsReader */;
 			targetProxy = 8A6B0D8B1BBD8BA40056C91E /* PBXContainerItemProxy */;
 		};
 		8A6B0D971BBD8BA40056C91E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 8A6B0D751BBD8BA40056C91E /* News Reader */;
+			target = 8A6B0D751BBD8BA40056C91E /* NewsReader */;
 			targetProxy = 8A6B0D961BBD8BA40056C91E /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -520,10 +549,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = "News Reader/Info.plist";
+				CLANG_ENABLE_MODULES = YES;
+				INFOPLIST_FILE = NewsReader/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "univercube.News-Reader";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = univercube.NewsReader;
+				PRODUCT_NAME = NewsReader;
+				SWIFT_OBJC_BRIDGING_HEADER = "./NewsReader/NewsReader-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -531,10 +563,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = "News Reader/Info.plist";
+				CLANG_ENABLE_MODULES = YES;
+				INFOPLIST_FILE = NewsReader/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "univercube.News-Reader";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = univercube.NewsReader;
+				PRODUCT_NAME = NewsReader;
+				SWIFT_OBJC_BRIDGING_HEADER = "./NewsReader/NewsReader-Bridging-Header.h";
 			};
 			name = Release;
 		};
@@ -545,8 +579,8 @@
 				INFOPLIST_FILE = "News ReaderTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "univercube.News-ReaderTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/News Reader.app/News Reader";
+				PRODUCT_NAME = NewsReader;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NewsReader.app/NewsReader";
 			};
 			name = Debug;
 		};
@@ -557,8 +591,8 @@
 				INFOPLIST_FILE = "News ReaderTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "univercube.News-ReaderTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/News Reader.app/News Reader";
+				PRODUCT_NAME = NewsReader;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NewsReader.app/NewsReader";
 			};
 			name = Release;
 		};
@@ -568,7 +602,7 @@
 				INFOPLIST_FILE = "News ReaderUITests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "univercube.News-ReaderUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = NewsReader;
 				TEST_TARGET_NAME = "News Reader";
 				USES_XCTRUNNER = YES;
 			};
@@ -580,7 +614,7 @@
 				INFOPLIST_FILE = "News ReaderUITests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "univercube.News-ReaderUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = NewsReader;
 				TEST_TARGET_NAME = "News Reader";
 				USES_XCTRUNNER = YES;
 			};
@@ -589,7 +623,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		8A6B0D711BBD8BA30056C91E /* Build configuration list for PBXProject "News Reader" */ = {
+		8A6B0D711BBD8BA30056C91E /* Build configuration list for PBXProject "NewsReader" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8A6B0D9C1BBD8BA40056C91E /* Debug */,
@@ -598,7 +632,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		8A6B0D9E1BBD8BA40056C91E /* Build configuration list for PBXNativeTarget "News Reader" */ = {
+		8A6B0D9E1BBD8BA40056C91E /* Build configuration list for PBXNativeTarget "NewsReader" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8A6B0D9F1BBD8BA40056C91E /* Debug */,
@@ -607,7 +641,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		8A6B0DA11BBD8BA40056C91E /* Build configuration list for PBXNativeTarget "News ReaderTests" */ = {
+		8A6B0DA11BBD8BA40056C91E /* Build configuration list for PBXNativeTarget "NewsReaderTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8A6B0DA21BBD8BA40056C91E /* Debug */,
@@ -616,7 +650,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		8A6B0DA41BBD8BA40056C91E /* Build configuration list for PBXNativeTarget "News ReaderUITests" */ = {
+		8A6B0DA41BBD8BA40056C91E /* Build configuration list for PBXNativeTarget "NewsReaderUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8A6B0DA51BBD8BA40056C91E /* Debug */,

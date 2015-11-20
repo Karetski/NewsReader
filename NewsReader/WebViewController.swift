@@ -27,7 +27,6 @@ class WebViewController: UIViewController, UIWebViewDelegate {
         
         dispatch_async(dispatch_get_main_queue()) { () -> Void in
             self.webView.loadRequest(request)
-//            self.navigationBar. = url.absoluteString
             self.customNavigationItem.title = url.absoluteString
         }
     }
@@ -38,10 +37,6 @@ class WebViewController: UIViewController, UIWebViewDelegate {
     }
     
     // MARK: - Button actions
-    
-    @IBAction func doneAction(sender: AnyObject) {
-        self.dismissViewControllerAnimated(true, completion: nil)
-    }
     
     @IBAction func copyAction(sender: AnyObject) {
         guard let url = self.url else {

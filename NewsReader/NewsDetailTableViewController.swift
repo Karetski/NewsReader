@@ -19,6 +19,7 @@ class NewsDetailTableViewController: UITableViewController {
     let itemLinkSegueIdentifier = "ItemLinkSegue"
     let categoryLinkSegueIdentifier = "CategoryLinkSegue"
     let mediaLinkSegueIdentifier = "MediaLinkSegue"
+    let drawingSegueIdentifier = "DrawingSegue"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,6 +39,16 @@ class NewsDetailTableViewController: UITableViewController {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    // MARK: - Unwind segues
+    
+    @IBAction func drawingExitSegue(segue:UIStoryboardSegue) {
+        
+    }
+    
+    @IBAction func webExitSegue(segue:UIStoryboardSegue) {
+        
     }
     
     // MARK: - Table view data source
@@ -128,36 +139,50 @@ class NewsDetailTableViewController: UITableViewController {
         guard let item = self.item else {
             return
         }
-        guard let destination = segue.destinationViewController as? WebViewController else {
-            return
-        }
         
-        if segue.identifier == self.itemLinkSegueIdentifier {
-            guard let url = item.url else {
+        if segue.identifier == self.mediaLinkSegueIdentifier || segue.identifier == self.itemLinkSegueIdentifier || segue.identifier == self.categoryLinkSegueIdentifier {
+            guard let destination = segue.destinationViewController as? WebViewController else {
                 return
             }
-            destination.url = url
-            return
-        }
+            
+            if segue.identifier == self.itemLinkSegueIdentifier {
+                guard let url = item.url else {
+                    return
+                }
+                destination.url = url
+                return
+            }
+            
+            guard let indexPath = self.tableView.indexPathForSelectedRow else {
+                return
+            }
         
-        guard let indexPath = self.tableView.indexPathForSelectedRow else {
-            return
-        }
-        if segue.identifier == self.categoryLinkSegueIdentifier {
-            let category = item.categories![indexPath.row] as! Category
-            guard let url = category.url else {
+            if segue.identifier == self.categoryLinkSegueIdentifier {
+                let category = item.categories![indexPath.row] as! Category
+                guard let url = category.url else {
+                    return
+                }
+                destination.url = url
                 return
             }
-            destination.url = url
-            return
-        }
-        if segue.identifier == self.mediaLinkSegueIdentifier {
-            let media = item.media![indexPath.row] as! Media
-            guard let url = media.url else {
+            if segue.identifier == self.mediaLinkSegueIdentifier {
+                let media = item.media![indexPath.row] as! Media
+                guard let url = media.url else {
+                    return
+                }
+                destination.url = url
                 return
             }
-            destination.url = url
-            return
+        } else {
+            guard let destination = segue.destinationViewController as? DrawingViewController else {
+                return
+            }
+            
+            if segue.identifier == self.drawingSegueIdentifier {
+                if let thumbnailImage = item.thumbnailImage {
+                    destination.sourceImage = thumbnailImage
+                }
+            }
         }
     }
 }
