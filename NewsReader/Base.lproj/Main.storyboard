@@ -440,6 +440,7 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="MnU-7c-aoU">
                                 <rect key="frame" x="0.0" y="0.0" width="400" height="600"/>
                                 <animations/>
+                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="MnU-7c-aoU" secondAttribute="height" multiplier="4:3" id="0yJ-cl-hdF"/>
                                 </constraints>
@@ -510,6 +511,7 @@
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="bGE-Zo-jc3" firstAttribute="leading" secondItem="FQ2-Gl-GI9" secondAttribute="leading" id="3cB-nT-GU6"/>
                             <constraint firstItem="ZGY-XK-xdV" firstAttribute="top" secondItem="MnU-7c-aoU" secondAttribute="bottom" id="4D9-pg-v2J"/>
@@ -621,7 +623,7 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RED" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zxd-qP-t1i">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Red" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zxd-qP-t1i">
                                 <rect key="frame" x="20" y="150" width="102" height="27"/>
                                 <animations/>
                                 <constraints>
@@ -629,10 +631,10 @@
                                     <constraint firstAttribute="width" constant="102" id="VG2-m9-0Kd"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                                <color key="textColor" red="0.988960862159729" green="0.40672391653060913" blue="0.43459874391555786" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.98594677448272705" green="0.0" blue="0.039444983005523682" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GREEN" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AiX-bp-6sU">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Green" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AiX-bp-6sU">
                                 <rect key="frame" x="20" y="185" width="102" height="27"/>
                                 <animations/>
                                 <constraints>
@@ -640,10 +642,10 @@
                                     <constraint firstAttribute="height" constant="27" id="Shc-E5-9KG"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                                <color key="textColor" red="0.36759841442108154" green="0.83179408311843872" blue="0.35010987520217896" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BLUE" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uSL-io-vPc">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Blue" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uSL-io-vPc">
                                 <rect key="frame" x="20" y="220" width="102" height="27"/>
                                 <animations/>
                                 <constraints>
@@ -651,10 +653,10 @@
                                     <constraint firstAttribute="width" constant="102" id="tyX-SJ-MDq"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                                <color key="textColor" red="0.42280733585357666" green="0.39412957429885864" blue="0.99857497215270996" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.99857497215270996" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="7.5" minValue="0.0" maxValue="150" translatesAutoresizingMaskIntoConstraints="NO" id="PMc-Yy-kmH">
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="7.5" minValue="0.0" maxValue="125" translatesAutoresizingMaskIntoConstraints="NO" id="PMc-Yy-kmH">
                                 <rect key="frame" x="140" y="79" width="242" height="31"/>
                                 <animations/>
                                 <connections>
@@ -671,7 +673,7 @@
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="100" minValue="0.0" maxValue="255" translatesAutoresizingMaskIntoConstraints="NO" id="RAA-7W-hx4">
                                 <rect key="frame" x="140" y="149" width="242" height="31"/>
                                 <animations/>
-                                <color key="tintColor" red="0.98896086220000001" green="0.4067239165" blue="0.43459874389999997" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" red="0.98594677450000001" green="0.0" blue="0.039444983009999997" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
                                     <action selector="rgbSlidersChanged:" destination="Y1R-Jv-Kou" eventType="valueChanged" id="wt1-YL-2LO"/>
                                 </connections>
@@ -679,7 +681,7 @@
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="200" minValue="0.0" maxValue="255" translatesAutoresizingMaskIntoConstraints="NO" id="DQ6-sQ-rRJ">
                                 <rect key="frame" x="140" y="184" width="242" height="31"/>
                                 <animations/>
-                                <color key="tintColor" red="0.36759841440000002" green="0.83179408310000003" blue="0.35010987519999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
                                     <action selector="rgbSlidersChanged:" destination="Y1R-Jv-Kou" eventType="valueChanged" id="5BQ-8N-uit"/>
                                 </connections>
@@ -687,7 +689,7 @@
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="30" minValue="0.0" maxValue="255" translatesAutoresizingMaskIntoConstraints="NO" id="eD5-ZB-3Wm">
                                 <rect key="frame" x="140" y="219" width="242" height="31"/>
                                 <animations/>
-                                <color key="tintColor" red="0.42280733590000003" green="0.39412957430000001" blue="0.99857497220000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" red="0.0" green="0.0" blue="0.99857497220000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
                                     <action selector="rgbSlidersChanged:" destination="Y1R-Jv-Kou" eventType="valueChanged" id="eIS-wW-L5t"/>
                                 </connections>
@@ -707,7 +709,7 @@
                             </imageView>
                         </subviews>
                         <animations/>
-                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="PRo-u3-siM" firstAttribute="top" secondItem="S6S-9u-KDW" secondAttribute="bottom" id="1zT-nX-zAU"/>
                             <constraint firstItem="AiX-bp-6sU" firstAttribute="leading" secondItem="Ni3-v5-iws" secondAttribute="leading" constant="20" id="3cH-c9-E33"/>

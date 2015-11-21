@@ -18,11 +18,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    self.red = 0.0/255.0;
-    self.green = 0.0/255.0;
-    self.blue = 0.0/255.0;
+    self.red = 30.0/255.0;
+    self.green = 30.0/255.0;
+    self.blue = 30.0/255.0;
     self.brushSize = 7.5;
-    self.opacity = 1;
+    self.opacity = 0.9;
     
     [self setNeedsStatusBarAppearanceUpdate];
     
@@ -35,32 +35,26 @@
     // Dispose of any resources that can be recreated.
 }
 
-// MARK: - UIBarPositioningDelegate
-
-- (UIStatusBarStyle)preferredStatusBarStyle {
-    return UIStatusBarStyleLightContent;
-}
-
-// MARK: - Button actions
+// MARK: - Actions
 
 - (IBAction)presetButtonAction:(id)sender {
     UIButton *pressedButton = (UIButton*)sender;
     if (pressedButton.tag == 0) {
-        self.red = 0.0;
-        self.green = 0.0;
-        self.blue = 0.0;
+        self.red = 30.0/255.0;
+        self.green = 30.0/255.0;
+        self.blue = 30.0/255.0;
     } else if (pressedButton.tag == 1) {
-        self.red = 1.0;
-        self.green = 1.0;
-        self.blue = 1.0;
+        self.red = 250.0/255.0;
+        self.green = 250.0/255.0;
+        self.blue = 250.0/255.0;
     } else if (pressedButton.tag == 2) {
-        self.red = 1.0;
-        self.green = 0.0;
-        self.blue = 0.0;
+        self.red = 254.0/255.0;
+        self.green = 48.0/255.0;
+        self.blue = 24.0/255.0;
     } else if (pressedButton.tag == 3) {
-        self.red = 0.0;
-        self.green = 0.0;
-        self.blue = 1.0;
+        self.red = 48.0/255.0;
+        self.green = 135.0/255.0;
+        self.blue = 246.0/255.0;
     }
 }
 
@@ -78,12 +72,20 @@
     [self presentViewController:activityController animated:YES completion:nil];
 }
 
+- (IBAction)showHideGesture:(id)sender {
+    NSLog(@"asdasdasd");
+}
+
 // MARK - Unwind segues
 
 - (IBAction)brushSettingsExitSegue:(UIStoryboardSegue *)segue {
 }
 
 // MARK - Helpers
+
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    return UIStatusBarStyleLightContent;
+}
 
 - (void)calculateDrawingSpace {
     UIImage *drawingImage = [self.sourceImage copy];
@@ -94,6 +96,9 @@
     if (drawingImage.size.width >= self.view.frame.size.width) {
         drawingImageWidth = self.view.frame.size.width;
         drawingImageHeight = self.view.frame.size.width / drawingImage.size.width * drawingImage.size.height;
+    } else if (drawingImage.size.height >= self.view.frame.size.height) {
+        drawingImageWidth = self.view.frame.size.height / drawingImage.size.height * drawingImage.size.width;
+        drawingImageHeight = self.view.frame.size.height;
     } else {
         drawingImageWidth = drawingImage.size.width;
         drawingImageHeight = drawingImage.size.height;
@@ -170,7 +175,6 @@
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-    
     if (!mouseSwiped) {
         UIGraphicsBeginImageContext(self.view.frame.size);
         [self.tempDrawImage.image drawInRect:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];

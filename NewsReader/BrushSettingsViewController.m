@@ -40,7 +40,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-// MARK: - UIBarPositioningDelegate
+// MARK: - Helpers
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
     return UIStatusBarStyleLightContent;
@@ -77,6 +77,7 @@
     self.previewImageView.image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
 }
+
 
 
 // MARK: - Navigation
