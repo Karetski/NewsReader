@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SettingsViewController : UIViewController <UIBarPositioningDelegate>
+@interface BrushSettingsViewController : UIViewController <UIBarPositioningDelegate>
 
 @property (nonatomic) CGFloat red;
 @property (nonatomic) CGFloat green;

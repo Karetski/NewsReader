@@ -7,7 +7,7 @@
 //
 
 #import "DrawingViewController.h"
-#import "SettingsViewController.h"
+#import "BrushSettingsViewController.h"
 
 @interface DrawingViewController ()
 
@@ -167,13 +167,11 @@
     UIGraphicsEndImageContext();
 }
 
-
 // Mark: - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier  isEqual: @"BrushSettingsSegue"]) {
-        SettingsViewController *destination = [segue destinationViewController];
+        BrushSettingsViewController *destination = [segue destinationViewController];
         
         destination.red = self.red;
         destination.green = self.green;

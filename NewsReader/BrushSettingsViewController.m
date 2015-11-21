@@ -6,14 +6,14 @@
 //  Copyright © 2015 Alexey. All rights reserved.
 //
 
-#import "SettingsViewController.h"
+#import "BrushSettingsViewController.h"
 #import "DrawingViewController.h"
 
-@interface SettingsViewController ()
+@interface BrushSettingsViewController ()
 
 @end
 
-@implementation SettingsViewController
+@implementation BrushSettingsViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
