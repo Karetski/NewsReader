@@ -509,7 +509,7 @@
                             </toolbar>
                         </subviews>
                         <animations/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="bGE-Zo-jc3" firstAttribute="leading" secondItem="FQ2-Gl-GI9" secondAttribute="leading" id="3cB-nT-GU6"/>
                             <constraint firstItem="ZGY-XK-xdV" firstAttribute="top" secondItem="MnU-7c-aoU" secondAttribute="bottom" id="4D9-pg-v2J"/>
@@ -571,10 +571,10 @@
             </objects>
             <point key="canvasLocation" x="1083" y="912"/>
         </scene>
-        <!--Settings View Controller-->
+        <!--Brush Settings View Controller-->
         <scene sceneID="yNe-fw-hhE">
             <objects>
-                <viewController id="Y1R-Jv-Kou" customClass="SettingsViewController" sceneMemberID="viewController">
+                <viewController id="Y1R-Jv-Kou" customClass="BrushSettingsViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="S6S-9u-KDW"/>
                         <viewControllerLayoutGuide type="bottom" id="Y0c-3O-Lq5"/>

@@ -26,7 +26,8 @@
     
     [self setNeedsStatusBarAppearanceUpdate];
     
-    [self drawClearImage];
+    [self calculateDrawingSpace];
+    [self drawCleanImage];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -65,14 +66,11 @@
 
 - (IBAction)refreshButtonAction:(id)sender {
     self.mainDrawImage.image = nil;
-    [self drawClearImage];
+    [self drawCleanImage];
 }
 
 - (IBAction)shareButtonAction:(id)sender {
-    UIGraphicsBeginImageContext(self.view.frame.size);
-    [self.mainDrawImage.image drawInRect:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
-    UIImage *savingImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
+    UIImage *savingImage = [self getSubImageFrom:self.mainDrawImage.image withRect:self.drawingSpace];
     
     NSArray *activityItems = [[NSArray alloc] initWithObjects: savingImage, nil];
     UIActivityViewController *activityController = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:nil];
@@ -87,23 +85,51 @@
 
 // MARK - Helpers
 
-- (void)drawClearImage {
+- (void)calculateDrawingSpace {
+    UIImage *drawingImage = [self.sourceImage copy];
+    
+    int drawingImageWidth;
+    int drawingImageHeight;
+    
+    if (drawingImage.size.width >= self.view.frame.size.width) {
+        drawingImageWidth = self.view.frame.size.width;
+        drawingImageHeight = self.view.frame.size.width / drawingImage.size.width * drawingImage.size.height;
+    } else {
+        drawingImageWidth = drawingImage.size.width;
+        drawingImageHeight = drawingImage.size.height;
+    }
+    
+    int drawingImageVertPosition = (self.view.frame.size.height / 2) - (drawingImageHeight / 2);
+    int drawingImageHorizPosition = (self.view.frame.size.width / 2) - (drawingImageWidth / 2);
+    
+    self.drawingSpace = CGRectMake(drawingImageHorizPosition, drawingImageVertPosition, drawingImageWidth, drawingImageHeight);
+}
+
+- (void)drawCleanImage {
     UIImage *drawingImage = [self.sourceImage copy];
     
     UIGraphicsBeginImageContext(self.view.frame.size);
     [self.mainDrawImage.image drawInRect:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
     
-    int drawingImageWidth = self.view.frame.size.width;
-    int drawingImageHeight = self.view.frame.size.width / drawingImage.size.width * drawingImage.size.height;
-    int drawingImageVertPosition = (self.view.frame.size.height / 2) - (drawingImageHeight / 2);
-    
-    CGContextSetRGBFillColor(UIGraphicsGetCurrentContext(), 0.0, 0.0, 0.0, 1.0);
-    CGContextFillRect(UIGraphicsGetCurrentContext(), CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height));
-    
-    [drawingImage drawInRect:CGRectMake(0, drawingImageVertPosition, drawingImageWidth, drawingImageHeight)];
+    [drawingImage drawInRect:self.drawingSpace];
     
     self.mainDrawImage.image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
+}
+
+- (UIImage*)getSubImageFrom:(UIImage*)img withRect:(CGRect)rect {
+    UIGraphicsBeginImageContext(rect.size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    CGRect drawRect = CGRectMake(-rect.origin.x, -rect.origin.y, img.size.width, img.size.height);
+    CGContextClipToRect(context, CGRectMake(0, 0, rect.size.width, rect.size.height));
+    
+    [img drawInRect:drawRect];
+    UIImage* subImage = UIGraphicsGetImageFromCurrentImageContext();
+    
+    UIGraphicsEndImageContext();
+    
+    return subImage;
 }
 
 // MARK: - UIBarPositioningDelegate

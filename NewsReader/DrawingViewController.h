@@ -20,6 +20,7 @@
 @property (nonatomic) CGFloat opacity;
 
 @property (strong, nonatomic) UIImage *sourceImage;
+@property (nonatomic) CGRect drawingSpace;
 
 @property (weak, nonatomic) IBOutlet UIImageView *mainDrawImage;
 @property (weak, nonatomic) IBOutlet UIImageView *tempDrawImage;
