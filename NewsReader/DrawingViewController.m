@@ -11,6 +11,12 @@
 
 @interface DrawingViewController ()
 
+@property (nonatomic) CGRect drawingSpace;
+
+@property (nonatomic) CGFloat graphicsScale;
+@property (nonatomic) CGRect scaledDrawingSpace;
+@property (nonatomic) CGRect scaledDrawingContext;
+
 @end
 
 @implementation DrawingViewController 
@@ -108,18 +114,22 @@
     int drawingImageVertPosition = (self.view.frame.size.height / 2) - (drawingImageHeight / 2);
     int drawingImageHorizPosition = (self.view.frame.size.width / 2) - (drawingImageWidth / 2);
     
+    self.graphicsScale = [[UIScreen mainScreen] scale];
+    
     self.drawingSpace = CGRectMake(drawingImageHorizPosition, drawingImageVertPosition, drawingImageWidth, drawingImageHeight);
+    self.scaledDrawingSpace = CGRectMake(drawingImageHorizPosition * self.graphicsScale, drawingImageVertPosition * self.graphicsScale, drawingImageWidth * self.graphicsScale, drawingImageHeight * self.graphicsScale);
+    self.scaledDrawingContext = CGRectMake(0, 0, self.view.frame.size.width * self.graphicsScale, self.view.frame.size.height * self.graphicsScale);
 }
 
 - (void)drawImageBounds {
-    UIGraphicsBeginImageContext(self.view.frame.size);
+    UIGraphicsBeginImageContext(self.scaledDrawingContext.size);
     
     CGContextSetLineCap(UIGraphicsGetCurrentContext(), kCGLineCapRound);
     CGContextSetLineWidth(UIGraphicsGetCurrentContext(), 1.0);
     CGContextSetRGBStrokeColor(UIGraphicsGetCurrentContext(), 30.0/255.0, 30.0/255.0, 30.0/255.0, 1.0);
     CGContextSetBlendMode(UIGraphicsGetCurrentContext(),kCGBlendModeNormal);
     
-    CGContextStrokeRect(UIGraphicsGetCurrentContext(), self.drawingSpace);
+    CGContextStrokeRect(UIGraphicsGetCurrentContext(), self.scaledDrawingSpace);
     
     self.boundsImageView.image = UIGraphicsGetImageFromCurrentImageContext();
     
