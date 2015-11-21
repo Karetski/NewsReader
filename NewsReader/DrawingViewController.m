@@ -60,6 +60,14 @@
         self.red = 48.0/255.0;
         self.green = 135.0/255.0;
         self.blue = 246.0/255.0;
+    } else if (pressedButton.tag == 4) {
+        self.red = 255.0/255.0;
+        self.green = 255.0/255.0;
+        self.blue = 0.0/255.0;
+    } else if (pressedButton.tag == 5) {
+        self.red = 255.0/255.0;
+        self.green = 0.0/255.0;
+        self.blue = 175.0/255.0;
     }
 }
 

@@ -244,6 +244,15 @@
                                                 <segue destination="iL9-XC-JUO" kind="presentation" identifier="DrawingSegue" id="So3-dS-IB6"/>
                                             </connections>
                                         </button>
+                                        <label opaque="NO" userInteractionEnabled="NO" alpha="0.34999999999999998" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap to draw" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JxA-a8-XKg">
+                                            <rect key="frame" x="25" y="101" width="73" height="17"/>
+                                            <animations/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                            <color key="shadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                            <size key="shadowOffset" width="-1" height="-1"/>
+                                        </label>
                                     </subviews>
                                     <animations/>
                                     <constraints>
@@ -255,6 +264,7 @@
                                         <constraint firstItem="LhS-Su-GN4" firstAttribute="width" secondItem="J4R-mZ-lqy" secondAttribute="width" id="I0F-wh-Thw"/>
                                         <constraint firstItem="ATA-Bd-phl" firstAttribute="leading" secondItem="L6d-kV-VGr" secondAttribute="leading" constant="15" id="KdO-7d-vxH"/>
                                         <constraint firstAttribute="trailing" secondItem="tcZ-ec-EBb" secondAttribute="trailing" constant="15" id="Ks1-iP-lKf"/>
+                                        <constraint firstItem="JxA-a8-XKg" firstAttribute="top" secondItem="EOz-Z5-JNS" secondAttribute="bottom" constant="18" id="U7S-NM-M6r"/>
                                         <constraint firstItem="J4R-mZ-lqy" firstAttribute="leading" secondItem="L6d-kV-VGr" secondAttribute="leading" constant="15" id="YG9-dx-g7U"/>
                                         <constraint firstAttribute="trailing" secondItem="ATA-Bd-phl" secondAttribute="trailing" constant="15" id="Z0a-Hx-IsW"/>
                                         <constraint firstItem="ATA-Bd-phl" firstAttribute="top" secondItem="J4R-mZ-lqy" secondAttribute="bottom" constant="8" id="aZQ-K9-woF"/>
@@ -265,6 +275,7 @@
                                         <constraint firstAttribute="bottom" secondItem="ATA-Bd-phl" secondAttribute="bottom" constant="15" id="kYV-JD-tT7"/>
                                         <constraint firstItem="LhS-Su-GN4" firstAttribute="centerX" secondItem="J4R-mZ-lqy" secondAttribute="centerX" id="lgX-pR-gYF"/>
                                         <constraint firstAttribute="trailing" secondItem="J4R-mZ-lqy" secondAttribute="trailing" constant="15" id="pYY-2Y-GZ7"/>
+                                        <constraint firstItem="JxA-a8-XKg" firstAttribute="leading" secondItem="L6d-kV-VGr" secondAttribute="leading" constant="25" id="u5a-rb-z7n"/>
                                         <constraint firstItem="EOz-Z5-JNS" firstAttribute="leading" secondItem="L6d-kV-VGr" secondAttribute="leading" constant="15" id="um4-AE-rxm"/>
                                         <constraint firstAttribute="trailing" secondItem="EOz-Z5-JNS" secondAttribute="trailing" constant="15" id="vto-YQ-xPx"/>
                                     </constraints>
@@ -485,14 +496,24 @@
                                             <action selector="presetButtonAction:" destination="iL9-XC-JUO" id="B77-GA-h7h"/>
                                         </connections>
                                     </barButtonItem>
-                                    <barButtonItem tag="2" title="🔴" id="heX-nC-ooK">
+                                    <barButtonItem tag="2" title="❤️" id="heX-nC-ooK">
                                         <connections>
                                             <action selector="presetButtonAction:" destination="iL9-XC-JUO" id="8lu-QM-LOR"/>
                                         </connections>
                                     </barButtonItem>
-                                    <barButtonItem tag="3" title="🔵" id="mx8-Sa-lt4">
+                                    <barButtonItem tag="3" title="💙" id="mx8-Sa-lt4">
                                         <connections>
                                             <action selector="presetButtonAction:" destination="iL9-XC-JUO" id="HJf-nB-BBz"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem tag="4" title="💛" id="6UJ-UA-27p">
+                                        <connections>
+                                            <action selector="presetButtonAction:" destination="iL9-XC-JUO" id="an7-ox-ScV"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem tag="5" title="💖" id="Hdg-fC-NpC">
+                                        <connections>
+                                            <action selector="presetButtonAction:" destination="iL9-XC-JUO" id="nNd-Mh-WnA"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem systemItem="flexibleSpace" id="q5I-Tr-Obh"/>
