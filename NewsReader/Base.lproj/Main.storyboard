@@ -508,11 +508,16 @@
                                     </barButtonItem>
                                 </items>
                             </toolbar>
+                            <imageView userInteractionEnabled="NO" alpha="0.5" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xaw-xc-v0j">
+                                <rect key="frame" x="0.0" y="0.0" width="400" height="600"/>
+                                <animations/>
+                            </imageView>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="xaw-xc-v0j" secondAttribute="trailing" id="2Q2-63-SoB"/>
                             <constraint firstItem="bGE-Zo-jc3" firstAttribute="leading" secondItem="FQ2-Gl-GI9" secondAttribute="leading" id="3cB-nT-GU6"/>
                             <constraint firstItem="ZGY-XK-xdV" firstAttribute="top" secondItem="MnU-7c-aoU" secondAttribute="bottom" id="4D9-pg-v2J"/>
                             <constraint firstAttribute="trailing" secondItem="MnU-7c-aoU" secondAttribute="trailing" id="4oT-0T-aCS"/>
@@ -521,11 +526,14 @@
                             <constraint firstItem="bGE-Zo-jc3" firstAttribute="top" secondItem="tFh-mx-CBU" secondAttribute="bottom" id="9cc-SF-tcd"/>
                             <constraint firstItem="MnU-7c-aoU" firstAttribute="leading" secondItem="FQ2-Gl-GI9" secondAttribute="leading" id="Bf3-vR-d9m"/>
                             <constraint firstAttribute="trailing" secondItem="bGE-Zo-jc3" secondAttribute="trailing" id="Drx-lV-Iwp"/>
+                            <constraint firstItem="ZGY-XK-xdV" firstAttribute="top" secondItem="xaw-xc-v0j" secondAttribute="bottom" id="FkQ-pF-GMi"/>
                             <constraint firstItem="MnU-7c-aoU" firstAttribute="leading" secondItem="FQ2-Gl-GI9" secondAttribute="leading" id="IPF-cQ-8tY"/>
                             <constraint firstItem="GW6-oj-cFQ" firstAttribute="top" secondItem="bGE-Zo-jc3" secondAttribute="bottom" id="Ihc-Ot-l1h"/>
                             <constraint firstItem="ZGY-XK-xdV" firstAttribute="top" secondItem="GW6-oj-cFQ" secondAttribute="bottom" id="M6C-6j-aKP"/>
                             <constraint firstItem="bGE-Zo-jc3" firstAttribute="top" secondItem="tFh-mx-CBU" secondAttribute="bottom" id="ORp-F1-86S"/>
                             <constraint firstItem="bGE-Zo-jc3" firstAttribute="leading" secondItem="FQ2-Gl-GI9" secondAttribute="leading" id="OcK-DT-Kwf"/>
+                            <constraint firstItem="xaw-xc-v0j" firstAttribute="leading" secondItem="FQ2-Gl-GI9" secondAttribute="leading" id="Pct-fb-0ZO"/>
+                            <constraint firstItem="xaw-xc-v0j" firstAttribute="top" secondItem="FQ2-Gl-GI9" secondAttribute="top" id="Pfm-fU-NXW"/>
                             <constraint firstItem="tFh-mx-CBU" firstAttribute="leading" secondItem="FQ2-Gl-GI9" secondAttribute="leading" id="U9l-T0-49T"/>
                             <constraint firstItem="GW6-oj-cFQ" firstAttribute="top" secondItem="MnU-7c-aoU" secondAttribute="bottom" id="UHH-tu-58Y"/>
                             <constraint firstItem="bGE-Zo-jc3" firstAttribute="leading" secondItem="FQ2-Gl-GI9" secondAttribute="leading" id="XNS-49-zTf"/>
@@ -564,6 +572,7 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="400" height="600"/>
                     <connections>
+                        <outlet property="boundsImageView" destination="xaw-xc-v0j" id="E3l-VR-Q8u"/>
                         <outlet property="mainDrawImage" destination="bGE-Zo-jc3" id="nYL-Wp-7zy"/>
                         <outlet property="tempDrawImage" destination="MnU-7c-aoU" id="JO8-GL-RNQ"/>
                     </connections>

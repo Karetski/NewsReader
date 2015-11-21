@@ -27,6 +27,7 @@
     [self setNeedsStatusBarAppearanceUpdate];
     
     [self calculateDrawingSpace];
+    [self drawImageBounds];
     [self drawCleanImage];
 }
 
@@ -110,6 +111,21 @@
     self.drawingSpace = CGRectMake(drawingImageHorizPosition, drawingImageVertPosition, drawingImageWidth, drawingImageHeight);
 }
 
+- (void)drawImageBounds {
+    UIGraphicsBeginImageContext(self.view.frame.size);
+    
+    CGContextSetLineCap(UIGraphicsGetCurrentContext(), kCGLineCapRound);
+    CGContextSetLineWidth(UIGraphicsGetCurrentContext(), 1.0);
+    CGContextSetRGBStrokeColor(UIGraphicsGetCurrentContext(), 30.0/255.0, 30.0/255.0, 30.0/255.0, 1.0);
+    CGContextSetBlendMode(UIGraphicsGetCurrentContext(),kCGBlendModeNormal);
+    
+    CGContextStrokeRect(UIGraphicsGetCurrentContext(), self.drawingSpace);
+    
+    self.boundsImageView.image = UIGraphicsGetImageFromCurrentImageContext();
+    
+    UIGraphicsEndImageContext();
+}
+
 - (void)drawCleanImage {
     UIImage *drawingImage = [self.sourceImage copy];
     
@@ -152,7 +168,6 @@
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
-    
     mouseSwiped = YES;
     UITouch *touch = [touches anyObject];
     CGPoint currentPoint = [touch locationInView:self.view];

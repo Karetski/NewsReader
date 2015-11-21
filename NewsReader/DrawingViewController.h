@@ -24,5 +24,6 @@
 
 @property (weak, nonatomic) IBOutlet UIImageView *mainDrawImage;
 @property (weak, nonatomic) IBOutlet UIImageView *tempDrawImage;
+@property (weak, nonatomic) IBOutlet UIImageView *boundsImageView;
 
 @end

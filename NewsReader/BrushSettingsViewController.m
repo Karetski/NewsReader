@@ -78,7 +78,11 @@
     UIGraphicsEndImageContext();
 }
 
+// MARK: - UIBarPositioningDelegate
 
+- (UIBarPosition)positionForBar:(id<UIBarPositioning>)bar {
+    return UIBarPositionTopAttached;
+}
 
 // MARK: - Navigation
 
