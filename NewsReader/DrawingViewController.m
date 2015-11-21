@@ -11,8 +11,6 @@
 
 @interface DrawingViewController ()
 
-@property (nonatomic) CGRect drawingSpace;
-
 @property (nonatomic) CGFloat graphicsScale;
 @property (nonatomic) CGRect scaledDrawingSpace;
 @property (nonatomic) CGRect scaledDrawingContext;
@@ -27,7 +25,7 @@
     self.red = 30.0/255.0;
     self.green = 30.0/255.0;
     self.blue = 30.0/255.0;
-    self.brushSize = 7.5;
+    self.brushSize = 15;
     self.opacity = 0.9;
     
     [self setNeedsStatusBarAppearanceUpdate];
@@ -71,7 +69,7 @@
 }
 
 - (IBAction)shareButtonAction:(id)sender {
-    UIImage *savingImage = [self getSubImageFrom:self.mainDrawImage.image withRect:self.drawingSpace];
+    UIImage *savingImage = [self getSubImageFrom:self.mainDrawImage.image withRect:self.scaledDrawingSpace];
     
     NSArray *activityItems = [[NSArray alloc] initWithObjects: savingImage, nil];
     UIActivityViewController *activityController = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:nil];
@@ -116,7 +114,6 @@
     
     self.graphicsScale = [[UIScreen mainScreen] scale];
     
-    self.drawingSpace = CGRectMake(drawingImageHorizPosition, drawingImageVertPosition, drawingImageWidth, drawingImageHeight);
     self.scaledDrawingSpace = CGRectMake(drawingImageHorizPosition * self.graphicsScale, drawingImageVertPosition * self.graphicsScale, drawingImageWidth * self.graphicsScale, drawingImageHeight * self.graphicsScale);
     self.scaledDrawingContext = CGRectMake(0, 0, self.view.frame.size.width * self.graphicsScale, self.view.frame.size.height * self.graphicsScale);
 }
@@ -139,10 +136,9 @@
 - (void)drawCleanImage {
     UIImage *drawingImage = [self.sourceImage copy];
     
-    UIGraphicsBeginImageContext(self.view.frame.size);
-    [self.mainDrawImage.image drawInRect:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+    UIGraphicsBeginImageContext(self.scaledDrawingContext.size);
     
-    [drawingImage drawInRect:self.drawingSpace];
+    [drawingImage drawInRect:self.scaledDrawingSpace];
     
     self.mainDrawImage.image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
@@ -182,10 +178,10 @@
     UITouch *touch = [touches anyObject];
     CGPoint currentPoint = [touch locationInView:self.view];
     
-    UIGraphicsBeginImageContext(self.view.frame.size);
-    [self.tempDrawImage.image drawInRect:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
-    CGContextMoveToPoint(UIGraphicsGetCurrentContext(), lastPoint.x, lastPoint.y);
-    CGContextAddLineToPoint(UIGraphicsGetCurrentContext(), currentPoint.x, currentPoint.y);
+    UIGraphicsBeginImageContext(self.scaledDrawingContext.size);
+    [self.tempDrawImage.image drawInRect:self.scaledDrawingContext];
+    CGContextMoveToPoint(UIGraphicsGetCurrentContext(), lastPoint.x * self.graphicsScale, lastPoint.y * self.graphicsScale);
+    CGContextAddLineToPoint(UIGraphicsGetCurrentContext(), currentPoint.x * self.graphicsScale, currentPoint.y * self.graphicsScale);
     CGContextSetLineCap(UIGraphicsGetCurrentContext(), kCGLineCapRound);
     CGContextSetLineWidth(UIGraphicsGetCurrentContext(), self.brushSize);
     CGContextSetRGBStrokeColor(UIGraphicsGetCurrentContext(), self.red, self.green, self.blue, 1.0);
@@ -201,22 +197,22 @@
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
     if (!mouseSwiped) {
-        UIGraphicsBeginImageContext(self.view.frame.size);
-        [self.tempDrawImage.image drawInRect:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+        UIGraphicsBeginImageContext(self.scaledDrawingContext.size);
+        [self.tempDrawImage.image drawInRect:self.scaledDrawingContext];
         CGContextSetLineCap(UIGraphicsGetCurrentContext(), kCGLineCapRound);
         CGContextSetLineWidth(UIGraphicsGetCurrentContext(), self.brushSize);
         CGContextSetRGBStrokeColor(UIGraphicsGetCurrentContext(), self.red, self.green, self.blue, self.opacity);
-        CGContextMoveToPoint(UIGraphicsGetCurrentContext(), lastPoint.x, lastPoint.y);
-        CGContextAddLineToPoint(UIGraphicsGetCurrentContext(), lastPoint.x, lastPoint.y);
+        CGContextMoveToPoint(UIGraphicsGetCurrentContext(), lastPoint.x * self.graphicsScale, lastPoint.y * self.graphicsScale);
+        CGContextAddLineToPoint(UIGraphicsGetCurrentContext(), lastPoint.x * self.graphicsScale, lastPoint.y * self.graphicsScale);
         CGContextStrokePath(UIGraphicsGetCurrentContext());
         CGContextFlush(UIGraphicsGetCurrentContext());
         self.tempDrawImage.image = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
     }
     
-    UIGraphicsBeginImageContext(self.mainDrawImage.frame.size);
-    [self.mainDrawImage.image drawInRect:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) blendMode:kCGBlendModeNormal alpha:1.0];
-    [self.tempDrawImage.image drawInRect:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) blendMode:kCGBlendModeNormal alpha: self.opacity];
+    UIGraphicsBeginImageContext(CGSizeMake(self.mainDrawImage.frame.size.width * self.graphicsScale, self.mainDrawImage.frame.size.height * self.graphicsScale));
+    [self.mainDrawImage.image drawInRect:self.scaledDrawingContext blendMode:kCGBlendModeNormal alpha:1.0];
+    [self.tempDrawImage.image drawInRect:self.scaledDrawingContext blendMode:kCGBlendModeNormal alpha: self.opacity];
     self.mainDrawImage.image = UIGraphicsGetImageFromCurrentImageContext();
     self.tempDrawImage.image = nil;
     UIGraphicsEndImageContext();

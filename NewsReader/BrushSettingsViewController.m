@@ -66,14 +66,19 @@
 }
 
 - (void)previewRedraw {
-    UIGraphicsBeginImageContext(self.previewImageView.frame.size);
+    CGFloat graphicsScale = [[UIScreen mainScreen] scale];
+    CGFloat positionX = self.previewImageView.frame.size.width * graphicsScale / 2;
+    CGFloat positionY = self.previewImageView.frame.size.height * graphicsScale / 2;
+    CGSize previewSize = CGSizeMake(self.previewImageView.frame.size.width * graphicsScale, self.previewImageView.frame.size.height * graphicsScale);
+    
+    UIGraphicsBeginImageContext(previewSize);
     CGContextSetLineCap(UIGraphicsGetCurrentContext(), kCGLineCapRound);
-    CGContextSetLineWidth(UIGraphicsGetCurrentContext(),self.brushSize);
+    CGContextSetLineWidth(UIGraphicsGetCurrentContext(), self.brushSize);
     CGContextSetRGBStrokeColor(UIGraphicsGetCurrentContext(), self.red, self.green, self.blue, self.opacity);
-    CGFloat position = self.previewImageView.frame.size.width/2;
-    CGContextMoveToPoint(UIGraphicsGetCurrentContext(), position, position);
-    CGContextAddLineToPoint(UIGraphicsGetCurrentContext(), position, position);
+    CGContextMoveToPoint(UIGraphicsGetCurrentContext(), positionX, positionY);
+    CGContextAddLineToPoint(UIGraphicsGetCurrentContext(), positionX, positionY);
     CGContextStrokePath(UIGraphicsGetCurrentContext());
+    CGContextFlush(UIGraphicsGetCurrentContext());
     self.previewImageView.image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
 }
