@@ -14,12 +14,12 @@ class CoreDataStack {
     
     lazy var context: NSManagedObjectContext = {
         var managedObjectContext = NSManagedObjectContext(concurrencyType: .MainQueueConcurrencyType)
-        managedObjectContext.persistentStoreCoordinator = self.psc
+        managedObjectContext.persistentStoreCoordinator = self.persistentStoreCoordinator
         
         return managedObjectContext
     }()
     
-    private lazy var psc: NSPersistentStoreCoordinator = {
+    private lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator = {
         let coordinator = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
         
         let url = self.applicationDocumentsDirectory.URLByAppendingPathComponent(self.modelName)

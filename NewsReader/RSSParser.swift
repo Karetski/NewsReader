@@ -15,11 +15,16 @@ class RSSParser: NSObject, NSXMLParserDelegate {
     private var activeElement = ""
     private var activeAttributes: [String: String]?
     private var lastPubDate: String?
+    private var rssLink: String?
+    
     private var isOldChannel: Bool = false
+    private var isRss: Bool = false
     
     var managedContext: NSManagedObjectContext!
 
     var delegate: RSSParserDelegate?
+    
+    let node_rss = "rss"
     
     let node_channel = "channel"
     let node_item = "item"
@@ -35,6 +40,7 @@ class RSSParser: NSObject, NSXMLParserDelegate {
     
     let attr_url = "url"
     let attr_domain = "domain"
+    let attr_version = "version"
     
     func parseWithURL(url: NSURL, intoManagedObjectContext managedContext: NSManagedObjectContext) {
         self.parseWithRequest(NSURLRequest(URL: url), intoManagedObjectContext: managedContext)
@@ -54,6 +60,10 @@ class RSSParser: NSObject, NSXMLParserDelegate {
                     self.delegate?.parsingWasFinished(error)
                 }
             } else {
+                if let url = request.URL {
+                    self.rssLink = url.absoluteString
+                }
+                
                 let parser = NSXMLParser(data: data!)
                 parser.delegate = self
                 parser.parse()
@@ -86,6 +96,13 @@ class RSSParser: NSObject, NSXMLParserDelegate {
     }
     
     func parser(parser: NSXMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String]) {
+        if elementName == self.node_rss {
+            if let version = attributeDict[self.attr_version] {
+                if version == "2.0" {
+                    self.isRss = true
+                }
+            }
+        }
         if elementName == self.node_channel {
             let channelEntity = NSEntityDescription.entityForName("Channel", inManagedObjectContext: managedContext)
             let channelFetch = NSFetchRequest(entityName: "Channel")
@@ -117,6 +134,9 @@ class RSSParser: NSObject, NSXMLParserDelegate {
     }
     
     func parser(parser: NSXMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
+        guard self.isRss == true else {
+            return
+        }
         if elementName == self.node_item {
             if let item = self.activeItem {
                 let items = self.channel.items!.mutableCopy() as! NSMutableOrderedSet
@@ -153,7 +173,6 @@ class RSSParser: NSObject, NSXMLParserDelegate {
                         item.categories = categories.copy() as? NSOrderedSet
                     }
                 }
-                self.activeAttributes = nil
             }
             if elementName == self.node_creator {
                 item.creator = self.activeElement
@@ -175,14 +194,16 @@ class RSSParser: NSObject, NSXMLParserDelegate {
                         item.media = medias.copy() as? NSOrderedSet
                     }
                 }
-                self.activeAttributes = nil
             }
         } else {
             if elementName == self.node_title {
                 self.channel.title = self.activeElement
             }
             if elementName == self.node_link {
-                self.channel.link = self.activeElement
+                guard let rssLink = self.rssLink else {
+                    return
+                }
+                self.channel.link = rssLink
             }
             if elementName == self.node_description {
                 self.channel.channelDescription = self.activeElement

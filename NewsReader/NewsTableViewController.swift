@@ -11,10 +11,20 @@ import CoreData
 
 class NewsTableViewController: UITableViewController, RSSParserDelegate {
     var managedContext: NSManagedObjectContext!
-    var channel: Channel!
+    var channel: Channel?
     var imageDownloadsInProgress = [NSIndexPath: ImageDownloader]()
     
-    var rssLink = "http://www.nytimes.com/services/xml/rss/nyt/World.xml"
+//    private lazy var rssLink = "http://www.nytimes.com/services/xml/rss/nyt/World.xml"
+    
+    private lazy var rssLink: String = {
+        var link: String = "http://www.nytimes.com/services/xml/rss/nyt/World.xml"
+        if let channel = self.channel {
+            if let channelLink = channel.link {
+                link = channelLink
+            }
+        }
+        return link
+    }()
     
     let newsCellIdentifier = "NewsCell"
     let imageNewsCellIdentifier = "ImageNewsCell"
@@ -31,7 +41,9 @@ class NewsTableViewController: UITableViewController, RSSParserDelegate {
         self.tableView.estimatedRowHeight = 160.0
         
         if self.fetchData() {
-            self.title = channel.title
+            if let channel = self.channel {
+                self.title = channel.title
+            }
             self.tableView.reloadData()
         }
     }
@@ -119,7 +131,9 @@ class NewsTableViewController: UITableViewController, RSSParserDelegate {
             self.sendMessageWithError(error, withTitle: "Parsing error")
             
             if self.fetchData() {
-                self.title = channel.title
+                if let channel = self.channel {
+                    self.title = channel.title
+                }
                 self.tableView.reloadData()
             } else {
                 self.title = "News Reader"
@@ -131,7 +145,9 @@ class NewsTableViewController: UITableViewController, RSSParserDelegate {
             return
         } else {
             if self.fetchData() {
-                self.title = channel.title
+                if let channel = self.channel {
+                    self.title = channel.title
+                }
                 self.tableView.reloadData()
             }
             
