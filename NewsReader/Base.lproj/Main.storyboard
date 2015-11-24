@@ -620,6 +620,11 @@
                                 <animations/>
                                 <items>
                                     <navigationItem title="Brush settings" id="9QU-RU-TOw">
+                                        <barButtonItem key="leftBarButtonItem" systemItem="stop" id="7qY-pN-z1X">
+                                            <connections>
+                                                <segue destination="eoh-TE-XNy" kind="unwind" unwindAction="brushSettingsExitSegue:" id="Rbh-vt-7EJ"/>
+                                            </connections>
+                                        </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="4Ys-nd-NQR">
                                             <connections>
                                                 <segue destination="eoh-TE-XNy" kind="unwind" identifier="BrushSettingsExitSegue" unwindAction="brushSettingsExitSegue:" id="Z5m-ha-lrS"/>
@@ -833,7 +838,7 @@
                                                 <segue destination="lOd-IE-NEv" kind="unwind" unwindAction="webExitSegue:" id="PfF-OS-BsH"/>
                                             </connections>
                                         </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" systemItem="reply" id="Ekg-eE-hYW">
+                                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="Ekg-eE-hYW">
                                             <connections>
                                                 <action selector="copyAction:" destination="b1Z-Er-laE" id="MAT-2N-ylY"/>
                                             </connections>
