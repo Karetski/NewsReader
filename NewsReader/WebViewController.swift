@@ -42,10 +42,15 @@ class WebViewController: UIViewController, UIWebViewDelegate {
         guard let url = self.url else {
             return
         }
-        UIPasteboard.generalPasteboard().string = url.absoluteString
         
-        let alert = UIAlertController(title: "Added", message: "URL Added to clipboard", preferredStyle: .Alert)
-        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default,handler: nil))
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
+        alert.addAction(UIAlertAction(title: "Add to clipboard", style: .Default) { (UIAlertAction) -> Void in
+            UIPasteboard.generalPasteboard().string = url.absoluteString
+        })
+        alert.addAction(UIAlertAction(title: "Open in Safari", style: .Default) { (UIAlertAction) -> Void in
+            UIApplication.sharedApplication().openURL(url)
+        })
+        alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
         
         self.presentViewController(alert, animated: true, completion: nil)
     }
