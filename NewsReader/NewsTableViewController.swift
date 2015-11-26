@@ -271,6 +271,9 @@ class NewsTableViewController: UITableViewController, RSSParserDelegate {
         
         for indexPath in visiblePaths {
             let item = channel.items![indexPath.row] as! Item
+            if let _ = item.thumbnailImage {
+                continue
+            }
             if let _ = item.thumbnail {
                 let cell = tableView.cellForRowAtIndexPath(indexPath) as! ImageNewsCell
                 self.startThumbnailDownload(item, indexPath: indexPath, cell: cell)

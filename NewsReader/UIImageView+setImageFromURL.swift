@@ -10,11 +10,12 @@ import UIKit
 
 extension UIImageView {
     func setImageFromURL(url: NSURL) {
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
         NSURLSession.sharedSession().dataTaskWithURL(url, completionHandler: { (data, _, error) -> Void in
+            UIApplication.sharedApplication().networkActivityIndicatorVisible = false
             guard let data = data where error == nil else { return }
             dispatch_async(dispatch_get_main_queue()) { () -> Void in
                 self.image = UIImage(data: data)
-                UIApplication.sharedApplication().networkActivityIndicatorVisible = false
             }
         }).resume()
     }
