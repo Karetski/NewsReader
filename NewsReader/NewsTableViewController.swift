@@ -14,8 +14,6 @@ class NewsTableViewController: UITableViewController, RSSParserDelegate {
     var channel: Channel?
     var imageDownloadsInProgress = [NSIndexPath: ImageDownloader]()
     
-//    private lazy var rssLink = "http://www.nytimes.com/services/xml/rss/nyt/World.xml"
-    
     private lazy var rssLink: String = {
         var link: String = "http://www.nytimes.com/services/xml/rss/nyt/World.xml"
         if let channel = self.channel {
@@ -227,7 +225,7 @@ class NewsTableViewController: UITableViewController, RSSParserDelegate {
             return
         }
         let imageDownloader = ImageDownloader()
-        imageDownloader.completionHandler = { image, error -> Void in
+        imageDownloader.completionHandler = { [unowned self] (image, error) -> Void in
             if let error = error {
                 self.sendMessageWithError(error, withTitle: "Image downloading Error")
                 self.imageDownloadsInProgress.removeValueForKey(indexPath)

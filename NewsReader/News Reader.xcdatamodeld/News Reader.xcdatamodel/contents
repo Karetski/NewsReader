@@ -3,7 +3,7 @@
     <entity name="Category" representedClassName=".Category" syncable="YES">
         <attribute name="link" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="item" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Item" inverseName="categories" inverseEntity="Item" syncable="YES"/>
+        <relationship name="item" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Item" inverseName="categories" inverseEntity="Item" syncable="YES"/>
     </entity>
     <entity name="Channel" representedClassName=".Channel" syncable="YES">
         <attribute name="channelDescription" optional="YES" attributeType="String" syncable="YES"/>
@@ -12,7 +12,7 @@
         <attribute name="language" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="link" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="items" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Item" inverseName="channel" inverseEntity="Item" syncable="YES"/>
+        <relationship name="items" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="Item" inverseName="channel" inverseEntity="Item" syncable="YES"/>
     </entity>
     <entity name="Item" representedClassName=".Item" syncable="YES">
         <attribute name="creator" optional="YES" attributeType="String" syncable="YES"/>
@@ -21,18 +21,18 @@
         <attribute name="link" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="thumbnailData" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="categories" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Category" inverseName="item" inverseEntity="Category" syncable="YES"/>
-        <relationship name="channel" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Channel" inverseName="items" inverseEntity="Channel" syncable="YES"/>
-        <relationship name="media" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Media" inverseName="item" inverseEntity="Media" syncable="YES"/>
+        <relationship name="categories" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="Category" inverseName="item" inverseEntity="Category" syncable="YES"/>
+        <relationship name="channel" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Channel" inverseName="items" inverseEntity="Channel" syncable="YES"/>
+        <relationship name="media" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="Media" inverseName="item" inverseEntity="Media" syncable="YES"/>
     </entity>
     <entity name="Media" representedClassName=".Media" syncable="YES">
         <attribute name="link" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="item" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Item" inverseName="media" inverseEntity="Item" syncable="YES"/>
+        <relationship name="item" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Item" inverseName="media" inverseEntity="Item" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Category" positionX="88" positionY="-43" width="128" height="90"/>
-        <element name="Channel" positionX="-252" positionY="-153" width="128" height="150"/>
+        <element name="Category" positionX="99" positionY="-43" width="128" height="88"/>
+        <element name="Channel" positionX="-252" positionY="-153" width="128" height="148"/>
         <element name="Item" positionX="-81" positionY="-153" width="128" height="178"/>
-        <element name="Media" positionX="88" positionY="-153" width="128" height="75"/>
+        <element name="Media" positionX="90" positionY="-153" width="128" height="73"/>
     </elements>
 </model>
