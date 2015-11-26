@@ -127,6 +127,7 @@ class NewsDetailTableViewController: UITableViewController {
         if let image = item.thumbnailImage {
             cell.thumbnailImageView.image = image
         } else {
+            UIApplication.sharedApplication().networkActivityIndicatorVisible = true
             cell.thumbnailImageView.setImageFromURL(imageURL)
         }
         

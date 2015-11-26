@@ -122,9 +122,11 @@ class NewsTableViewController: UITableViewController, RSSParserDelegate {
             leftBarButtomItem.enabled = false
         }
         self.title = "Loading..."
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
     }
     
     func parsingWasFinished(error: NSError?) {
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = false
         if let error = error {
             self.sendMessageWithError(error, withTitle: "Parsing error")
             
@@ -224,11 +226,17 @@ class NewsTableViewController: UITableViewController, RSSParserDelegate {
         guard let thumbnailURL = item.thumbnail else {
             return
         }
+        
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+        
         let imageDownloader = ImageDownloader()
         imageDownloader.completionHandler = { [unowned self] (image, error) -> Void in
             if let error = error {
                 self.sendMessageWithError(error, withTitle: "Image downloading Error")
                 self.imageDownloadsInProgress.removeValueForKey(indexPath)
+                if self.imageDownloadsInProgress.count == 0 {
+                    UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+                }
                 return
             }
             
@@ -245,6 +253,9 @@ class NewsTableViewController: UITableViewController, RSSParserDelegate {
             }
             
             self.imageDownloadsInProgress.removeValueForKey(indexPath)
+            if self.imageDownloadsInProgress.count == 0 {
+                UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+            }
         }
         self.imageDownloadsInProgress[indexPath] = imageDownloader
         imageDownloader.downloadImageWithURL(thumbnailURL)

@@ -14,6 +14,7 @@ extension UIImageView {
             guard let data = data where error == nil else { return }
             dispatch_async(dispatch_get_main_queue()) { () -> Void in
                 self.image = UIImage(data: data)
+                UIApplication.sharedApplication().networkActivityIndicatorVisible = false
             }
         }).resume()
     }

@@ -60,11 +60,13 @@ class WebViewController: UIViewController, UIWebViewDelegate {
     func webViewDidStartLoad(webView: UIWebView) {
         self.activityIndicator.startAnimating()
         self.activityBackground.hidden = false
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
     }
     
     func webViewDidFinishLoad(webView: UIWebView) {
         self.activityIndicator.stopAnimating()
         self.activityBackground.hidden = true
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = false
     }
 
     /*
