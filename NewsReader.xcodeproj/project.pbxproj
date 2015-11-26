@@ -59,6 +59,7 @@
 
 /* Begin PBXFileReference section */
 		8A0B46A41BFD238000B9E2A2 /* DetailImageNewsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailImageNewsCell.swift; sourceTree = "<group>"; };
+		8A21B2331C079BD2009FC351 /* LICENSE.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = LICENSE.md; sourceTree = "<group>"; };
 		8A31C2CC1BBEB0A9001DA7C4 /* Channel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Channel.swift; sourceTree = "<group>"; };
 		8A31C2CE1BBEB3D2001DA7C4 /* Item.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		8A5571591BFF2FB500B6C5F5 /* NewsReader-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NewsReader-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -147,6 +148,7 @@
 		8A6B0D6D1BBD8BA30056C91E = {
 			isa = PBXGroup;
 			children = (
+				8A21B2331C079BD2009FC351 /* LICENSE.md */,
 				8ADA86C51C00FEA8008B27B1 /* README.md */,
 				8AA77D771BFE6BE900018BEF /* UIKit.framework */,
 				8AEA0E631BBDCBC000556336 /* .gitignore */,
