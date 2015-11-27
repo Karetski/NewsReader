@@ -211,7 +211,7 @@ class NewsTableViewController: UITableViewController, RSSParserDelegate {
             if self.tableView.dragging == false && self.tableView.decelerating == false {
                 self.startThumbnailDownload(item, indexPath: indexPath, cell: cell)
             }
-            cell.thumbnailImageView.image = UIImage(named: "Placeholder.png")
+            cell.thumbnailImageView.image = UIImage(named: "ThumbnailPlaceholder.png")
         }
         
         return cell

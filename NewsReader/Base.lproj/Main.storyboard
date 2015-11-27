@@ -107,7 +107,7 @@
                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DBi-va-0dU">
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ThumbnailPlaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="DBi-va-0dU">
                                             <rect key="frame" x="15" y="15" width="100" height="100"/>
                                             <animations/>
                                             <constraints>
@@ -185,7 +185,7 @@
             </objects>
             <point key="canvasLocation" x="-170" y="459"/>
         </scene>
-        <!--Title-->
+        <!--Detail-->
         <scene sceneID="XsI-Oo-UCm">
             <objects>
                 <tableViewController id="85f-UP-yaU" customClass="NewsDetailTableViewController" customModule="NewsReader" customModuleProvider="target" sceneMemberID="viewController">
@@ -223,7 +223,7 @@
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <imageView autoresizesSubviews="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="J4R-mZ-lqy">
+                                        <imageView autoresizesSubviews="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="3x2ImagePlaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="J4R-mZ-lqy">
                                             <rect key="frame" x="15" y="91" width="370" height="247"/>
                                             <animations/>
                                             <constraints>
@@ -409,7 +409,7 @@
                         </connections>
                     </tableView>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="Title" id="eZo-2a-9FI">
+                    <navigationItem key="navigationItem" title="Detail" id="eZo-2a-9FI">
                         <barButtonItem key="rightBarButtonItem" systemItem="action" id="zY5-LT-96d">
                             <connections>
                                 <segue destination="b1Z-Er-laE" kind="presentation" identifier="ItemLinkSegue" id="uKF-Ii-a7i"/>
@@ -832,7 +832,7 @@
                                 <animations/>
                                 <color key="barTintColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 <items>
-                                    <navigationItem title="Web View" id="swp-GU-okc">
+                                    <navigationItem title="Web view" id="swp-GU-okc">
                                         <barButtonItem key="leftBarButtonItem" systemItem="stop" id="Guu-DN-Tki">
                                             <connections>
                                                 <segue destination="lOd-IE-NEv" kind="unwind" unwindAction="webExitSegue:" id="PfF-OS-BsH"/>
@@ -935,7 +935,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Placeholder" width="100" height="100"/>
+        <image name="3x2ImagePlaceholder" width="320" height="213"/>
+        <image name="ThumbnailPlaceholder" width="100" height="100"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="qzv-5W-C13"/>
