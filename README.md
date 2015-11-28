@@ -38,5 +38,5 @@ NewsReader is RSS 2.0 Reader for iOS. Writed on Swift and Objective-C. Next desc
 
 ----------
 
-[![Karetski](https://cldup.com/Vqd8sXLdg3.png)](https://github.com/Karetski)
+[![Karetski](https://cldup.com/oHDxvpvOgm.png)](https://github.com/Karetski)
 
