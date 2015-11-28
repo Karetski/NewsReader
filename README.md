@@ -2,7 +2,7 @@
 
 [![MIT Licensed](https://img.shields.io/badge/license-MIT-00aeef.svg)](LICENSE.md)
 [![Platform](https://img.shields.io/badge/platform-iOS-00aeef.svg)](http://www.apple.com/ios)
-[![Author](https://img.shields.io/badge/author-Alexey_Karetski-00aeef.svg)](https://github.com/Karetski)
+[![Author](https://img.shields.io/badge/author-Alexey_Karetski-F0C83C.svg)](https://github.com/Karetski)
 
 NewsReader is RSS 2.0 Reader for iOS. Writed on Swift and Objective-C. Next description will be on Russian. Sorry, but my english skills are bad.
 
@@ -35,4 +35,8 @@ NewsReader is RSS 2.0 Reader for iOS. Writed on Swift and Objective-C. Next desc
 Откройте при помощи XCode:
 
     $ open NewsReader.xcodeproj
+
+----------
+
+[![Karetski](https://cldup.com/Vqd8sXLdg3.png)](https://github.com/Karetski)
 
