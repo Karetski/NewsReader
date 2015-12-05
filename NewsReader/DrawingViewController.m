@@ -175,12 +175,20 @@
 // MARK: - Drawing
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    if (touches.count > 1) {
+        return;
+    }
+    
     mouseSwiped = NO;
     UITouch *touch = [touches anyObject];
     lastPoint = [touch locationInView:self.view];
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
+    if (touches.count > 1) {
+        return;
+    }
+    
     mouseSwiped = YES;
     UITouch *touch = [touches anyObject];
     CGPoint currentPoint = [touch locationInView:self.view];
@@ -203,7 +211,7 @@
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-    if (touches.count >= 2) {
+    if (touches.count > 1) {
         if (self.isInterfaceHidden) {
             self.isInterfaceHidden = NO;
             [UIView animateWithDuration:0.3 animations:^{
