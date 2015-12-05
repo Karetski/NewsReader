@@ -432,7 +432,7 @@
                         <viewControllerLayoutGuide type="top" id="Xpv-hM-Gzm"/>
                         <viewControllerLayoutGuide type="bottom" id="ZGY-XK-xdV"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="FQ2-Gl-GI9">
+                    <view key="view" multipleTouchEnabled="YES" contentMode="scaleToFill" id="FQ2-Gl-GI9">
                         <rect key="frame" x="0.0" y="0.0" width="400" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -465,7 +465,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="400" height="600"/>
                                 <animations/>
                             </imageView>
-                            <navigationBar contentMode="scaleToFill" barStyle="black" translatesAutoresizingMaskIntoConstraints="NO" id="tFh-mx-CBU">
+                            <navigationBar opaque="NO" contentMode="scaleToFill" barStyle="black" translatesAutoresizingMaskIntoConstraints="NO" id="tFh-mx-CBU">
                                 <rect key="frame" x="0.0" y="20" width="400" height="44"/>
                                 <animations/>
                                 <items>
@@ -486,7 +486,7 @@
                                     <outlet property="delegate" destination="iL9-XC-JUO" id="qxB-eN-ToA"/>
                                 </connections>
                             </navigationBar>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="black" translatesAutoresizingMaskIntoConstraints="NO" id="GW6-oj-cFQ">
+                            <toolbar clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="black" translatesAutoresizingMaskIntoConstraints="NO" id="GW6-oj-cFQ">
                                 <rect key="frame" x="0.0" y="556" width="400" height="44"/>
                                 <animations/>
                                 <items>
@@ -595,7 +595,9 @@
                     <connections>
                         <outlet property="boundsImageView" destination="xaw-xc-v0j" id="E3l-VR-Q8u"/>
                         <outlet property="mainDrawImage" destination="bGE-Zo-jc3" id="nYL-Wp-7zy"/>
+                        <outlet property="navigationBar" destination="tFh-mx-CBU" id="MPw-fH-sU3"/>
                         <outlet property="tempDrawImage" destination="MnU-7c-aoU" id="JO8-GL-RNQ"/>
+                        <outlet property="toolbar" destination="GW6-oj-cFQ" id="lJ8-ZA-1Jy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WHX-ma-Meu" userLabel="First Responder" sceneMemberID="firstResponder"/>

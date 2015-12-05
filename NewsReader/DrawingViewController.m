@@ -14,6 +14,7 @@
 @property (nonatomic) CGFloat graphicsScale;
 @property (nonatomic) CGRect scaledDrawingSpace;
 @property (nonatomic) CGRect scaledDrawingContext;
+@property (nonatomic) BOOL isInterfaceHidden;
 
 @end
 
@@ -27,6 +28,8 @@
     self.blue = 30.0/255.0;
     self.brushSize = 15;
     self.opacity = 0.9;
+    
+    self.isInterfaceHidden = NO;
     
     [self setNeedsStatusBarAppearanceUpdate];
     
@@ -83,10 +86,6 @@
     UIActivityViewController *activityController = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:nil];
     
     [self presentViewController:activityController animated:YES completion:nil];
-}
-
-- (IBAction)showHideGesture:(id)sender {
-    NSLog(@"asdasdasd");
 }
 
 // MARK - Unwind segues
@@ -152,7 +151,7 @@
     UIGraphicsEndImageContext();
 }
 
-- (UIImage*)getSubImageFrom:(UIImage*)img withRect:(CGRect)rect {
+- (UIImage *)getSubImageFrom:(UIImage*)img withRect:(CGRect)rect {
     UIGraphicsBeginImageContext(rect.size);
     CGContextRef context = UIGraphicsGetCurrentContext();
     
@@ -204,6 +203,23 @@
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+    if (touches.count >= 2) {
+        if (self.isInterfaceHidden) {
+            self.isInterfaceHidden = NO;
+            [UIView animateWithDuration:0.3 animations:^{
+                self.navigationBar.alpha = 1.0;
+                self.toolbar.alpha = 1.0;
+            }];
+        } else {
+            self.isInterfaceHidden = YES;
+            [UIView animateWithDuration:0.3 animations:^{
+                self.navigationBar.alpha = 0.0;
+                self.toolbar.alpha = 0.0;
+            }];
+        }
+        return;
+    }
+    
     if (!mouseSwiped) {
         UIGraphicsBeginImageContext(self.scaledDrawingContext.size);
         [self.tempDrawImage.image drawInRect:self.scaledDrawingContext];

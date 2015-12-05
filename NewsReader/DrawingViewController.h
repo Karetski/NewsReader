@@ -25,4 +25,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *tempDrawImage;
 @property (weak, nonatomic) IBOutlet UIImageView *boundsImageView;
 
+@property (weak, nonatomic) IBOutlet UINavigationBar *navigationBar;
+@property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
+
 @end
