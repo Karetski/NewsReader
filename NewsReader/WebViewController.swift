@@ -16,6 +16,8 @@ class WebViewController: UIViewController, UIWebViewDelegate {
     
     var url: NSURL?
     
+    // MARK: - View Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -29,6 +31,11 @@ class WebViewController: UIViewController, UIWebViewDelegate {
             self.webView.loadRequest(request)
             self.customNavigationItem.title = url.absoluteString
         }
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(true)
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = false
     }
 
     override func didReceiveMemoryWarning() {

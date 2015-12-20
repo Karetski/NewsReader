@@ -29,6 +29,9 @@
 		8AB4C9021BF9007300E945D8 /* Media+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB4C8FE1BF9007300E945D8 /* Media+CoreDataProperties.swift */; };
 		8AB4C9041BF9016500E945D8 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB4C9031BF9016500E945D8 /* CoreDataStack.swift */; };
 		8AB93C0F1BC6C90C00351C4F /* NewsDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB93C0E1BC6C90C00351C4F /* NewsDetailTableViewController.swift */; };
+		8ABAE04C1C26F7AF00E7768E /* FavoritesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ABAE04B1C26F7AF00E7768E /* FavoritesTableViewController.swift */; };
+		8ABAE0571C27105700E7768E /* Favorite+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ABAE0551C27105700E7768E /* Favorite+CoreDataProperties.swift */; };
+		8ABAE0581C27105700E7768E /* Favorite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ABAE0561C27105700E7768E /* Favorite.swift */; };
 		8AC036391BDBF7290041AC62 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC036381BDBF7280041AC62 /* WebViewController.swift */; };
 		8AC53E5D1BC98CF2000B45E2 /* NewsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC53E5C1BC98CF2000B45E2 /* NewsCell.swift */; };
 		8AC74DB91BC285FF00CBF2AE /* RSSParserDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC74DB81BC285FF00CBF2AE /* RSSParserDelegate.swift */; };
@@ -90,6 +93,9 @@
 		8AB4C8FE1BF9007300E945D8 /* Media+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Media+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		8AB4C9031BF9016500E945D8 /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		8AB93C0E1BC6C90C00351C4F /* NewsDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsDetailTableViewController.swift; sourceTree = "<group>"; };
+		8ABAE04B1C26F7AF00E7768E /* FavoritesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesTableViewController.swift; sourceTree = "<group>"; };
+		8ABAE0551C27105700E7768E /* Favorite+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Favorite+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		8ABAE0561C27105700E7768E /* Favorite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Favorite.swift; sourceTree = "<group>"; };
 		8AC036381BDBF7280041AC62 /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		8AC53E5C1BC98CF2000B45E2 /* NewsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsCell.swift; sourceTree = "<group>"; };
 		8AC74DB81BC285FF00CBF2AE /* RSSParserDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RSSParserDelegate.swift; sourceTree = "<group>"; };
@@ -216,6 +222,7 @@
 			isa = PBXGroup;
 			children = (
 				8A6B0DA71BBD8D740056C91E /* NewsTableViewController.swift */,
+				8ABAE04B1C26F7AF00E7768E /* FavoritesTableViewController.swift */,
 				8AB93C0E1BC6C90C00351C4F /* NewsDetailTableViewController.swift */,
 				8AA77D721BFE6AA200018BEF /* Drawing */,
 				8AC036381BDBF7280041AC62 /* WebViewController.swift */,
@@ -247,6 +254,8 @@
 				8AB4C8FE1BF9007300E945D8 /* Media+CoreDataProperties.swift */,
 				8AEACC4A1BE912350059F53C /* Category.swift */,
 				8AB4C8FB1BF9007300E945D8 /* Category+CoreDataProperties.swift */,
+				8ABAE0561C27105700E7768E /* Favorite.swift */,
+				8ABAE0551C27105700E7768E /* Favorite+CoreDataProperties.swift */,
 				8AB4C9031BF9016500E945D8 /* CoreDataStack.swift */,
 				8AE139101BDFD35D00140BEA /* News Reader.xcdatamodeld */,
 			);
@@ -399,7 +408,9 @@
 				8AB4C9041BF9016500E945D8 /* CoreDataStack.swift in Sources */,
 				8AC74DB91BC285FF00CBF2AE /* RSSParserDelegate.swift in Sources */,
 				8A31C2CF1BBEB3D2001DA7C4 /* Item.swift in Sources */,
+				8ABAE04C1C26F7AF00E7768E /* FavoritesTableViewController.swift in Sources */,
 				8A5C592B1BFFB51B002D17BA /* BrushSettingsViewController.m in Sources */,
+				8ABAE0571C27105700E7768E /* Favorite+CoreDataProperties.swift in Sources */,
 				8A6B0DA81BBD8D740056C91E /* NewsTableViewController.swift in Sources */,
 				8AE139121BDFD35D00140BEA /* News Reader.xcdatamodeld in Sources */,
 				8AB4C9011BF9007300E945D8 /* Item+CoreDataProperties.swift in Sources */,
@@ -418,6 +429,7 @@
 				8AA61E831BC9C87F00D937C6 /* ImageNewsCell.swift in Sources */,
 				8AB4C9021BF9007300E945D8 /* Media+CoreDataProperties.swift in Sources */,
 				8AC036391BDBF7290041AC62 /* WebViewController.swift in Sources */,
+				8ABAE0581C27105700E7768E /* Favorite.swift in Sources */,
 				8AC972EE1BD6A264002D99FC /* DetailNewsCell.swift in Sources */,
 				8AEACC491BE911350059F53C /* Media.swift in Sources */,
 			);
@@ -562,7 +574,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = NewsReader/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = univercube.NewsReader;
+				PRODUCT_BUNDLE_IDENTIFIER = Karetski.NewsReader;
 				PRODUCT_NAME = NewsReader;
 				SWIFT_OBJC_BRIDGING_HEADER = "./NewsReader/NewsReader-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -576,7 +588,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = NewsReader/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = univercube.NewsReader;
+				PRODUCT_BUNDLE_IDENTIFIER = Karetski.NewsReader;
 				PRODUCT_NAME = NewsReader;
 				SWIFT_OBJC_BRIDGING_HEADER = "./NewsReader/NewsReader-Bridging-Header.h";
 			};

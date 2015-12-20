@@ -14,7 +14,7 @@ class NewsTableViewController: UITableViewController, RSSParserDelegate {
     var channel: Channel?
     var imageDownloadsInProgress = [NSIndexPath: ImageDownloader]()
     
-    private lazy var rssLink: String = {
+    lazy var rssLink: String = {
         var link: String = "http://www.nytimes.com/services/xml/rss/nyt/World.xml"
         if let channel = self.channel {
             if let channelLink = channel.link {
@@ -29,6 +29,7 @@ class NewsTableViewController: UITableViewController, RSSParserDelegate {
     
     let newsDetailSegueIdentifier = "NewsDetailSegue"
     let imageNewsDetailSegueIdentifier = "ImageNewsDetailSegue"
+    let favoritesSegueIdentifier = "FavoritesSegue"
     
     // MARK: - View Lifecycle
     
@@ -48,6 +49,12 @@ class NewsTableViewController: UITableViewController, RSSParserDelegate {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    // MARK: - Unwind segues
+    
+    @IBAction func favoritesExitSegue(segue:UIStoryboardSegue) {
+        self.beginParsing()
     }
     
     // MARK: - Button actions
@@ -78,7 +85,7 @@ class NewsTableViewController: UITableViewController, RSSParserDelegate {
     
     func sendMessageWithError(error: NSError, withTitle title: String) {
         let alert = UIAlertController(title: title, message: error.localizedDescription, preferredStyle: .Alert)
-        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default,handler: nil))
+        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default,handler: nil))
         
         self.presentViewController(alert, animated: true, completion: nil)
     }
@@ -303,6 +310,11 @@ class NewsTableViewController: UITableViewController, RSSParserDelegate {
                         destination.item = channel.items![indexPath.row] as? Item
                     }
                 }
+            }
+        }
+        if segue.identifier == favoritesSegueIdentifier {
+            if let destination = segue.destinationViewController as? FavoritesTableViewController {
+                destination.managedContext = self.managedContext
             }
         }
     }
