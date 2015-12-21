@@ -248,7 +248,7 @@ class NewsTableViewController: UITableViewController, RSSParserDelegate {
             }
             
             dispatch_async(dispatch_get_main_queue()) { () -> Void in
-                cell.thumbnailImageView.image = image
+                cell.thumbnailImageView.setImageAnimated(image!, interval: 0.2, animationOption: .TransitionCrossDissolve)
             }
             
             item.thumbnailImage = image

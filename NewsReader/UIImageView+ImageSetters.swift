@@ -19,6 +19,12 @@ extension UIImageView {
             }
         }).resume()
     }
+    
+    func setImageAnimated(image: UIImage, interval: NSTimeInterval, animationOption: UIViewAnimationOptions) {
+        UIView.transitionWithView(self, duration: interval, options: animationOption, animations: { () -> Void in
+            self.image = image
+            }, completion: nil)
+    }
 }
 
 

@@ -40,7 +40,7 @@
 		8AEA0E641BBDCBC000556336 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 8AEA0E631BBDCBC000556336 /* .gitignore */; };
 		8AEACC491BE911350059F53C /* Media.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AEACC481BE911350059F53C /* Media.swift */; };
 		8AEACC4B1BE912350059F53C /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AEACC4A1BE912350059F53C /* Category.swift */; };
-		8AEEE52A1BCBE16B0013A5CE /* UIImageView+setImageFromURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AEEE5291BCBE16B0013A5CE /* UIImageView+setImageFromURL.swift */; };
+		8AEEE52A1BCBE16B0013A5CE /* UIImageView+ImageSetters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AEEE5291BCBE16B0013A5CE /* UIImageView+ImageSetters.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -105,7 +105,7 @@
 		8AEA0E631BBDCBC000556336 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		8AEACC481BE911350059F53C /* Media.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Media.swift; sourceTree = "<group>"; };
 		8AEACC4A1BE912350059F53C /* Category.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
-		8AEEE5291BCBE16B0013A5CE /* UIImageView+setImageFromURL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+setImageFromURL.swift"; sourceTree = "<group>"; };
+		8AEEE5291BCBE16B0013A5CE /* UIImageView+ImageSetters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+ImageSetters.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,7 +137,7 @@
 		8A4A35231BCC105D001C324F /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				8AEEE5291BCBE16B0013A5CE /* UIImageView+setImageFromURL.swift */,
+				8AEEE5291BCBE16B0013A5CE /* UIImageView+ImageSetters.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -424,7 +424,7 @@
 				8A5C59251BFF3C6E002D17BA /* DrawingViewController.m in Sources */,
 				8A0B46A51BFD238000B9E2A2 /* DetailImageNewsCell.swift in Sources */,
 				8AC53E5D1BC98CF2000B45E2 /* NewsCell.swift in Sources */,
-				8AEEE52A1BCBE16B0013A5CE /* UIImageView+setImageFromURL.swift in Sources */,
+				8AEEE52A1BCBE16B0013A5CE /* UIImageView+ImageSetters.swift in Sources */,
 				8A6B0D7A1BBD8BA40056C91E /* AppDelegate.swift in Sources */,
 				8AA61E831BC9C87F00D937C6 /* ImageNewsCell.swift in Sources */,
 				8AB4C9021BF9007300E945D8 /* Media+CoreDataProperties.swift in Sources */,
