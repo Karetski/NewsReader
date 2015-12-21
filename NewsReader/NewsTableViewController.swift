@@ -212,13 +212,15 @@ class NewsTableViewController: UITableViewController, RSSParserDelegate {
         cell.descriptionLabel.text = item.minifiedDescription
         cell.dateLabel.text = item.date
         
+        cell.tag = indexPath.row
+        
         if let thumbnailImage = item.thumbnailImage {
             cell.thumbnailImageView.image = thumbnailImage
         } else {
             if self.tableView.dragging == false && self.tableView.decelerating == false {
                 self.startThumbnailDownload(item, indexPath: indexPath, cell: cell)
             }
-            cell.thumbnailImageView.image = UIImage(named: "ThumbnailPlaceholder.png")
+            cell.thumbnailImageView.setImageAnimated(UIImage(named: "ThumbnailPlaceholder.png"), interval: 0.1, animationOption: .TransitionCrossDissolve)
         }
         
         return cell
@@ -248,7 +250,9 @@ class NewsTableViewController: UITableViewController, RSSParserDelegate {
             }
             
             dispatch_async(dispatch_get_main_queue()) { () -> Void in
-                cell.thumbnailImageView.setImageAnimated(image!, interval: 0.2, animationOption: .TransitionCrossDissolve)
+                if indexPath.row == cell.tag {
+                    cell.thumbnailImageView.setImageAnimated(image, interval: 0.2, animationOption: .TransitionCrossDissolve)
+                }
             }
             
             item.thumbnailImage = image
