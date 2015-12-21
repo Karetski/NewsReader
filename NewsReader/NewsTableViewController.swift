@@ -251,7 +251,7 @@ class NewsTableViewController: UITableViewController, RSSParserDelegate {
             
             dispatch_async(dispatch_get_main_queue()) { () -> Void in
                 if indexPath.row == cell.tag {
-                    cell.thumbnailImageView.setImageAnimated(image, interval: 0.2, animationOption: .TransitionCrossDissolve)
+                    cell.thumbnailImageView.setImageAnimated(image, interval: 0.2, animationOption: .TransitionFlipFromTop)
                 }
             }
             
